@@ -10,7 +10,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      Learn Lingo
+      Learn Lingo Project
     </div>
   );
 };
