@@ -1,5 +1,5 @@
 {
-  "name": "learn-lingo",
+  "name": "learn-lyingo",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://volodya1989.github.io/learn-lingo/",
@@ -18,7 +18,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:js": "eslint src/**/*.{js,jsx}"
+    "lint:js": "eslint src/**/*.{js,jsx}",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
   },
   "eslintConfig": {
     "extends": [
