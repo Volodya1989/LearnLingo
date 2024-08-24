@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunklearn_lingo=self.webpackChunklearn_lingo||[]).push([[932],{932:function(n,e,t){t.r(e),t.d(e,{default:function(){return u}});var r=t(184),u=function(){return(0,r.jsxs)("div",{children:[(0,r.jsx)("div",{}),(0,r.jsx)("h4",{children:"Unlock your potential with the best language tutors"})]})}}}]);
+//# sourceMappingURL=932.cb8d572a.chunk.js.map
