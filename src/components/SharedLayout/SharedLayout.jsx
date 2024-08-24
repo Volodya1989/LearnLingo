@@ -6,20 +6,41 @@ import {
   StyledHeader,
   StyledList,
   StyledItem,
+  Block,
+  BlockRight,
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
   return (
     <div>
       <StyledHeader>
-        Header
-        <StyledList>
-          <StyledItem>
+        <Block>
+          <StyledList>
             <StyledLink to="/" end>
-              Find A Car
+              LearnLingo
             </StyledLink>
-          </StyledItem>
-        </StyledList>
+            <StyledItem>
+              <StyledLink to="/" end>
+                Home
+              </StyledLink>
+            </StyledItem>
+            <StyledItem>
+              <StyledLink to="/teachers" end>
+                Teachers
+              </StyledLink>
+            </StyledItem>
+          </StyledList>
+        </Block>
+        <BlockRight>
+          <StyledList>
+            <StyledItem>
+              <StyledLink to="/login">Login</StyledLink>
+            </StyledItem>
+            <StyledItem>
+              <StyledLink to="/registration">Registration</StyledLink>
+            </StyledItem>
+          </StyledList>
+        </BlockRight>
       </StyledHeader>
       <Suspense fallback={<div>loading...</div>}>
         <Outlet />

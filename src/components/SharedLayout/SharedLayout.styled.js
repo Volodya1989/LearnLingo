@@ -28,8 +28,8 @@ export const StyledHeader = styled.nav`
   position: sticky;
   z-index: 1100;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
   height: 50px;
   padding-right: 24px;
   padding-left: 24px;
@@ -49,6 +49,14 @@ export const StyledList = styled.ul`
   gap: 50px;
   list-style: none;
   text-decoration: none;
+`;
+
+export const Block = styled.div`
+  display: flax;
+  justify-content: space-around;
+`;
+export const BlockRight = styled.div`
+  justify-content: right;
 `;
 
 export const StyledItem = styled.li`
