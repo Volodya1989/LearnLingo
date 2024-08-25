@@ -8,6 +8,9 @@ import {
   StyledItem,
   Block,
   BlockRight,
+  Logo,
+  StyledLogin,
+  StyledRegistration,
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
@@ -17,7 +20,13 @@ const SharedLayout = () => {
         <Block>
           <StyledList>
             <StyledLink to="/" end>
-              LearnLingo
+              <img
+                src={require('../../SVG/ukraine.svg').default}
+                alt="Flag of Ukraine"
+                width={28}
+                height={28}
+              />
+              <Logo>LearnLingo</Logo>
             </StyledLink>
             <StyledItem>
               <StyledLink to="/" end>
@@ -34,10 +43,18 @@ const SharedLayout = () => {
         <BlockRight>
           <StyledList>
             <StyledItem>
-              <StyledLink to="/login">Login</StyledLink>
+              <StyledLink to="/login">
+                <img
+                  src={require('../../SVG/log-in-01.svg').default}
+                  alt="Log in"
+                />
+                <StyledLogin>Log in</StyledLogin>
+              </StyledLink>
             </StyledItem>
             <StyledItem>
-              <StyledLink to="/registration">Registration</StyledLink>
+              <StyledLink to="/registration">
+                <StyledRegistration> Registration</StyledRegistration>
+              </StyledLink>
             </StyledItem>
           </StyledList>
         </BlockRight>
