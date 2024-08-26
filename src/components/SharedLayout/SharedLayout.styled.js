@@ -32,6 +32,7 @@ export const Logo = styled.span`
   display: flex;
   align-items: center;
   padding-left: 5px;
+  padding-right: 430px;
 `;
 
 export const StyledLogin = styled.span`
@@ -58,10 +59,10 @@ export const StyledHeader = styled.nav`
   z-index: 1100;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 50px;
-  padding-right: 24px;
-  padding-left: 24px;
+  padding-left: 5%;
+  padding-right: 5%;
   padding-top: 12px;
   padding-bottom: 12px;
   color: #fff;
