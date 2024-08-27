@@ -1,3 +1,4 @@
+import { CardWrapper, StyledImg } from './Card.styled';
 const Card = ({
   avatar_url,
   conditions,
@@ -13,31 +14,31 @@ const Card = ({
   surname,
 }) => {
   return (
-    <div>
-      <li>
+    <CardWrapper>
+      <div>
         {name} {surname}
-      </li>
-      <li>
-        <img src={avatar_url} width={120} height={120} alt={name} />
-      </li>
-      <li>Speaks: {languages.map(el => el).join(', ')}</li>
-      <li>Experience: {experience}</li>
-      <li>Lesson Info:{lesson_info}</li>
-      <li>
+      </div>
+      <div>
+        <StyledImg src={avatar_url}  alt={name} />
+      </div>
+      <div>Speaks: {languages.map(el => el).join(', ')}</div>
+      <div>Experience: {experience}</div>
+      <div>Lesson Info:{lesson_info}</div>
+      <div>
         Conditions:
         {conditions
           .map(el => el)
           .join('')
           .replace('.', '. ')}
-      </li>
-      <li>lessons Done: {lessons_done}</li>
-      <li>Level:{levels}</li>
+      </div>
+      <div>lessons Done: {lessons_done}</div>
+      <div>Level:{levels}</div>
 
-      <li>Price:{price_per_hour}</li>
-      <li>Rating:{rating}</li>
-      <li>Reviews:Need to create LIST OF COMMENTS</li>
+      <div>Price:{price_per_hour}</div>
+      <div>Rating:{rating}</div>
+      <div>Reviews:Need to create LIST OF COMMENTS</div>
       <p>=======================</p>
-    </div>
+    </CardWrapper>
   );
 };
 export default Card;
