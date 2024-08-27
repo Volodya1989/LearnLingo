@@ -3,6 +3,7 @@ import CardsList from 'components/CardsList';
 import teachersAPI from '../../data/teachers.json';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useFetch from 'use-http';
+import { StyledContainer } from './Teachers.styled';
 
 const Teachers = () => {
   // console.log(teachersAPI);
@@ -29,14 +30,12 @@ const Teachers = () => {
 
   useEffect(() => {
     handleLoading();
-    // console.log('setTeachers', teachers);
-    // console.log('isLoading', isLoading);
   }, [handleLoading]);
 
   return (
-    <div>
+    <StyledContainer>
       {!isLoading ? <p>Loading...</p> : <CardsList teachers={teachers} />}
-    </div>
+    </StyledContainer>
   );
 };
 export default Teachers;
