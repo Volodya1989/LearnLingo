@@ -5,7 +5,8 @@ export const CardWrapper = styled.li`
   //   box-shadow: var(--shade);
   border-radius: 20px;
   width: 1100px;
-  display: block;
+  display: flex;
+  gap: 50px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 30px;
@@ -39,4 +40,19 @@ export const StyledImg = styled.img`
   height: 120px;
   border: solid #fbe9ba 3px;
   padding: 10px;
+`;
+
+export const StyledIsActive = styled.div`
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background: #38cd3e;
+  border: 3px solid #fff;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+`;
+
+export const ImgWrapper = styled.div`
+  position: relative;
 `;
