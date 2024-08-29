@@ -3,6 +3,7 @@ import {
   StyledImg,
   StyledIsActive,
   ImgWrapper,
+  StyledFirstSection,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -25,11 +26,21 @@ const Card = ({
         <StyledImg src={avatar_url} alt={name} />
       </ImgWrapper>
       <div>
-        <div>
-          {name} {surname}
-        </div>
+        <StyledFirstSection>
+          <div>
+            Lnguages
+            <span>
+              {name} {surname}
+            </span>
+          </div>
+          <div>Lessons online</div>
+          <div>lessons Done: {lessons_done}</div>
+          <div>Rating:{rating}</div>
+          <div>Price:{price_per_hour}</div>
+        </StyledFirstSection>
         <div>Speaks: {languages.map(el => el).join(', ')}</div>
         <div>Experience: {experience}</div>
+
         <div>Lesson Info:{lesson_info}</div>
         <div>
           Conditions:
@@ -38,11 +49,8 @@ const Card = ({
             .join('')
             .replace('.', '. ')}
         </div>
-        <div>lessons Done: {lessons_done}</div>
         <div>Level:{levels}</div>
 
-        <div>Price:{price_per_hour}</div>
-        <div>Rating:{rating}</div>
         <div>Reviews:Need to create LIST OF COMMENTS</div>
         <p>=======================</p>
       </div>

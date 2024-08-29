@@ -56,3 +56,8 @@ export const StyledIsActive = styled.div`
 export const ImgWrapper = styled.div`
   position: relative;
 `;
+
+export const StyledFirstSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
