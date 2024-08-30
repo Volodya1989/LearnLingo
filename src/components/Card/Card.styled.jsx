@@ -116,3 +116,8 @@ export const StyledDescMain = styled.div`
   line-height: calc(24 / 16);
   margin-bottom: 8px;
 `;
+
+export const StyledReadMore = styled.div`
+  text-decoration: underline;
+  cursor: pointer;
+`;

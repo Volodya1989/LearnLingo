@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   CardWrapper,
   StyledImg,
@@ -13,6 +15,7 @@ import {
   StyledFirstName,
   StyledDescription,
   StyledDescMain,
+  StyledReadMore,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -28,6 +31,10 @@ const Card = ({
   reviews,
   surname,
 }) => {
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };
   return (
     <CardWrapper>
       <ImgWrapper>
@@ -81,17 +88,21 @@ const Card = ({
             .join('')
             .replace('.', '. ')}
         </StyledDescMain>
-        <p>Read more</p>
+        <StyledReadMore onClick={toggleReadMore}>Read more</StyledReadMore>
+        {isReadMore ? (
+          ''
+        ) : (
+          <>
+            <div>
+              {' '}
+              <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
+            </div>
 
-        <div>
-          {' '}
-          <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
-        </div>
+            <div>Level:{levels}</div>
 
-        <div>Level:{levels}</div>
-
-        <div>Reviews:Need to create LIST OF COMMENTS</div>
-        <p>=======================</p>
+            <div>Reviews:Need to create LIST OF COMMENTS</div>
+          </>
+        )}
       </div>
     </CardWrapper>
   );
