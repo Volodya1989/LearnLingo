@@ -61,10 +61,14 @@ export const StyledFirstSection = styled.div`
   display: flex;
   justify-content: start;
   gap: 150px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: calc(24 / 16);
+  text-align: left;
 `;
 export const StyledBook = styled.div`
   display: flex;
-  gap: 5px;
+  gap: 8px;
 `;
 
 export const StyledLessons = styled.span`
@@ -83,4 +87,19 @@ export const StyledPipe = styled.div`
   border: solid #121417 0.5px;
   opacity: 0.3;
   height: 16px;
+`;
+
+export const StyledPrice = styled.span`
+  color: #0bb81c;
+`;
+
+export const StyledName = styled.div`
+  color: #8a8a89;
+`;
+export const StyledFirstName = styled.span`
+  display: block;
+  padding-top: 5px;
+  font-size: 24px;
+  line-height: calc(24 / 24);
+  color: black;
 `;

@@ -8,6 +8,9 @@ import {
   StyledLessons,
   StyledFirstSection2,
   StyledPipe,
+  StyledPrice,
+  StyledName,
+  StyledFirstName,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -31,12 +34,12 @@ const Card = ({
       </ImgWrapper>
       <div>
         <StyledFirstSection>
-          <div>
-            Lnguages
-            <span>
+          <StyledName>
+            Languages <br />
+            <StyledFirstName>
               {name} {surname}
-            </span>
-          </div>
+            </StyledFirstName>
+          </StyledName>
           <StyledFirstSection2>
             <StyledBook>
               {' '}
@@ -49,9 +52,15 @@ const Card = ({
             <StyledPipe />
             <div>Lessons Done: {lessons_done}</div>
             <StyledPipe />
-            <div>Rating:{rating}</div>
+            <StyledBook>
+              {' '}
+              <img src={require('../../SVG/star.svg').default} alt="Star" />
+              <span>Rating: {rating}</span>
+            </StyledBook>
             <StyledPipe />
-            <div>Price:{price_per_hour}$</div>
+            <div>
+              Price / 1 hour: <StyledPrice>{price_per_hour}$</StyledPrice>
+            </div>
           </StyledFirstSection2>
         </StyledFirstSection>
         <div>Speaks: {languages.map(el => el).join(', ')}</div>
