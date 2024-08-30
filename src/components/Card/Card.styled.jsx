@@ -59,5 +59,28 @@ export const ImgWrapper = styled.div`
 
 export const StyledFirstSection = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 150px;
+`;
+export const StyledBook = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+export const StyledLessons = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+export const StyledFirstSection2 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const StyledPipe = styled.div`
+  border: solid #121417 0.5px;
+  opacity: 0.3;
+  height: 16px;
 `;

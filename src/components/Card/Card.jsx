@@ -4,6 +4,10 @@ import {
   StyledIsActive,
   ImgWrapper,
   StyledFirstSection,
+  StyledBook,
+  StyledLessons,
+  StyledFirstSection2,
+  StyledPipe,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -33,10 +37,22 @@ const Card = ({
               {name} {surname}
             </span>
           </div>
-          <div>Lessons online</div>
-          <div>lessons Done: {lessons_done}</div>
-          <div>Rating:{rating}</div>
-          <div>Price:{price_per_hour}</div>
+          <StyledFirstSection2>
+            <StyledBook>
+              {' '}
+              <img
+                src={require('../../SVG/book-open.svg').default}
+                alt="Book"
+              />
+              <StyledLessons> Lessons online </StyledLessons>
+            </StyledBook>
+            <StyledPipe />
+            <div>Lessons Done: {lessons_done}</div>
+            <StyledPipe />
+            <div>Rating:{rating}</div>
+            <StyledPipe />
+            <div>Price:{price_per_hour}$</div>
+          </StyledFirstSection2>
         </StyledFirstSection>
         <div>Speaks: {languages.map(el => el).join(', ')}</div>
         <div>Experience: {experience}</div>
