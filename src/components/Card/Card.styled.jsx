@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const CardWrapper = styled.li`
   //   position: relative;
   //   box-shadow: var(--shade);
+  font-family: Roboto;
+
   border-radius: 20px;
   width: 1100px;
   display: flex;
@@ -65,6 +67,7 @@ export const StyledFirstSection = styled.div`
   font-weight: 500;
   line-height: calc(24 / 16);
   text-align: left;
+  margin-bottom: 32px;
 `;
 export const StyledBook = styled.div`
   display: flex;
@@ -93,7 +96,10 @@ export const StyledPrice = styled.span`
   color: #0bb81c;
 `;
 
-export const StyledName = styled.div`
+export const StyledSubTitle = styled.div`
+  color: #8a8a89;
+`;
+export const StyledDescription = styled.span`
   color: #8a8a89;
 `;
 export const StyledFirstName = styled.span`
@@ -102,4 +108,11 @@ export const StyledFirstName = styled.span`
   font-size: 24px;
   line-height: calc(24 / 24);
   color: black;
+`;
+
+export const StyledDescMain = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: calc(24 / 16);
+  margin-bottom: 8px;
 `;

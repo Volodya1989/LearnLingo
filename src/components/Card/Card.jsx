@@ -9,8 +9,10 @@ import {
   StyledFirstSection2,
   StyledPipe,
   StyledPrice,
-  StyledName,
+  StyledSubTitle,
   StyledFirstName,
+  StyledDescription,
+  StyledDescMain,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -34,12 +36,12 @@ const Card = ({
       </ImgWrapper>
       <div>
         <StyledFirstSection>
-          <StyledName>
+          <StyledSubTitle>
             Languages <br />
             <StyledFirstName>
               {name} {surname}
             </StyledFirstName>
-          </StyledName>
+          </StyledSubTitle>
           <StyledFirstSection2>
             <StyledBook>
               {' '}
@@ -63,17 +65,29 @@ const Card = ({
             </div>
           </StyledFirstSection2>
         </StyledFirstSection>
-        <div>Speaks: {languages.map(el => el).join(', ')}</div>
-        <div>Experience: {experience}</div>
-
-        <div>Lesson Info:{lesson_info}</div>
-        <div>
-          Conditions:
+        <StyledDescMain>
+          {' '}
+          <StyledDescription>Speaks:</StyledDescription>{' '}
+          {languages.map(el => el).join(', ')}
+        </StyledDescMain>
+        <StyledDescMain>
+          {' '}
+          <StyledDescription>Experience:</StyledDescription> {experience}
+        </StyledDescMain>
+        <StyledDescMain>
+          <StyledDescription>Conditions:</StyledDescription>
           {conditions
             .map(el => el)
             .join('')
             .replace('.', '. ')}
+        </StyledDescMain>
+        <p>Read more</p>
+
+        <div>
+          {' '}
+          <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
         </div>
+
         <div>Level:{levels}</div>
 
         <div>Reviews:Need to create LIST OF COMMENTS</div>
