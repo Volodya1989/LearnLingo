@@ -4,6 +4,15 @@ import {
   StyledIsActive,
   ImgWrapper,
   StyledFirstSection,
+  StyledBook,
+  StyledLessons,
+  StyledFirstSection2,
+  StyledPipe,
+  StyledPrice,
+  StyledSubTitle,
+  StyledFirstName,
+  StyledDescription,
+  StyledDescMain,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -27,28 +36,58 @@ const Card = ({
       </ImgWrapper>
       <div>
         <StyledFirstSection>
-          <div>
-            Lnguages
-            <span>
+          <StyledSubTitle>
+            Languages <br />
+            <StyledFirstName>
               {name} {surname}
-            </span>
-          </div>
-          <div>Lessons online</div>
-          <div>lessons Done: {lessons_done}</div>
-          <div>Rating:{rating}</div>
-          <div>Price:{price_per_hour}</div>
+            </StyledFirstName>
+          </StyledSubTitle>
+          <StyledFirstSection2>
+            <StyledBook>
+              {' '}
+              <img
+                src={require('../../SVG/book-open.svg').default}
+                alt="Book"
+              />
+              <StyledLessons> Lessons online </StyledLessons>
+            </StyledBook>
+            <StyledPipe />
+            <div>Lessons Done: {lessons_done}</div>
+            <StyledPipe />
+            <StyledBook>
+              {' '}
+              <img src={require('../../SVG/star.svg').default} alt="Star" />
+              <span>Rating: {rating}</span>
+            </StyledBook>
+            <StyledPipe />
+            <div>
+              Price / 1 hour: <StyledPrice>{price_per_hour}$</StyledPrice>
+            </div>
+          </StyledFirstSection2>
         </StyledFirstSection>
-        <div>Speaks: {languages.map(el => el).join(', ')}</div>
-        <div>Experience: {experience}</div>
-
-        <div>Lesson Info:{lesson_info}</div>
-        <div>
-          Conditions:
+        <StyledDescMain>
+          {' '}
+          <StyledDescription>Speaks:</StyledDescription>{' '}
+          {languages.map(el => el).join(', ')}
+        </StyledDescMain>
+        <StyledDescMain>
+          {' '}
+          <StyledDescription>Experience:</StyledDescription> {experience}
+        </StyledDescMain>
+        <StyledDescMain>
+          <StyledDescription>Conditions:</StyledDescription>
           {conditions
             .map(el => el)
             .join('')
             .replace('.', '. ')}
+        </StyledDescMain>
+        <p>Read more</p>
+
+        <div>
+          {' '}
+          <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
         </div>
+
         <div>Level:{levels}</div>
 
         <div>Reviews:Need to create LIST OF COMMENTS</div>

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const CardWrapper = styled.li`
   //   position: relative;
   //   box-shadow: var(--shade);
+  font-family: Roboto;
+
   border-radius: 20px;
   width: 1100px;
   display: flex;
@@ -59,5 +61,58 @@ export const ImgWrapper = styled.div`
 
 export const StyledFirstSection = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 150px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: calc(24 / 16);
+  text-align: left;
+  margin-bottom: 32px;
+`;
+export const StyledBook = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+export const StyledLessons = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+export const StyledFirstSection2 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const StyledPipe = styled.div`
+  border: solid #121417 0.5px;
+  opacity: 0.3;
+  height: 16px;
+`;
+
+export const StyledPrice = styled.span`
+  color: #0bb81c;
+`;
+
+export const StyledSubTitle = styled.div`
+  color: #8a8a89;
+`;
+export const StyledDescription = styled.span`
+  color: #8a8a89;
+`;
+export const StyledFirstName = styled.span`
+  display: block;
+  padding-top: 5px;
+  font-size: 24px;
+  line-height: calc(24 / 24);
+  color: black;
+`;
+
+export const StyledDescMain = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: calc(24 / 16);
+  margin-bottom: 8px;
 `;
