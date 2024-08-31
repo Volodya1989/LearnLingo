@@ -19,7 +19,7 @@ const SharedLayout = () => {
       <StyledHeader>
         <Block>
           <StyledList>
-            <StyledLink to="/" end>
+            <StyledLink to="/learn-lingo" end>
               <img
                 src={require('../../SVG/ukraine.svg').default}
                 alt="Flag of Ukraine"
@@ -29,7 +29,7 @@ const SharedLayout = () => {
               <Logo>LearnLingo</Logo>
             </StyledLink>
             <StyledItem>
-              <StyledLink to="/" end>
+              <StyledLink to="/learn-lingo" end>
                 Home
               </StyledLink>
             </StyledItem>
