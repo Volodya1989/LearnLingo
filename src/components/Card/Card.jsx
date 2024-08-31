@@ -88,7 +88,6 @@ const Card = ({
             .join('')
             .replace('.', '. ')}
         </StyledDescMain>
-        <StyledReadMore onClick={toggleReadMore}>Read more</StyledReadMore>
         {isReadMore ? (
           ''
         ) : (
@@ -103,6 +102,9 @@ const Card = ({
             <div>Reviews:Need to create LIST OF COMMENTS</div>
           </>
         )}
+        <StyledReadMore onClick={toggleReadMore}>
+          {isReadMore ? 'Read more' : 'Read less'}
+        </StyledReadMore>
       </div>
     </CardWrapper>
   );
