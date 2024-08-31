@@ -16,7 +16,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
-            <Route path="/learn-lingo" element={<MainHome />} />
+            <Route index element={<MainHome />} />
             <Route path="/teachers" element={<Teachers />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/login" element={<Login />} />
