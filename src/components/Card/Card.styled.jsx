@@ -4,7 +4,6 @@ export const CardWrapper = styled.li`
   //   position: relative;
   //   box-shadow: var(--shade);
   font-family: Roboto;
-
   border-radius: 20px;
   width: 1100px;
   display: flex;
@@ -15,6 +14,7 @@ export const CardWrapper = styled.li`
   padding-right: 30px;
   padding-bottom: 20px;
   padding-top: 20px;
+  margin-bottom: 60px;
   //   margin-bottom: 35px;
   transition: transform 0.4s;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),

@@ -3,12 +3,11 @@ import { List } from 'components/CardsList/CardsList.styled';
 import { v4 as uuidv4 } from 'uuid';
 const CardsList = ({ teachers }) => {
   console.log('teachers CardList', teachers);
-  const oneTeacher = teachers.slice(0, 1);
   return (
     <div>
       <h3>List of Teachers</h3>
       <List>
-        {oneTeacher?.map(
+        {teachers?.map(
           ({
             avatar_url,
             conditions,
