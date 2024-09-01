@@ -18,6 +18,7 @@ import {
   StyledReadMore,
   StyledLevel,
   StyledLevelEl,
+  MainButton,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -115,6 +116,8 @@ const Card = ({
             </StyledLevelEl>
           ))}
         </StyledLevel>
+
+        {isReadMore ? false : <MainButton>Book trial lesson</MainButton>}
       </div>
     </CardWrapper>
   );

@@ -143,3 +143,18 @@ export const StyledLevelEl = styled.span`
   margin-top: 25px;
   border: solid lightgray 1px;
 `;
+
+export const MainButton = styled.button`
+  width: Hug (232px) px;
+  height: Hug (60px) px;
+  padding: 16px 48px 16px 48px;
+  gap: 0px;
+  margin-top: 25px;
+  border-radius: 12px;
+  opacity: 0px;
+  font-weight: 700;
+  background: #f4c550;
+  border: none;
+  font-size: 18px;
+  line-height: calc(28 / 18);
+`;
