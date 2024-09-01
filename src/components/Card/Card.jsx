@@ -16,6 +16,8 @@ import {
   StyledDescription,
   StyledDescMain,
   StyledReadMore,
+  StyledLevel,
+  StyledLevelEl,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -97,14 +99,17 @@ const Card = ({
               <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
             </div>
 
-            <div>Level:{levels}</div>
-
             <div>Reviews:Need to create LIST OF COMMENTS</div>
           </>
         )}
         <StyledReadMore onClick={toggleReadMore}>
           {isReadMore ? 'Read more' : 'Read less'}
         </StyledReadMore>
+        <StyledLevel>
+          {levels.map((el, i) => (
+            <StyledLevelEl index={i}>{el}</StyledLevelEl>
+          ))}
+        </StyledLevel>
       </div>
     </CardWrapper>
   );
