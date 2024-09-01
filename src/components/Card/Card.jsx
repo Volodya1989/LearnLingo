@@ -18,6 +18,9 @@ import {
   StyledReadMore,
   StyledLevel,
   StyledLevelEl,
+  MainButton,
+  Comments,
+  CommentsRating,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -75,13 +78,11 @@ const Card = ({
           </StyledFirstSection2>
         </StyledFirstSection>
         <StyledDescMain>
-          {' '}
           <StyledDescription>Speaks:</StyledDescription>{' '}
           {languages.map(el => el).join(', ')}
         </StyledDescMain>
         <StyledDescMain>
-          {' '}
-          <StyledDescription>Experience:</StyledDescription> {experience}
+          <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
         </StyledDescMain>
         <StyledDescMain>
           <StyledDescription>Conditions:</StyledDescription>
@@ -94,16 +95,40 @@ const Card = ({
           ''
         ) : (
           <>
+            <StyledDescMain>{experience}</StyledDescMain>
+            {reviews ? <h4>Comments</h4> : ''}
             <div>
-              {' '}
-              <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
+              {reviews?.length > 0
+                ? reviews.map(
+                    (
+                      { comment, reviewer_name: name, reviewer_rating: rating },
+                      index
+                    ) => {
+                      return (
+                        <div key={index}>
+                          <Comments onClick={toggleReadMore}>
+                            {' '}
+                            <StyledDescription>{name}</StyledDescription>{' '}
+                            <CommentsRating>
+                              {' '}
+                              <img
+                                src={require('../../SVG/star.svg').default}
+                                alt="Star"
+                              />
+                              <span>{rating}.0</span>
+                            </CommentsRating>
+                            <div>{comment}</div>
+                          </Comments>
+                        </div>
+                      );
+                    }
+                  )
+                : ''}
             </div>
-
-            <div>Reviews:Need to create LIST OF COMMENTS</div>
           </>
         )}
         <StyledReadMore onClick={toggleReadMore}>
-          {isReadMore ? 'Read more' : 'Read less'}
+          {isReadMore ? 'Read more' : ''}
         </StyledReadMore>
         <StyledLevel>
           {levels.map((el, i) => (
@@ -115,6 +140,7 @@ const Card = ({
             </StyledLevelEl>
           ))}
         </StyledLevel>
+        {isReadMore ? false : <MainButton>Book trial lesson</MainButton>}
       </div>
     </CardWrapper>
   );

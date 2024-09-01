@@ -143,3 +143,36 @@ export const StyledLevelEl = styled.span`
   margin-top: 25px;
   border: solid lightgray 1px;
 `;
+
+export const MainButton = styled.button`
+  width: Hug (232px) px;
+  height: Hug (60px) px;
+  padding: 16px 48px 16px 48px;
+  gap: 0px;
+  margin-top: 25px;
+  border-radius: 12px;
+  opacity: 0px;
+  font-weight: 700;
+  background: #f4c550;
+  border: none;
+  font-size: 18px;
+  line-height: calc(28 / 18);
+  cursor: pointer;
+  &:hover {
+    transition: opacity 0.4s;
+    opacity: 0.8;
+    transition-timing-function: ease;
+  }
+`;
+export const Comments = styled.div`
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+`;
+
+export const CommentsRating = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
