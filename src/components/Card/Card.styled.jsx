@@ -157,4 +157,22 @@ export const MainButton = styled.button`
   border: none;
   font-size: 18px;
   line-height: calc(28 / 18);
+  cursor: pointer;
+  &:hover {
+    transition: opacity 0.4s;
+    opacity: 0.8;
+    transition-timing-function: ease;
+  }
+`;
+export const Comments = styled.div`
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+`;
+
+export const CommentsRating = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;
