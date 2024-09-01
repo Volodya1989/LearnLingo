@@ -107,7 +107,12 @@ const Card = ({
         </StyledReadMore>
         <StyledLevel>
           {levels.map((el, i) => (
-            <StyledLevelEl index={i}>{el}</StyledLevelEl>
+            <StyledLevelEl
+              key={i}
+              style={{ background: `${i === 0 ? '#f4c550' : '#fff'}` }}
+            >
+              {el}
+            </StyledLevelEl>
           ))}
         </StyledLevel>
       </div>
