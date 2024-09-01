@@ -121,3 +121,26 @@ export const StyledReadMore = styled.div`
   text-decoration: underline;
   cursor: pointer;
 `;
+
+export const StyledLevel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: calc(16 / 14);
+`;
+
+export const StyledLevelEl = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  padding: 4px 12px 4px 12px;
+  height: 32px;
+  border-radius: 35px;
+  opacity: 0px;
+  margin-top: 25px;
+  background: ${index => (index === 0 ? '#f4c550' : '#fff')};
+  border: solid lightgray 1px;
+`;
