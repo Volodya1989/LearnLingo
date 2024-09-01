@@ -141,6 +141,5 @@ export const StyledLevelEl = styled.span`
   border-radius: 35px;
   opacity: 0px;
   margin-top: 25px;
-  background: ${index => (index === 0 ? '#f4c550' : '#fff')};
   border: solid lightgray 1px;
 `;
