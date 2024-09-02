@@ -77,24 +77,27 @@ const Card = ({
             </div>
           </StyledFirstSection2>
         </StyledFirstSection>
-        <StyledDescMain>
-          <StyledDescription>Speaks:</StyledDescription>{' '}
-          {languages.map(el => el).join(', ')}
-        </StyledDescMain>
-        <StyledDescMain>
-          <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
-        </StyledDescMain>
-        <StyledDescMain>
-          <StyledDescription>Conditions:</StyledDescription>
-          {conditions
-            .map(el => el)
-            .join('')
-            .replace('.', '. ')}
-        </StyledDescMain>
+        <div onClick={isReadMore ? '' : toggleReadMore}>
+          <StyledDescMain>
+            <StyledDescription>Speaks:</StyledDescription>{' '}
+            {languages.map(el => el).join(', ')}
+          </StyledDescMain>
+          <StyledDescMain>
+            <StyledDescription>Lesson Info:</StyledDescription> {lesson_info}
+          </StyledDescMain>
+          <StyledDescMain>
+            <StyledDescription>Conditions:</StyledDescription>
+            {conditions
+              .map(el => el)
+              .join('')
+              .replace('.', '. ')}
+          </StyledDescMain>
+        </div>
+
         {isReadMore ? (
           ''
         ) : (
-          <>
+          <div onClick={toggleReadMore}>
             <StyledDescMain>{experience}</StyledDescMain>
             {reviews ? <h4>Comments</h4> : ''}
             <div>
@@ -106,7 +109,7 @@ const Card = ({
                     ) => {
                       return (
                         <div key={index}>
-                          <Comments onClick={toggleReadMore}>
+                          <Comments>
                             {' '}
                             <StyledDescription>{name}</StyledDescription>{' '}
                             <CommentsRating>
@@ -125,7 +128,7 @@ const Card = ({
                   )
                 : ''}
             </div>
-          </>
+          </div>
         )}
         <StyledReadMore onClick={toggleReadMore}>
           {isReadMore ? 'Read more' : ''}
