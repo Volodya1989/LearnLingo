@@ -3,26 +3,25 @@ import CardsList from 'components/CardsList';
 import teachersAPI from '../../data/teachers.json';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useFetch from 'use-http';
-import { StyledContainer } from './Teachers.styled';
+import {
+  StyledContainer,
+  Dropdown,
+  DropdownBtn,
+  DropdownList,
+  DropdownItem,
+  DropdownDescr,
+} from './Teachers.styled';
 // import Search from 'components/Search';
 const Teachers = () => {
   // console.log(teachersAPI);
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
-  // const [query, setQuerySearch] = useState('');
+  const [isDropdown, setIsDropdown] = useState(false);
 
-  // //setting query state on change and passing it as props to search component
-  // const onQueryChange = useCallback(
-  //   e => {
-  //     if (e.currentTarget.value === ' ') {
-  //       return;
-  //     }
-  //     setQuerySearch(e.currentTarget.value);
-  //   },
-  //   [setQuerySearch]
-  // );
-
+  const toggleDropdown = () => {
+    setIsDropdown(!isDropdown);
+  };
   const handleLoading = useCallback(
     e => {
       if (loading) {
@@ -51,10 +50,35 @@ const Teachers = () => {
       ) : (
         <>
           {/* <Search onQueryChange={onQueryChange} query={query} /> */}
+
+          <Dropdown>
+            <DropdownDescr>Languages</DropdownDescr>
+            <DropdownBtn onClick={() => toggleDropdown()}>
+              <span>All</span>
+              <div>
+                <img
+                  src={require('../../SVG/arrow-down.svg').default}
+                  alt="Arrow-down"
+                />
+              </div>
+            </DropdownBtn>{' '}
+            {isDropdown ? (
+              <div>
+                <DropdownList>
+                  <DropdownItem>English</DropdownItem>
+                  <DropdownItem>French</DropdownItem>
+                  <DropdownItem>Ukrainian</DropdownItem>
+                </DropdownList>
+              </div>
+            ) : (
+              false
+            )}
+          </Dropdown>
           <CardsList teachers={teachers} />
         </>
       )}
     </StyledContainer>
   );
 };
+
 export default Teachers;

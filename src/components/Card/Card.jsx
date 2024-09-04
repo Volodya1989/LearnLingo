@@ -77,7 +77,7 @@ const Card = ({
             </div>
           </StyledFirstSection2>
         </StyledFirstSection>
-        <div onClick={isReadMore ? '' : toggleReadMore}>
+        <div>
           <StyledDescMain>
             <StyledDescription>Speaks:</StyledDescription>{' '}
             {languages.map(el => el).join(', ')}
@@ -97,7 +97,7 @@ const Card = ({
         {isReadMore ? (
           ''
         ) : (
-          <div onClick={toggleReadMore}>
+          <div onClick={() => toggleReadMore()}>
             <StyledDescMain>{experience}</StyledDescMain>
             {reviews ? <h4>Comments</h4> : ''}
             <div>
@@ -130,7 +130,7 @@ const Card = ({
             </div>
           </div>
         )}
-        <StyledReadMore onClick={toggleReadMore}>
+        <StyledReadMore onClick={() => toggleReadMore()}>
           {isReadMore ? 'Read more' : ''}
         </StyledReadMore>
         <StyledLevel>
