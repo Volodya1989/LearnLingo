@@ -2,7 +2,6 @@ import Card from 'components/Card';
 import { List, Title } from 'components/CardsList/CardsList.styled';
 import { v4 as uuidv4 } from 'uuid';
 const CardsList = ({ teachers }) => {
-  console.log('teachers CardList', teachers);
   return (
     <div>
       <Title>List of Teachers</Title>

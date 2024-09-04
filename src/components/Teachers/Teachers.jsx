@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import CardsList from 'components/CardsList';
 import teachersAPI from '../../data/teachers.json';
 import useLocalStorage from 'hooks/useLocalStorage';
+import { GoChevronDown } from 'react-icons/go';
 import useFetch from 'use-http';
 import {
   StyledContainer,
@@ -13,11 +14,25 @@ import {
 } from './Teachers.styled';
 // import Search from 'components/Search';
 const Teachers = () => {
-  // console.log(teachersAPI);
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
+  const [languages, setLanguages] = useLocalStorage('languages', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdown, setIsDropdown] = useState(false);
+
+  //  const handleChange =() => {
+  //    setSelectedItem(item);
+  //    onSelect && onSelect(item.id);
+  //    isDropdown(false);
+  //  };
+  // useEffect(() => {
+  //   if (selectedId && data) {
+  //     const newSelectedItem = data.find(item => item.id === selectedId);
+  //     newSelectedItem && setSelectedItem(newSelectedItem);
+  //   } else {
+  //     setSelectedItem(undefined);
+  //   }
+  // }, [selectedId, data]);
 
   const toggleDropdown = () => {
     setIsDropdown(!isDropdown);
@@ -30,13 +45,18 @@ const Teachers = () => {
       if (!teachers) {
         setTeachers(teachersAPI);
       }
+      if (!languages) {
+        setLanguages([
+          ...new Set(teachersAPI?.map(({ languages }) => languages)?.flat()),
+        ]);
+      }
       if (!loading) {
         setTimeout(() => {
           setIsLoading(true);
         }, 1000);
       }
     },
-    [loading, setTeachers, teachers]
+    [loading, setTeachers, teachers, languages, setLanguages]
   );
 
   useEffect(() => {
@@ -55,19 +75,18 @@ const Teachers = () => {
             <DropdownDescr>Languages</DropdownDescr>
             <DropdownBtn onClick={() => toggleDropdown()}>
               <span>All</span>
-              <div>
-                <img
-                  src={require('../../SVG/arrow-down.svg').default}
-                  alt="Arrow-down"
-                />
-              </div>
+              <GoChevronDown
+                size={20}
+                color={'black'}
+                style={isDropdown ? { transform: 'rotate(180deg)' } : ''}
+              />
             </DropdownBtn>{' '}
             {isDropdown ? (
               <div>
                 <DropdownList>
-                  <DropdownItem>English</DropdownItem>
-                  <DropdownItem>French</DropdownItem>
-                  <DropdownItem>Ukrainian</DropdownItem>
+                  {languages?.map((item, index) => {
+                    return <DropdownItem key={index}>{item}</DropdownItem>;
+                  })}
                 </DropdownList>
               </div>
             ) : (
