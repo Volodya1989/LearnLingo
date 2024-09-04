@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import CardsList from 'components/CardsList';
 import teachersAPI from '../../data/teachers.json';
 import useLocalStorage from 'hooks/useLocalStorage';
+import { GoChevronDown } from 'react-icons/go';
 import useFetch from 'use-http';
 import {
   StyledContainer,
@@ -18,7 +19,6 @@ const Teachers = () => {
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdown, setIsDropdown] = useState(false);
-  console.log('List of languages', teachers);
 
   //  const handleChange =() => {
   //    setSelectedItem(item);
@@ -75,12 +75,11 @@ const Teachers = () => {
             <DropdownDescr>Languages</DropdownDescr>
             <DropdownBtn onClick={() => toggleDropdown()}>
               <span>All</span>
-              <div>
-                <img
-                  src={require('../../SVG/arrow-down.svg').default}
-                  alt="Arrow-down"
-                />
-              </div>
+              <GoChevronDown
+                size={20}
+                color={'black'}
+                style={isDropdown ? { transform: 'rotate(180deg)' } : ''}
+              />
             </DropdownBtn>{' '}
             {isDropdown ? (
               <div>
