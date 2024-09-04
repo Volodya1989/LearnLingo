@@ -55,8 +55,11 @@ export const DropdownList = styled.ul`
   list-style: none;
   padding-left: 0;
   width: 100%;
+  height: 200px;
   border-radius: 14px;
   margin-top: 5px;
+  overflow: scroll;
+  padding-bottom: 10px;
 `;
 export const DropdownItem = styled.li`
   color: black;

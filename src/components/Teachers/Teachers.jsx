@@ -13,11 +13,26 @@ import {
 } from './Teachers.styled';
 // import Search from 'components/Search';
 const Teachers = () => {
-  // console.log(teachersAPI);
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
+  const [languages, setLanguages] = useLocalStorage('languages', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdown, setIsDropdown] = useState(false);
+  console.log('List of languages', teachers);
+
+  //  const handleChange =() => {
+  //    setSelectedItem(item);
+  //    onSelect && onSelect(item.id);
+  //    isDropdown(false);
+  //  };
+  // useEffect(() => {
+  //   if (selectedId && data) {
+  //     const newSelectedItem = data.find(item => item.id === selectedId);
+  //     newSelectedItem && setSelectedItem(newSelectedItem);
+  //   } else {
+  //     setSelectedItem(undefined);
+  //   }
+  // }, [selectedId, data]);
 
   const toggleDropdown = () => {
     setIsDropdown(!isDropdown);
@@ -30,13 +45,18 @@ const Teachers = () => {
       if (!teachers) {
         setTeachers(teachersAPI);
       }
+      if (!languages) {
+        setLanguages([
+          ...new Set(teachersAPI?.map(({ languages }) => languages)?.flat()),
+        ]);
+      }
       if (!loading) {
         setTimeout(() => {
           setIsLoading(true);
         }, 1000);
       }
     },
-    [loading, setTeachers, teachers]
+    [loading, setTeachers, teachers, languages, setLanguages]
   );
 
   useEffect(() => {
@@ -65,9 +85,9 @@ const Teachers = () => {
             {isDropdown ? (
               <div>
                 <DropdownList>
-                  <DropdownItem>English</DropdownItem>
-                  <DropdownItem>French</DropdownItem>
-                  <DropdownItem>Ukrainian</DropdownItem>
+                  {languages?.map((item, index) => {
+                    return <DropdownItem key={index}>{item}</DropdownItem>;
+                  })}
                 </DropdownList>
               </div>
             ) : (
