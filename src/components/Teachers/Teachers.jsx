@@ -1,66 +1,85 @@
-import { useEffect, useCallback, useState, useRef } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import CardsList from 'components/CardsList';
 import teachersAPI from '../../data/teachers.json';
 import useLocalStorage from 'hooks/useLocalStorage';
-import { GoChevronDown } from 'react-icons/go';
-import useOnClickOutside from 'hooks/useOnClickOutside';
 
+import Dropdown from 'components/Dropdown';
 import useFetch from 'use-http';
-import {
-  StyledContainer,
-  Dropdown,
-  DropdownBtn,
-  DropdownList,
-  DropdownItem,
-  DropdownDescr,
-} from './Teachers.styled';
+import { StyledContainer } from './Teachers.styled';
 
 const Teachers = () => {
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
   const [languages, setLanguages] = useLocalStorage('languages', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
-  const [isDropdown, setIsDropdown] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useLocalStorage('All', 'All');
+
+  const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
+    'selectedLanguage',
+    'All'
+  );
+  const [levelOfLanguage, setLevelOfLanguage] = useLocalStorage(
+    'levelOfLanguage',
+    null
+  );
+  const [selectedLevel, setSelectedLevel] = useLocalStorage(
+    'selectedLevel',
+    'All'
+  );
+
   const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
     'filteredTeachers',
     null
   );
 
+  // const handleFilteredTeachers = useCallback(() => {
+  //   if (!teachers) return;
+  //   const filteredListOfTeachers = teachers?.filter(teacher => {
+  //     if (teacher.languages.includes(selectedLanguage)) {
+  //       return teacher;
+  //     }
+  //     if (selectedLanguage === 'All') {
+  //       return teacher;
+  //     }
+  //     return false;
+  //   });
+  //   setFilteredTeachers(filteredListOfTeachers);
+  // }, [teachers, selectedLanguage, setFilteredTeachers]);
+
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
-    const filteredListOfTeachers = teachers?.filter(teacher => {
-      if (teacher.languages.includes(selectedLanguage)) {
-        return teacher;
-      }
-      if (selectedLanguage === 'All') {
-        return teacher;
-      }
-      return false;
-    });
-    setFilteredTeachers(filteredListOfTeachers);
-  }, [teachers, selectedLanguage, setFilteredTeachers]);
+    let filteredTeachers = teachers;
+    if (selectedLanguage === 'All') {
+      filteredTeachers = teachers;
+    }
+    if (selectedLevel === 'All') {
+      filteredTeachers = teachers;
+    }
+    if (selectedLanguage !== 'All') {
+      filteredTeachers = filteredTeachers?.filter(teacher => {
+        return teacher.languages.includes(selectedLanguage);
+      });
+    }
+    if (selectedLevel !== 'All') {
+      filteredTeachers = filteredTeachers?.filter(teacher => {
+        return teacher.levels.includes(selectedLevel);
+      });
+    }
+
+    setFilteredTeachers(filteredTeachers);
+  }, [teachers, selectedLanguage, setFilteredTeachers, selectedLevel]);
 
   useEffect(() => {
     handleFilteredTeachers();
   }, [handleFilteredTeachers]);
 
-  //saving ref valus for the soring options between renders
-  const innerWrapperRef = useRef();
-  const handleClick = item => {
+  const handleLanguage = item => {
     setSelectedLanguage(item);
-    setIsDropdown(false);
   };
 
-  //closing sorting options based on the click outside of the sorting box
-  useOnClickOutside(
-    innerWrapperRef,
-    () => isDropdown && setTimeout(() => setIsDropdown(false), 201)
-  );
-
-  const toggleDropdown = () => {
-    setIsDropdown(!isDropdown);
+  const handleLevel = item => {
+    setSelectedLevel(item);
   };
+
   const handleLoading = useCallback(
     e => {
       if (loading) {
@@ -73,6 +92,11 @@ const Teachers = () => {
       if (!languages) {
         setLanguages([
           ...new Set(teachersAPI?.map(({ languages }) => languages)?.flat()),
+        ]);
+      }
+      if (!levelOfLanguage) {
+        setLevelOfLanguage([
+          ...new Set(teachersAPI?.map(({ levels }) => [...levels]).flat()),
         ]);
       }
       if (!loading) {
@@ -88,6 +112,8 @@ const Teachers = () => {
       languages,
       setLanguages,
       setFilteredTeachers,
+      levelOfLanguage,
+      setLevelOfLanguage,
     ]
   );
 
@@ -105,56 +131,19 @@ const Teachers = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <Dropdown>
-            <DropdownDescr>Languages</DropdownDescr>
-            <DropdownBtn onClick={() => toggleDropdown()}>
-              <span>{selectedLanguage}</span>
-              <GoChevronDown
-                size={20}
-                color={'black'}
-                style={isDropdown ? { transform: 'rotate(180deg)' } : ''}
-              />
-            </DropdownBtn>{' '}
-            {isDropdown ? (
-              <div>
-                <DropdownList ref={innerWrapperRef}>
-                  {selectedLanguage !== 'All' ? (
-                    <DropdownItem
-                      style={{
-                        color: `${
-                          selectedLanguage === 'All' ? 'black' : '#8a8a89'
-                        }`,
-                      }}
-                      onClick={() => handleClick('All')}
-                    >
-                      All
-                    </DropdownItem>
-                  ) : (
-                    ''
-                  )}
+          <Dropdown
+            dropdownName={'Language'}
+            selectedName={selectedLanguage}
+            handleClick={handleLanguage}
+            itemsMap={languages}
+          />
+          <Dropdown
+            dropdownName={'Level of knowledge'}
+            selectedName={selectedLevel}
+            handleClick={handleLevel}
+            itemsMap={levelOfLanguage}
+          />
 
-                  {languages?.map((item, index) => {
-                    return (
-                      <DropdownItem
-                        props={(selectedLanguage, item)}
-                        style={{
-                          color: `${
-                            selectedLanguage === item ? 'black' : '#8a8a89'
-                          }`,
-                        }}
-                        onClick={() => handleClick(item)}
-                        key={index}
-                      >
-                        {item}
-                      </DropdownItem>
-                    );
-                  })}
-                </DropdownList>
-              </div>
-            ) : (
-              false
-            )}
-          </Dropdown>
           <CardsList teachers={filteredTeachers} />
         </>
       )}
