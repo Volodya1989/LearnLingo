@@ -14,7 +14,7 @@ import {
   DropdownItem,
   DropdownDescr,
 } from './Teachers.styled';
-// import Search from 'components/Search';
+
 const Teachers = () => {
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
   const [languages, setLanguages] = useLocalStorage('languages', null);
@@ -22,6 +22,28 @@ const Teachers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdown, setIsDropdown] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage('All', 'All');
+  const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
+    'filteredTeachers',
+    null
+  );
+
+  const handleFilteredTeachers = useCallback(() => {
+    if (!teachers) return;
+    const filteredListOfTeachers = teachers?.filter(teacher => {
+      if (teacher.languages.includes(selectedLanguage)) {
+        return teacher;
+      }
+      if (selectedLanguage === 'All') {
+        return teacher;
+      }
+      return false;
+    });
+    setFilteredTeachers(filteredListOfTeachers);
+  }, [teachers, selectedLanguage, setFilteredTeachers]);
+
+  useEffect(() => {
+    handleFilteredTeachers();
+  }, [handleFilteredTeachers]);
 
   //saving ref valus for the soring options between renders
   const innerWrapperRef = useRef();
@@ -35,14 +57,6 @@ const Teachers = () => {
     innerWrapperRef,
     () => isDropdown && setTimeout(() => setIsDropdown(false), 201)
   );
-  // useEffect(() => {
-  //   if (selectedId && data) {
-  //     const newSelectedItem = data.find(item => item.id === selectedId);
-  //     newSelectedItem && setSelectedItem(newSelectedItem);
-  //   } else {
-  //     setSelectedItem(undefined);
-  //   }
-  // }, [selectedId, data]);
 
   const toggleDropdown = () => {
     setIsDropdown(!isDropdown);
@@ -54,6 +68,7 @@ const Teachers = () => {
       }
       if (!teachers) {
         setTeachers(teachersAPI);
+        setFilteredTeachers(teachersAPI);
       }
       if (!languages) {
         setLanguages([
@@ -66,8 +81,19 @@ const Teachers = () => {
         }, 1000);
       }
     },
-    [loading, setTeachers, teachers, languages, setLanguages]
+    [
+      loading,
+      setTeachers,
+      teachers,
+      languages,
+      setLanguages,
+      setFilteredTeachers,
+    ]
   );
+
+  useEffect(() => {
+    handleLoading();
+  }, [handleLoading]);
 
   useEffect(() => {
     handleLoading();
@@ -79,8 +105,6 @@ const Teachers = () => {
         <p>Loading...</p>
       ) : (
         <>
-          {/* <Search onQueryChange={onQueryChange} query={query} /> */}
-
           <Dropdown>
             <DropdownDescr>Languages</DropdownDescr>
             <DropdownBtn onClick={() => toggleDropdown()}>
@@ -95,7 +119,14 @@ const Teachers = () => {
               <div>
                 <DropdownList ref={innerWrapperRef}>
                   {selectedLanguage !== 'All' ? (
-                    <DropdownItem onClick={() => handleClick('All')}>
+                    <DropdownItem
+                      style={{
+                        color: `${
+                          selectedLanguage === 'All' ? 'black' : '#8a8a89'
+                        }`,
+                      }}
+                      onClick={() => handleClick('All')}
+                    >
                       All
                     </DropdownItem>
                   ) : (
@@ -105,6 +136,12 @@ const Teachers = () => {
                   {languages?.map((item, index) => {
                     return (
                       <DropdownItem
+                        props={(selectedLanguage, item)}
+                        style={{
+                          color: `${
+                            selectedLanguage === item ? 'black' : '#8a8a89'
+                          }`,
+                        }}
                         onClick={() => handleClick(item)}
                         key={index}
                       >
@@ -118,7 +155,7 @@ const Teachers = () => {
               false
             )}
           </Dropdown>
-          <CardsList teachers={teachers} />
+          <CardsList teachers={filteredTeachers} />
         </>
       )}
     </StyledContainer>
