@@ -1,8 +1,10 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState, useRef } from 'react';
 import CardsList from 'components/CardsList';
 import teachersAPI from '../../data/teachers.json';
 import useLocalStorage from 'hooks/useLocalStorage';
 import { GoChevronDown } from 'react-icons/go';
+import useOnClickOutside from 'hooks/useOnClickOutside';
+
 import useFetch from 'use-http';
 import {
   StyledContainer,
@@ -19,12 +21,20 @@ const Teachers = () => {
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdown, setIsDropdown] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useLocalStorage('All', 'All');
 
-  //  const handleChange =() => {
-  //    setSelectedItem(item);
-  //    onSelect && onSelect(item.id);
-  //    isDropdown(false);
-  //  };
+  //saving ref valus for the soring options between renders
+  const innerWrapperRef = useRef();
+  const handleClick = item => {
+    setSelectedLanguage(item);
+    setIsDropdown(false);
+  };
+
+  //closing sorting options based on the click outside of the sorting box
+  useOnClickOutside(
+    innerWrapperRef,
+    () => isDropdown && setTimeout(() => setIsDropdown(false), 201)
+  );
   // useEffect(() => {
   //   if (selectedId && data) {
   //     const newSelectedItem = data.find(item => item.id === selectedId);
@@ -74,7 +84,7 @@ const Teachers = () => {
           <Dropdown>
             <DropdownDescr>Languages</DropdownDescr>
             <DropdownBtn onClick={() => toggleDropdown()}>
-              <span>All</span>
+              <span>{selectedLanguage}</span>
               <GoChevronDown
                 size={20}
                 color={'black'}
@@ -83,9 +93,24 @@ const Teachers = () => {
             </DropdownBtn>{' '}
             {isDropdown ? (
               <div>
-                <DropdownList>
+                <DropdownList ref={innerWrapperRef}>
+                  {selectedLanguage !== 'All' ? (
+                    <DropdownItem onClick={() => handleClick('All')}>
+                      All
+                    </DropdownItem>
+                  ) : (
+                    ''
+                  )}
+
                   {languages?.map((item, index) => {
-                    return <DropdownItem key={index}>{item}</DropdownItem>;
+                    return (
+                      <DropdownItem
+                        onClick={() => handleClick(item)}
+                        key={index}
+                      >
+                        {item}
+                      </DropdownItem>
+                    );
                   })}
                 </DropdownList>
               </div>
