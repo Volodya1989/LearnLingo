@@ -60,10 +60,14 @@ export const DropdownList = styled.ul`
   margin-top: 5px;
   overflow: scroll;
   padding-bottom: 10px;
+  cursor: pointer;
 `;
 export const DropdownItem = styled.li`
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  &:hover {
+    background: #f4c550;
+  }
 `;
