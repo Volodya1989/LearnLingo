@@ -12,38 +12,26 @@ const Teachers = () => {
   const [languages, setLanguages] = useLocalStorage('languages', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
-
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
     'selectedLanguage',
     'All'
-  );
-  const [levelOfLanguage, setLevelOfLanguage] = useLocalStorage(
-    'levelOfLanguage',
-    null
   );
   const [selectedLevel, setSelectedLevel] = useLocalStorage(
     'selectedLevel',
     'All'
   );
+  const [selectedPrice, setSelectedPrice] = useLocalStorage('selected', 'All');
+  const [levelOfLanguage, setLevelOfLanguage] = useLocalStorage(
+    'levelOfLanguage',
+    null
+  );
+  const [price, setPrice] = useLocalStorage('price', null);
 
   const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
     'filteredTeachers',
     null
   );
-
-  // const handleFilteredTeachers = useCallback(() => {
-  //   if (!teachers) return;
-  //   const filteredListOfTeachers = teachers?.filter(teacher => {
-  //     if (teacher.languages.includes(selectedLanguage)) {
-  //       return teacher;
-  //     }
-  //     if (selectedLanguage === 'All') {
-  //       return teacher;
-  //     }
-  //     return false;
-  //   });
-  //   setFilteredTeachers(filteredListOfTeachers);
-  // }, [teachers, selectedLanguage, setFilteredTeachers]);
+  console.log(teachers);
 
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
@@ -64,9 +52,20 @@ const Teachers = () => {
         return teacher.levels.includes(selectedLevel);
       });
     }
+    if (selectedPrice !== 'All') {
+      filteredTeachers = filteredTeachers?.filter(teacher => {
+        return Number(teacher.price_per_hour) === Number(selectedPrice);
+      });
+    }
 
     setFilteredTeachers(filteredTeachers);
-  }, [teachers, selectedLanguage, setFilteredTeachers, selectedLevel]);
+  }, [
+    teachers,
+    selectedLanguage,
+    setFilteredTeachers,
+    selectedLevel,
+    selectedPrice,
+  ]);
 
   useEffect(() => {
     handleFilteredTeachers();
@@ -78,6 +77,10 @@ const Teachers = () => {
 
   const handleLevel = item => {
     setSelectedLevel(item);
+  };
+
+  const handlePrice = item => {
+    setSelectedPrice(item);
   };
 
   const handleLoading = useCallback(
@@ -92,6 +95,11 @@ const Teachers = () => {
       if (!languages) {
         setLanguages([
           ...new Set(teachersAPI?.map(({ languages }) => languages)?.flat()),
+        ]);
+      }
+      if (!price) {
+        setPrice([
+          ...new Set(teachersAPI?.map(({ price_per_hour }) => price_per_hour)),
         ]);
       }
       if (!levelOfLanguage) {
@@ -114,6 +122,8 @@ const Teachers = () => {
       setFilteredTeachers,
       levelOfLanguage,
       setLevelOfLanguage,
+      price,
+      setPrice,
     ]
   );
 
@@ -142,6 +152,12 @@ const Teachers = () => {
             selectedName={selectedLevel}
             handleClick={handleLevel}
             itemsMap={levelOfLanguage}
+          />
+          <Dropdown
+            dropdownName={'Price'}
+            selectedName={selectedPrice}
+            handleClick={handlePrice}
+            itemsMap={price}
           />
 
           <CardsList teachers={filteredTeachers} />
