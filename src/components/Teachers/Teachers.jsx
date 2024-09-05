@@ -14,16 +14,16 @@ const Teachers = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
-    'All Languages',
-    'All Languages'
+    'selectedLanguage',
+    'All'
   );
   const [levelOfLanguage, setLevelOfLanguage] = useLocalStorage(
     'levelOfLanguage',
     null
   );
   const [selectedLevel, setSelectedLevel] = useLocalStorage(
-    'All Levels',
-    'All Levels'
+    'selectedLevel',
+    'All'
   );
 
   const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
@@ -31,19 +31,42 @@ const Teachers = () => {
     null
   );
 
+  // const handleFilteredTeachers = useCallback(() => {
+  //   if (!teachers) return;
+  //   const filteredListOfTeachers = teachers?.filter(teacher => {
+  //     if (teacher.languages.includes(selectedLanguage)) {
+  //       return teacher;
+  //     }
+  //     if (selectedLanguage === 'All') {
+  //       return teacher;
+  //     }
+  //     return false;
+  //   });
+  //   setFilteredTeachers(filteredListOfTeachers);
+  // }, [teachers, selectedLanguage, setFilteredTeachers]);
+
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
-    const filteredListOfTeachers = teachers?.filter(teacher => {
-      if (teacher.languages.includes(selectedLanguage)) {
-        return teacher;
-      }
-      if (selectedLanguage === 'All') {
-        return teacher;
-      }
-      return false;
-    });
-    setFilteredTeachers(filteredListOfTeachers);
-  }, [teachers, selectedLanguage, setFilteredTeachers]);
+    let filteredTeachers = teachers;
+    if (selectedLanguage === 'All') {
+      filteredTeachers = teachers;
+    }
+    if (selectedLevel === 'All') {
+      filteredTeachers = teachers;
+    }
+    if (selectedLanguage !== 'All') {
+      filteredTeachers = filteredTeachers?.filter(teacher => {
+        return teacher.languages.includes(selectedLanguage);
+      });
+    }
+    if (selectedLevel !== 'All') {
+      filteredTeachers = filteredTeachers?.filter(teacher => {
+        return teacher.levels.includes(selectedLevel);
+      });
+    }
+
+    setFilteredTeachers(filteredTeachers);
+  }, [teachers, selectedLanguage, setFilteredTeachers, selectedLevel]);
 
   useEffect(() => {
     handleFilteredTeachers();
@@ -52,6 +75,7 @@ const Teachers = () => {
   const handleLanguage = item => {
     setSelectedLanguage(item);
   };
+
   const handleLevel = item => {
     setSelectedLevel(item);
   };

@@ -12,8 +12,8 @@ export const DropdownBtn = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 100px;
-  width: 251px;
+  gap: 30px;
+  width: 200px;
   height: 48 px;
   padding: 16px 18px 16px 18px;
   border-radius: 14px;
@@ -33,6 +33,7 @@ export const DropdownContainer = styled.div`
   display: inline-block;
   width: 221 px;
   margin-top: 20px;
+  margin-right: 15px;
 `;
 export const DropdownArrow = styled.div`
   display: flex;

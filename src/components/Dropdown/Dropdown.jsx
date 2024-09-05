@@ -24,9 +24,9 @@ const Dropdown = ({ dropdownName, selectedName, handleClick, itemsMap }) => {
     () => isDropdown && setTimeout(() => setIsDropdown(false), 201)
   );
   return (
-    <DropdownContainer>
+    <DropdownContainer onClick={() => toggleDropdown()}>
       <DropdownDescr>{dropdownName}</DropdownDescr>
-      <DropdownBtn onClick={() => toggleDropdown()}>
+      <DropdownBtn>
         <span>{selectedName}</span>
         <GoChevronDown
           size={20}
