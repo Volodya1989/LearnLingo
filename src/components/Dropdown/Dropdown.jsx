@@ -37,7 +37,9 @@ const Dropdown = ({
           width: `${width}`,
         }}
       >
-        <span>{`${selectedName} ${dropdownName === 'Price' ? '$' : ''}`}</span>
+        <span>{`${selectedName} ${
+          dropdownName === 'Price' && selectedName !== 'All' ? '$' : ''
+        }`}</span>
         <GoChevronDown
           size={20}
           color={'black'}
