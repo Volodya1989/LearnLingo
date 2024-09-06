@@ -5,45 +5,33 @@ import useLocalStorage from 'hooks/useLocalStorage';
 
 import Dropdown from 'components/Dropdown';
 import useFetch from 'use-http';
-import { StyledContainer } from './Teachers.styled';
+import { StyledContainer, DropdownContainer } from './Teachers.styled';
 
 const Teachers = () => {
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
   const [languages, setLanguages] = useLocalStorage('languages', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
-
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
     'selectedLanguage',
     'All'
-  );
-  const [levelOfLanguage, setLevelOfLanguage] = useLocalStorage(
-    'levelOfLanguage',
-    null
   );
   const [selectedLevel, setSelectedLevel] = useLocalStorage(
     'selectedLevel',
     'All'
   );
+  const [selectedPrice, setSelectedPrice] = useLocalStorage('selected', 'All');
+  const [levelOfLanguage, setLevelOfLanguage] = useLocalStorage(
+    'levelOfLanguage',
+    null
+  );
+  const [price, setPrice] = useLocalStorage('price', null);
 
   const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
     'filteredTeachers',
     null
   );
-
-  // const handleFilteredTeachers = useCallback(() => {
-  //   if (!teachers) return;
-  //   const filteredListOfTeachers = teachers?.filter(teacher => {
-  //     if (teacher.languages.includes(selectedLanguage)) {
-  //       return teacher;
-  //     }
-  //     if (selectedLanguage === 'All') {
-  //       return teacher;
-  //     }
-  //     return false;
-  //   });
-  //   setFilteredTeachers(filteredListOfTeachers);
-  // }, [teachers, selectedLanguage, setFilteredTeachers]);
+  console.log(teachers);
 
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
@@ -64,9 +52,23 @@ const Teachers = () => {
         return teacher.levels.includes(selectedLevel);
       });
     }
+    if (selectedPrice !== 'All') {
+      filteredTeachers = filteredTeachers?.filter(teacher => {
+        return Number(teacher.price_per_hour) <= Number(selectedPrice);
+      });
+      filteredTeachers = filteredTeachers.sort(
+        (a, b) => b.price_per_hour - a.price_per_hour
+      );
+    }
 
     setFilteredTeachers(filteredTeachers);
-  }, [teachers, selectedLanguage, setFilteredTeachers, selectedLevel]);
+  }, [
+    teachers,
+    selectedLanguage,
+    setFilteredTeachers,
+    selectedLevel,
+    selectedPrice,
+  ]);
 
   useEffect(() => {
     handleFilteredTeachers();
@@ -78,6 +80,10 @@ const Teachers = () => {
 
   const handleLevel = item => {
     setSelectedLevel(item);
+  };
+
+  const handlePrice = item => {
+    setSelectedPrice(item);
   };
 
   const handleLoading = useCallback(
@@ -93,6 +99,9 @@ const Teachers = () => {
         setLanguages([
           ...new Set(teachersAPI?.map(({ languages }) => languages)?.flat()),
         ]);
+      }
+      if (!price) {
+        setPrice([20, 30, 40, 50]);
       }
       if (!levelOfLanguage) {
         setLevelOfLanguage([
@@ -114,6 +123,8 @@ const Teachers = () => {
       setFilteredTeachers,
       levelOfLanguage,
       setLevelOfLanguage,
+      price,
+      setPrice,
     ]
   );
 
@@ -131,18 +142,26 @@ const Teachers = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <Dropdown
-            dropdownName={'Language'}
-            selectedName={selectedLanguage}
-            handleClick={handleLanguage}
-            itemsMap={languages}
-          />
-          <Dropdown
-            dropdownName={'Level of knowledge'}
-            selectedName={selectedLevel}
-            handleClick={handleLevel}
-            itemsMap={levelOfLanguage}
-          />
+          <DropdownContainer>
+            <Dropdown
+              dropdownName={'Language'}
+              selectedName={selectedLanguage}
+              handleClick={handleLanguage}
+              itemsMap={languages}
+            />
+            <Dropdown
+              dropdownName={'Level of knowledge'}
+              selectedName={selectedLevel}
+              handleClick={handleLevel}
+              itemsMap={levelOfLanguage}
+            />
+            <Dropdown
+              dropdownName={'Price'}
+              selectedName={selectedPrice}
+              handleClick={handlePrice}
+              itemsMap={price}
+            />
+          </DropdownContainer>
 
           <CardsList teachers={filteredTeachers} />
         </>

@@ -12,7 +12,7 @@ export const DropdownBtn = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
   width: 200px;
   height: 48 px;
   padding: 16px 18px 16px 18px;
