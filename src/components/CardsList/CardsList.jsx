@@ -6,7 +6,12 @@ const CardsList = ({ teachers }) => {
   return (
     <div>
       <Title>List of Teachers</Title>
-      <List>
+      <List
+        style={{
+          display: `${!teachers.length ? `flex` : ''}`,
+          justifyContent: `${!teachers.length ? `center` : ''}`,
+        }}
+      >
         {teachers.length !== 0 ? (
           teachers?.map(
             ({
@@ -43,9 +48,7 @@ const CardsList = ({ teachers }) => {
             }
           )
         ) : (
-          <NoTeachers>
-            No teachers are available with this search criteria
-          </NoTeachers>
+          <NoTeachers>Teachers Not Found</NoTeachers>
         )}
       </List>
     </div>

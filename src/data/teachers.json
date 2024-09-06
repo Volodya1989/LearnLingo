@@ -146,7 +146,7 @@
         "comment": "I have made great progress with Michael's lessons. Highly recommended."
       }
     ],
-    "price_per_hour": 32,
+    "price_per_hour": 40,
     "lessons_done": 1355,
     "avatar_url": "https://ftp.goit.study/img/avatars/5.jpg",
     "lesson_info": "Lessons focus on developing speaking fluency and listening comprehension.",
@@ -235,7 +235,7 @@
         "comment": "I have improved my Spanish and French skills significantly with Sophia's lessons."
       }
     ],
-    "price_per_hour": 35,
+    "price_per_hour": 50,
     "lessons_done": 1450,
     "avatar_url": "https://ftp.goit.study/img/avatars/8.jpg",
     "lesson_info": "Lessons focus on speaking fluency, grammar, and cultural understanding.",

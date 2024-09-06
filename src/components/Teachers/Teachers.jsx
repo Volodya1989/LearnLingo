@@ -148,22 +148,28 @@ const Teachers = () => {
               selectedName={selectedLanguage}
               handleClick={handleLanguage}
               itemsMap={languages}
+              width={'170px'}
             />
             <Dropdown
               dropdownName={'Level of knowledge'}
               selectedName={selectedLevel}
               handleClick={handleLevel}
               itemsMap={levelOfLanguage}
+              width={'200px'}
             />
             <Dropdown
               dropdownName={'Price'}
               selectedName={selectedPrice}
               handleClick={handlePrice}
               itemsMap={price}
+              width={'80px'}
             />
           </DropdownContainer>
 
-          <CardsList teachers={filteredTeachers} />
+          <CardsList
+           
+            teachers={filteredTeachers}
+          />
         </>
       )}
     </StyledContainer>
