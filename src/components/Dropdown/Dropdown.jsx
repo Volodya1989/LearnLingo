@@ -10,7 +10,13 @@ import {
 import { GoChevronDown } from 'react-icons/go';
 import useOnClickOutside from 'hooks/useOnClickOutside';
 
-const Dropdown = ({ dropdownName, selectedName, handleClick, itemsMap }) => {
+const Dropdown = ({
+  width,
+  dropdownName,
+  selectedName,
+  handleClick,
+  itemsMap,
+}) => {
   const [isDropdown, setIsDropdown] = useState(false);
   const toggleDropdown = () => {
     setIsDropdown(!isDropdown);
@@ -26,8 +32,12 @@ const Dropdown = ({ dropdownName, selectedName, handleClick, itemsMap }) => {
   return (
     <DropdownContainer onClick={() => toggleDropdown()}>
       <DropdownDescr>{dropdownName}</DropdownDescr>
-      <DropdownBtn>
-        <span>{selectedName}</span>
+      <DropdownBtn
+        style={{
+          width: `${width}`,
+        }}
+      >
+        <span>{`${selectedName} ${dropdownName === 'Price' ? '$' : ''}`}</span>
         <GoChevronDown
           size={20}
           color={'black'}
@@ -56,7 +66,7 @@ const Dropdown = ({ dropdownName, selectedName, handleClick, itemsMap }) => {
                   onClick={() => handleClick(item)}
                   key={index}
                 >
-                  {item}
+                  {`${item}${dropdownName === 'Price' ? '$' : ''}`}
                 </DropdownItem>
               );
             })}
