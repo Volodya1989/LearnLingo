@@ -59,7 +59,6 @@ const Dropdown = ({
             </DropdownItem>
 
             {itemsMap?.map((item, index) => {
-              console.log(item);
               return (
                 <DropdownItem
                   style={{

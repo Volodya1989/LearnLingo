@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 import {
   CardWrapper,
@@ -21,7 +22,9 @@ import {
   MainButton,
   Comments,
   CommentsRating,
+  Heart,
 } from './Card.styled';
+import { useEffect } from 'react';
 const Card = ({
   avatar_url,
   conditions,
@@ -35,11 +38,54 @@ const Card = ({
   price_per_hour,
   reviews,
   surname,
+  favorites,
+  id,
 }) => {
+  const [isFavorite, setIsFavorite] = useState(favorites);
+
+  //setting up state for cars using localStorage hook
+  const [teachers, setTeachers] = useLocalStorage('teachers' ?? []);
+  const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
+    'filteredTeachers',
+    null
+  );
+  //setting up favorites state based on the previous
+  const onFavoriteChange = () => {
+    setIsFavorite(!isFavorite);
+
+    const teachersModified = teachers?.map(obj => {
+      if (obj.id === id) {
+        return { ...obj, favorites: !isFavorite };
+      }
+      return obj;
+    });
+    const filteredModified = filteredTeachers?.map(obj => {
+      if (obj.id === id) {
+        return { ...obj, favorites: !isFavorite };
+      }
+      return obj;
+    });
+
+    setTeachers(teachersModified);
+    setFilteredTeachers(filteredModified);
+  };
+
+  useEffect(() => {
+    teachers?.map(obj => {
+      if (obj.id === id) setIsFavorite(obj.favorites);
+      return obj;
+    });
+    filteredTeachers?.map(obj => {
+      if (obj.id === id) setIsFavorite(obj.favorites);
+      return obj;
+    });
+  }, [id, isFavorite, teachers, filteredTeachers]);
+
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
+
   return (
     <CardWrapper>
       <ImgWrapper>
@@ -76,7 +122,19 @@ const Card = ({
               Price / 1 hour: <StyledPrice>{price_per_hour}$</StyledPrice>
             </div>
           </StyledFirstSection2>
+          <Heart onClick={onFavoriteChange}>
+            {' '}
+            <img
+              src={
+                isFavorite
+                  ? require('../../SVG/hover.svg').default
+                  : require('../../SVG/heart.svg').default
+              }
+              alt="Heart"
+            />
+          </Heart>
         </StyledFirstSection>
+
         <div>
           <StyledDescMain>
             <StyledDescription>Speaks:</StyledDescription>{' '}

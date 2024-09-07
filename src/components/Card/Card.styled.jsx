@@ -62,7 +62,8 @@ export const ImgWrapper = styled.div`
 export const StyledFirstSection = styled.div`
   display: flex;
   justify-content: start;
-  gap: 150px;
+  align-items: center;
+  gap: 125px;
   font-size: 16px;
   font-weight: 500;
   line-height: calc(24 / 16);
@@ -175,4 +176,13 @@ export const CommentsRating = styled.div`
   gap: 8px;
   margin-top: 5px;
   margin-bottom: 5px;
+`;
+
+export const Heart = styled.div`
+  cursor: pointer;
+  &:hover {
+    transition: opacity 0.4s;
+    opacity: 0.6;
+    transition-timing-function: ease;
+  }
 `;

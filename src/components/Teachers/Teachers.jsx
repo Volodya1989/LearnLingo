@@ -31,10 +31,10 @@ const Teachers = () => {
     'filteredTeachers',
     null
   );
-  console.log(teachers);
-
+  console.log(teachers?.[0]);
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
+
     let filteredTeachers = teachers;
     if (selectedLanguage === 'All') {
       filteredTeachers = teachers;
@@ -82,6 +82,7 @@ const Teachers = () => {
     setSelectedLevel(item);
   };
 
+
   const handlePrice = item => {
     setSelectedPrice(item);
   };
@@ -93,7 +94,6 @@ const Teachers = () => {
       }
       if (!teachers) {
         setTeachers(teachersAPI);
-        setFilteredTeachers(teachersAPI);
       }
       if (!languages) {
         setLanguages([
@@ -120,7 +120,6 @@ const Teachers = () => {
       teachers,
       languages,
       setLanguages,
-      setFilteredTeachers,
       levelOfLanguage,
       setLevelOfLanguage,
       price,
@@ -167,7 +166,6 @@ const Teachers = () => {
           </DropdownContainer>
 
           <CardsList
-           
             teachers={filteredTeachers}
           />
         </>
