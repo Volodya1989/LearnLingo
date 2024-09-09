@@ -24,7 +24,6 @@ const Dropdown = ({
 
   const innerWrapperRef = useRef();
 
-  //closing sorting options based on the click outside of the sorting box
   useOnClickOutside(
     innerWrapperRef,
     () => isDropdown && setTimeout(() => setIsDropdown(false), 201)
