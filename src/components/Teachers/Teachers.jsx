@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import CardsList from 'components/CardsList';
 import teachersAPI from '../../data/teachers.json';
 import useLocalStorage from 'hooks/useLocalStorage';
-
+import Button from 'components/Button';
 import Dropdown from 'components/Dropdown';
 import useFetch from 'use-http';
 import { StyledContainer, DropdownContainer } from './Teachers.styled';
@@ -12,6 +12,9 @@ const Teachers = () => {
   const [languages, setLanguages] = useLocalStorage('languages', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
+  const [pageCounter, setPageCounter] = useState(() => 3);
+  const [isLoadMore, setIsLoadMore] = useState(true);
+
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
     'selectedLanguage',
     'All'
@@ -35,12 +38,12 @@ const Teachers = () => {
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
 
-    let filteredTeachers = teachers;
+    let filteredTeachers = teachers.slice(0, pageCounter);
     if (selectedLanguage === 'All') {
-      filteredTeachers = teachers;
+      filteredTeachers = teachers.slice(0, pageCounter);
     }
     if (selectedLevel === 'All') {
-      filteredTeachers = teachers;
+      filteredTeachers = teachers.slice(0, pageCounter);
     }
     if (selectedLanguage !== 'All') {
       filteredTeachers = filteredTeachers?.filter(teacher => {
@@ -68,6 +71,7 @@ const Teachers = () => {
     setFilteredTeachers,
     selectedLevel,
     selectedPrice,
+    pageCounter,
   ]);
 
   useEffect(() => {
@@ -82,11 +86,17 @@ const Teachers = () => {
     setSelectedLevel(item);
   };
 
-
   const handlePrice = item => {
     setSelectedPrice(item);
   };
 
+  const onLoadMore = () => {
+    if (teachers.length <= pageCounter) {
+      setIsLoadMore(false);
+    }
+    setPageCounter(prevCounter => prevCounter + 3);
+    console.log('onLoadeMore', pageCounter);
+  };
   const handleLoading = useCallback(
     e => {
       if (loading) {
@@ -165,9 +175,8 @@ const Teachers = () => {
             />
           </DropdownContainer>
 
-          <CardsList
-            teachers={filteredTeachers}
-          />
+          <CardsList teachers={filteredTeachers} />
+          {isLoadMore && <Button onLoad={onLoadMore} />}
         </>
       )}
     </StyledContainer>
