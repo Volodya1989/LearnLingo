@@ -5,6 +5,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import Button from 'components/Button';
 import Dropdown from 'components/Dropdown';
 import useFetch from 'use-http';
+import Loader from 'components/Loader';
 import { StyledContainer, DropdownContainer } from './Teachers.styled';
 
 const Teachers = () => {
@@ -148,7 +149,7 @@ const Teachers = () => {
   return (
     <StyledContainer>
       {!isLoading ? (
-        <p>Loading...</p>
+        <Loader />
       ) : (
         <>
           <DropdownContainer>
