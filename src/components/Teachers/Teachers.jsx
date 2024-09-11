@@ -38,13 +38,13 @@ const Teachers = () => {
   console.log(teachers?.[0]);
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
+    let filteredTeachers = teachers;
 
-    let filteredTeachers = teachers.slice(0, pageCounter);
     if (selectedLanguage === 'All') {
-      filteredTeachers = teachers.slice(0, pageCounter);
+      filteredTeachers = teachers;
     }
     if (selectedLevel === 'All') {
-      filteredTeachers = teachers.slice(0, pageCounter);
+      filteredTeachers = teachers;
     }
     if (selectedLanguage !== 'All') {
       filteredTeachers = filteredTeachers?.filter(teacher => {
@@ -64,8 +64,15 @@ const Teachers = () => {
         (a, b) => b.price_per_hour - a.price_per_hour
       );
     }
-
-    setFilteredTeachers(filteredTeachers);
+    const finalListFilteredTeachers = filteredTeachers.filter(
+      (_, index) => index < pageCounter
+    );
+    setFilteredTeachers(finalListFilteredTeachers);
+    if (finalListFilteredTeachers.length + 1 <= pageCounter) {
+      setIsLoadMore(false);
+    } else {
+      setIsLoadMore(true);
+    }
   }, [
     teachers,
     selectedLanguage,
@@ -92,7 +99,10 @@ const Teachers = () => {
   };
 
   const onLoadMore = () => {
-    if (teachers.length <= pageCounter) {
+    console.log(filteredTeachers.length);
+    console.log(filteredTeachers.length <= pageCounter);
+
+    if (filteredTeachers.length <= pageCounter) {
       setIsLoadMore(false);
     }
     setPageCounter(prevCounter => prevCounter + 3);
