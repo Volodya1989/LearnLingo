@@ -6,6 +6,8 @@ import Button from 'components/Button';
 import Dropdown from 'components/Dropdown';
 import useFetch from 'use-http';
 import Loader from 'components/Loader';
+import Modal from 'components/Modal';
+import TrialLesson from 'components/Modal/TrialLesson';
 import { StyledContainer, DropdownContainer } from './Teachers.styled';
 
 const Teachers = () => {
@@ -15,6 +17,8 @@ const Teachers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [pageCounter, setPageCounter] = useState(() => 3);
   const [isLoadMore, setIsLoadMore] = useState(true);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [modalProps, setModalProps] = useState(null);
 
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
     'selectedLanguage',
@@ -81,6 +85,23 @@ const Teachers = () => {
     selectedPrice,
     pageCounter,
   ]);
+
+  // using this toggle to update state of the Modal window based on previous state
+  const toggleModal = useCallback(
+    e => {
+      setIsShowModal(prevIsShowModal => !prevIsShowModal);
+    },
+    [setIsShowModal]
+  );
+
+  //setting info that is displayed in Modal and passed as props
+  const onClickModal = useCallback(
+    (e, showModalInfo) => {
+      setModalProps(showModalInfo);
+      toggleModal();
+    },
+    [setModalProps, toggleModal]
+  );
 
   useEffect(() => {
     handleFilteredTeachers();
@@ -186,9 +207,14 @@ const Teachers = () => {
             />
           </DropdownContainer>
 
-          <CardsList teachers={filteredTeachers} />
+          <CardsList onClick={onClickModal} teachers={filteredTeachers} />
           {isLoadMore && <Button onLoad={onLoadMore} />}
         </>
+      )}
+      {isShowModal && (
+        <Modal onClose={toggleModal}>
+          <TrialLesson details={modalProps} />
+        </Modal>
       )}
     </StyledContainer>
   );
