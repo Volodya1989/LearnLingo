@@ -40,7 +40,9 @@ const Card = ({
   surname,
   favorites,
   id,
+  onClick,
 }) => {
+  console.log('card', surname);
   const [isFavorite, setIsFavorite] = useState(favorites);
 
   //setting up state for cars using localStorage hook
@@ -49,6 +51,7 @@ const Card = ({
     'filteredTeachers',
     null
   );
+
   //setting up favorites state based on the previous
   const onFavoriteChange = () => {
     setIsFavorite(!isFavorite);
@@ -201,7 +204,13 @@ const Card = ({
             </StyledLevelEl>
           ))}
         </StyledLevel>
-        {isReadMore ? false : <MainButton>Book trial lesson</MainButton>}
+        {isReadMore ? (
+          false
+        ) : (
+          <MainButton onClick={e => onClick(e, { surname, name })}>
+            Book trial lesson
+          </MainButton>
+        )}
       </div>
     </CardWrapper>
   );

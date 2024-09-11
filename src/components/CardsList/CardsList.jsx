@@ -1,7 +1,7 @@
 import Card from 'components/Card';
 import { List, Title, NoTeachers } from 'components/CardsList/CardsList.styled';
 import { v4 as uuidv4 } from 'uuid';
-const CardsList = ({ teachers, onTeachers }) => {
+const CardsList = ({ teachers, onTeachers, onClick }) => {
   return (
     <div>
       <Title>List of Teachers</Title>
@@ -46,6 +46,7 @@ const CardsList = ({ teachers, onTeachers }) => {
                   favorites={favorites}
                   id={id}
                   key={uuidv4()}
+                  onClick={onClick}
                 />
               );
             }
