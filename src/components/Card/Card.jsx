@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import useLocalStorage from 'hooks/useLocalStorage';
 
 import {
   CardWrapper,
@@ -24,7 +23,6 @@ import {
   CommentsRating,
   Heart,
 } from './Card.styled';
-import { useEffect } from 'react';
 const Card = ({
   avatar_url,
   conditions,
@@ -41,50 +39,17 @@ const Card = ({
   favorites,
   id,
   onClick,
+  onFavoriteChange,
 }) => {
   console.log('card', surname);
   const [isFavorite, setIsFavorite] = useState(favorites);
+  const [isReadMore, setIsReadMore] = useState(true);
 
-  //setting up state for cars using localStorage hook
-  const [teachers, setTeachers] = useLocalStorage('teachers' ?? []);
-  const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
-    'filteredTeachers',
-    null
-  );
-
-  //setting up favorites state based on the previous
-  const onFavoriteChange = () => {
+  const onHandleFavorite = e => {
     setIsFavorite(!isFavorite);
-
-    const teachersModified = teachers?.map(obj => {
-      if (obj.id === id) {
-        return { ...obj, favorites: !isFavorite };
-      }
-      return obj;
-    });
-    const filteredModified = filteredTeachers?.map(obj => {
-      if (obj.id === id) {
-        return { ...obj, favorites: !isFavorite };
-      }
-      return obj;
-    });
-
-    setTeachers(teachersModified);
-    setFilteredTeachers(filteredModified);
+    onFavoriteChange(e, id, isFavorite);
   };
 
-  useEffect(() => {
-    teachers?.map(obj => {
-      if (obj.id === id) setIsFavorite(obj.favorites);
-      return obj;
-    });
-    filteredTeachers?.map(obj => {
-      if (obj.id === id) setIsFavorite(obj.favorites);
-      return obj;
-    });
-  }, [id, isFavorite, teachers, filteredTeachers]);
-
-  const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
@@ -125,7 +90,7 @@ const Card = ({
               Price / 1 hour: <StyledPrice>{price_per_hour}$</StyledPrice>
             </div>
           </StyledFirstSection2>
-          <Heart onClick={onFavoriteChange}>
+          <Heart onClick={() => onHandleFavorite()}>
             {' '}
             <img
               src={

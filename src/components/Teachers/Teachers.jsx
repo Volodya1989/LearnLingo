@@ -39,7 +39,27 @@ const Teachers = () => {
     'filteredTeachers',
     null
   );
-  console.log(teachers?.[0]);
+  const onFavoriteChange = useCallback(
+    (e, id, isFavorite) => {
+      const teachersModified = teachers?.map(obj => {
+        if (obj.id === id) {
+          return { ...obj, favorites: !isFavorite };
+        }
+        return obj;
+      });
+      const filteredModified = filteredTeachers?.map(obj => {
+        if (obj.id === id) {
+          return { ...obj, favorites: !isFavorite };
+        }
+        return obj;
+      });
+
+      setTeachers(teachersModified);
+      setFilteredTeachers(filteredModified);
+    },
+    [setFilteredTeachers, setTeachers, filteredTeachers, teachers]
+  );
+
   const handleFilteredTeachers = useCallback(() => {
     if (!teachers) return;
     let filteredTeachers = teachers;
@@ -207,7 +227,11 @@ const Teachers = () => {
             />
           </DropdownContainer>
 
-          <CardsList onClick={onClickModal} teachers={filteredTeachers} />
+          <CardsList
+            onFavoriteChange={onFavoriteChange}
+            onClick={onClickModal}
+            teachers={filteredTeachers}
+          />
           {isLoadMore && <Button onLoad={onLoadMore} />}
         </>
       )}
