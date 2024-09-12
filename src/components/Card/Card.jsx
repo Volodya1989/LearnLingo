@@ -70,7 +70,6 @@ const Card = ({
           </StyledSubTitle>
           <StyledFirstSection2>
             <StyledBook>
-              {' '}
               <img
                 src={require('../../SVG/book-open.svg').default}
                 alt="Book"
@@ -81,7 +80,6 @@ const Card = ({
             <div>Lessons Done: {lessons_done}</div>
             <StyledPipe />
             <StyledBook>
-              {' '}
               <img src={require('../../SVG/star.svg').default} alt="Star" />
               <span>Rating: {rating}</span>
             </StyledBook>
@@ -91,7 +89,6 @@ const Card = ({
             </div>
           </StyledFirstSection2>
           <Heart onClick={() => onHandleFavorite()}>
-            {' '}
             <img
               src={
                 isFavorite
