@@ -7,6 +7,7 @@ export const CardWrapper = styled.li`
   border-radius: 20px;
   width: 1100px;
   display: flex;
+  justify-content: space-around;
   gap: 50px;
   margin-left: auto;
   margin-right: auto;
@@ -61,7 +62,7 @@ export const ImgWrapper = styled.div`
 
 export const StyledFirstSection = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: space-around;
   align-items: center;
   gap: 95px;
   font-size: 16px;
