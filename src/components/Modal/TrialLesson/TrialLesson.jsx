@@ -9,6 +9,8 @@ import {
   Label,
   Field,
   Wrapper,
+  ErrorMessage,
+  MainButton,
 } from './TrialLesson.styled';
 export const TrialLesson = ({ details: { surname, name } }) => {
   const {
@@ -81,10 +83,21 @@ export const TrialLesson = ({ details: { surname, name } }) => {
           your learning goals, and tailor the lesson to your specific needs.
         </Text>
         <form onSubmit={handleSubmit(data => onClick(data))}>
-          {errors.fullName && <p>Full Name is required.</p>}
+          {errors.email && <ErrorMessage>Email is required.</ErrorMessage>}
+          {errors.fullName && (
+            <ErrorMessage>Full Name is required.</ErrorMessage>
+          )}
+          {errors.phone && (
+            <ErrorMessage>Phone number is required.</ErrorMessage>
+          )}
+
           <Wrapper>
             <Field
-              {...register('fullName', { required: true, value: fullName })}
+              {...register('fullName', {
+                required: true,
+                value: fullName,
+                maxLength: 5,
+              })}
               onChange={onQueryChange}
               name="fullName"
               value={fullName}
@@ -104,7 +117,6 @@ export const TrialLesson = ({ details: { surname, name } }) => {
             />
             <Label htmlFor={1}>{'Email'}</Label>
           </Wrapper>
-          {errors.email && <p>Email is required.</p>}
           <Wrapper>
             <Field
               {...register('phone', { required: true, value: phone })}
@@ -115,9 +127,8 @@ export const TrialLesson = ({ details: { surname, name } }) => {
               type={'text'}
             />
             <Label htmlFor={1}>{'Phone'}</Label>
-            {errors.phone && <p>Phone number is required.</p>}
           </Wrapper>
-          <input type="submit" />
+          <MainButton type="submit" value={'Book'} />
         </form>
       </Description>
     </>
