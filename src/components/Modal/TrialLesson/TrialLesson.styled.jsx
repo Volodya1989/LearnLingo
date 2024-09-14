@@ -37,13 +37,13 @@ export const Heading = styled.h5`
   text-align: center;
 `;
 export const Label = styled.label`
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 300;
   width: 200px;
-  color: black;
+  color: #9ca5b5;
   position: absolute;
   left: 0;
-  top: 30%;
+  top: 50%;
   transform: translateY(-50%);
   transition: all 0.2s ease;
   pointer-events: none;
@@ -53,16 +53,17 @@ export const Wrapper = styled.section`
   flex-direction: 'row';
   alignitems: 'center';
   position: relative;
-  margin-bottom: 40px;
+  margin-top: 30px;
 `;
 
 export const Field = styled.input`
   display: flex;
-  border: 1px solid gray;
+  border: 0;
   font-size: 22px;
   background-color: transparent;
   padding: 10px 15px;
-  border-bottom: 2px solid #d5f5f4;
+  border-bottom: 1px solid #f4c550;
+
   outline: none;
   width: 200px;
   color: black;
@@ -77,6 +78,7 @@ export const Field = styled.input`
     (disabled || '') &&
     `
     pointer-events: none;
+    
   `}
 
   &:focus {
@@ -84,8 +86,8 @@ export const Field = styled.input`
   }
 
   &:focus ~ ${Label} {
-    transform: translateY(-55px);
-    scale: 0.9;
+    transform: translateY(-40px);
+    // scale: 0.9;
     color: #9ca5b5;
   }
 
@@ -93,7 +95,7 @@ export const Field = styled.input`
     value &&
     `
     & ~ ${Label} {
-      transform: translateY(-50px);
+      transform: translateY(-40px);
 
     }
   `}
