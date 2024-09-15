@@ -12,6 +12,8 @@ export const Description = styled.div`
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
+  padding: 30px 60px;
+  border-radius: 30px;
   @media screen and (min-width: 768px) {
     font-size: 30px;
     line-height: 1.07;
@@ -47,6 +49,7 @@ export const Label = styled.label`
   transform: translateY(-50%);
   transition: all 0.2s ease;
   pointer-events: none;
+  padding-left: 15px;
 `;
 
 export const Wrapper = styled.section`
@@ -61,14 +64,15 @@ export const Field = styled.input`
   border: 0;
   font-size: 22px;
   background-color: transparent;
-  padding: 10px 15px;
+  padding-top: 10px;
   border-bottom: 1px solid #f4c550;
 
   outline: none;
   width: 200px;
   color: black;
+  overflow: hidden;
   @media screen and (min-width: 768px) {
-    width: 350px;
+    width: 100%;
   }
   // @media screen and (min-width: 1100px) {
   //   width: 450px;
@@ -99,4 +103,34 @@ export const Field = styled.input`
 
     }
   `}
+`;
+export const ErrorMessage = styled.p`
+  font-size: 20px;
+  line-height: calc(18 / 12);
+  color: red;
+`;
+
+export const MainButton = styled.input`
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: Hug (60px) px;
+  padding: 16px 48px 16px 48px;
+  gap: 0px;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  border-radius: 12px;
+  opacity: 0px;
+  font-weight: 700;
+  background: #f4c550;
+  border: none;
+  font-size: 18px;
+  line-height: calc(28 / 18);
+  cursor: pointer;
+  &:hover {
+    transition: opacity 0.4s;
+    opacity: 0.8;
+    transition-timing-function: ease;
+  }
 `;

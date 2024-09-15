@@ -25,21 +25,21 @@ export const ModalStyled = styled.div`
 
 export const CloseBtn = styled.button`
   position: absolute;
-  top: 0;
-  right: -22px;
+  top: 25px;
+  right: 25px;
   cursor: pointer;
   border: none;
   width: 24px;
   height: 24px;
   text-align: center;
   line-height: 0;
-  color: white;
+  color: black;
   font-size: 30px;
   font-weight: 700;
   background-color: transparent;
   &:hover,
   &:focus {
-    color: #48a7f0;
+    color: red;
     transition: var(--transition-time-and-cubic);
   }
 `;
