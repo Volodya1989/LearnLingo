@@ -169,7 +169,7 @@ const Card = ({
         {isReadMore ? (
           false
         ) : (
-          <MainButton onClick={e => onClick(e, { surname, name })}>
+          <MainButton onClick={e => onClick(e, { surname, name, avatar_url })}>
             Book trial lesson
           </MainButton>
         )}

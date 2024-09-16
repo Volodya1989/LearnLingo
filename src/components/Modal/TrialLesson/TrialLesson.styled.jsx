@@ -6,7 +6,7 @@ export const ModalDetailsStyled = styled.img`
 
 export const Description = styled.div`
   display: block;
-  max-width: 600px;
+  max-width: 500px;
   background-color: #f7f7f7;
   padding-right: 20px;
   padding-left: 20px;
@@ -31,12 +31,19 @@ export const Text = styled.p`
   margin-top: 10px;
   margin-bottom: 25px;
 `;
-export const Heading = styled.h5`
-  font-size: 25px;
-  line-height: 1.18;
+export const Heading = styled.h3`
+  font-size: 40px;
+  line-height: calc(48 / 40);
   font-weight: 500;
   margin-bottom: 25px;
-  text-align: center;
+  text-align: left;
+  letter-spacing: -0.02em;
+`;
+export const DescrText = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  line-height: calc(22 / 16);
+  text-align: left;
 `;
 export const Label = styled.label`
   font-size: 18px;
@@ -57,6 +64,12 @@ export const Wrapper = styled.section`
   alignitems: 'center';
   position: relative;
   margin-top: 30px;
+`;
+
+export const StyledImg = styled.img`
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
 `;
 
 export const Field = styled.input`
@@ -133,4 +146,20 @@ export const MainButton = styled.input`
     opacity: 0.8;
     transition-timing-function: ease;
   }
+`;
+
+export const NameTitle = styled.div`
+  color: #8a8a89;
+  font-size: 12px;
+  line-height: calc(16 / 12);
+`;
+export const Name = styled.span`
+  display: block;
+  font-size: 16px;
+  line-height: calc(24 / 16);
+  color: black;
+`;
+export const NameWrapper = styled.div`
+  display: flex;
+  gap: 20px;
 `;
