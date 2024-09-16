@@ -4,15 +4,19 @@ import useLocalStorage from 'hooks/useLocalStorage';
 
 import {
   Description,
-  Text,
   Heading,
   Label,
   Field,
   Wrapper,
   ErrorMessage,
   MainButton,
+  StyledImg,
+  DescrText,
+  Name,
+  NameTitle,
+  NameWrapper,
 } from './TrialLesson.styled';
-export const TrialLesson = ({ details: { surname, name } }) => {
+export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const {
     register,
     handleSubmit,
@@ -75,13 +79,25 @@ export const TrialLesson = ({ details: { surname, name } }) => {
         alt="large image"
         width="600"
       /> */}
+
       <Description>
         <Heading>{`Book Trial Lesson `}</Heading>
-        <Text>Your Teacher: {`${surname} ${name}`} </Text>
-        <Text>
+        <DescrText>
           Our experienced tutor will assess your current language level, discuss
           your learning goals, and tailor the lesson to your specific needs.
-        </Text>
+        </DescrText>
+        <NameWrapper>
+          <div>
+            {' '}
+            <StyledImg src={avatar_url} alt="Face" />
+          </div>
+          <NameTitle>
+            Your Teacher <br />
+            <Name>
+              {name} {surname}
+            </Name>
+          </NameTitle>
+        </NameWrapper>
         <form onSubmit={handleSubmit(data => onClick(data))}>
           {errors.email && <ErrorMessage>Email is required.</ErrorMessage>}
           {errors.fullName && (
