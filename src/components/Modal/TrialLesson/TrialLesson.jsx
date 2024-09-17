@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 import {
@@ -15,6 +15,10 @@ import {
   Name,
   NameTitle,
   NameWrapper,
+  RadioWrapper,
+  RadioDescr,
+  Radio,
+  RadioTitle,
 } from './TrialLesson.styled';
 export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const {
@@ -26,6 +30,7 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const [fullName, setFullName] = useLocalStorage('fullName' || '');
   const [email, setEmail] = useLocalStorage('email' || '');
   const [phone, setPhone] = useLocalStorage('phone' || '');
+  const [BtnName, setBtnName] = useState('Book');
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -43,7 +48,6 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
       if (e.currentTarget.name === 'phone') {
         setPhone(e.currentTarget.value);
       }
-      // setQuerySearch(e.currentTarget.value);
     },
     [setEmail, setFullName, setPhone]
   );
@@ -52,7 +56,19 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
     setPhone('');
     setEmail('');
     console.log(data);
+    setBtnName('Submitting');
+    setTimeout(() => {
+      setBtnName('Book');
+    }, 1000);
   };
+
+  const radioOptions = [
+    { label: 'Career and business', value: 'Career and business' },
+    { label: 'Lesson for kids', value: 'Lesson for kids' },
+    { label: 'Living abroad', value: 'Living abroad' },
+    { label: 'Exams and courswork', value: 'Exams and courswork' },
+    { label: 'Culture, travel and hobby', value: 'Culture, travel and hobby' },
+  ];
 
   useEffect(() => {
     console.log(isSubmitSuccessful);
@@ -64,22 +80,8 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
       setEmail('');
     }
   }, [setEmail, setFullName, setPhone, isSubmitSuccessful]);
-  // const { showBridge, description, brand, model } = details;
   return (
     <>
-      {/* <TrialLessonStyled
-        src={
-          showBridge
-            ? require('../../../images/bridge.jpg')
-            : require('../../../images/placeholderCar.jpg')
-        }
-        onError={e =>
-          (e.target.src = require('../../../images/placeholderCar.jpg'))
-        }
-        alt="large image"
-        width="600"
-      /> */}
-
       <Description>
         <Heading>{`Book Trial Lesson `}</Heading>
         <DescrText>
@@ -98,7 +100,31 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
             </Name>
           </NameTitle>
         </NameWrapper>
+
         <form onSubmit={handleSubmit(data => onClick(data))}>
+          <RadioTitle>
+            What is your main reason for learning English?
+          </RadioTitle>
+          {radioOptions?.map(({ label: optionLabel, value }, index) => {
+            return (
+              <RadioWrapper key={index}>
+                <label htmlFor={optionLabel}>
+                  <Radio
+                    {...register('radioButton', {
+                      required: true,
+                      value: value,
+                    })}
+                    defaultChecked={index !== 0 ? true : false}
+                    type="radio"
+                    value={value}
+                    id={optionLabel}
+                  />
+                </label>
+                <RadioDescr>{optionLabel}</RadioDescr>
+              </RadioWrapper>
+            );
+          })}
+
           {errors.email && <ErrorMessage>Email is required.</ErrorMessage>}
           {errors.fullName && (
             <ErrorMessage>Full Name is required.</ErrorMessage>
@@ -144,7 +170,7 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
             />
             <Label htmlFor={1}>{'Phone'}</Label>
           </Wrapper>
-          <MainButton type="submit" value={'Book'} />
+          <MainButton type="submit" value={BtnName} />
         </form>
       </Description>
     </>
