@@ -8,7 +8,12 @@ import useFetch from 'use-http';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
 import TrialLesson from 'components/Modal/TrialLesson';
-import { StyledContainer, DropdownContainer } from './Teachers.styled';
+import {
+  StyledContainer,
+  DropdownContainer,
+  StyledToastContainer,
+} from './Teachers.styled';
+import { ToastContainer } from 'react-toastify';
 
 const Teachers = () => {
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
@@ -199,6 +204,9 @@ const Teachers = () => {
 
   return (
     <StyledContainer>
+      <StyledToastContainer autoClose={2000} position="top-right">
+        <ToastContainer />;
+      </StyledToastContainer>
       {!isLoading ? (
         <Loader />
       ) : (
@@ -237,7 +245,7 @@ const Teachers = () => {
       )}
       {isShowModal && (
         <Modal onClose={toggleModal}>
-          <TrialLesson details={modalProps} />
+          <TrialLesson onClose={toggleModal} details={modalProps} />
         </Modal>
       )}
     </StyledContainer>
