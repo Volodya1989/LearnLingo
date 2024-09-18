@@ -1,5 +1,13 @@
 @import-normalize; /* bring in normalize.css styles */
 
+/* @import url('./styles/reset.css'); */
+/* @import url('./styles/global.css'); */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,6 +15,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* background: linear-gradient(
+    90deg,
+    rgba(5, 32, 108, 1) 0%,
+    rgba(21, 21, 173, 1) 9%,
+    rgba(17, 202, 240, 1) 95%
+  ); */
+
+  /* background-attachment: fixed; */
 }
 
 code {

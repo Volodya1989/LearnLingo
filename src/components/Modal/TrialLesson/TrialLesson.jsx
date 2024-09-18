@@ -1,6 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useCallback, useEffect, useState } from 'react';
 import useLocalStorage from 'hooks/useLocalStorage';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormLabel from '@mui/material/FormLabel';
 
 import {
   Description,
@@ -15,10 +21,10 @@ import {
   Name,
   NameTitle,
   NameWrapper,
-  RadioWrapper,
-  RadioDescr,
-  Radio,
-  RadioTitle,
+  // RadioWrapper,
+  // RadioDescr,
+  // Radio,
+  // RadioTitle,
 } from './TrialLesson.styled';
 export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const {
@@ -31,6 +37,14 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const [email, setEmail] = useLocalStorage('email' || '');
   const [phone, setPhone] = useLocalStorage('phone' || '');
   const [BtnName, setBtnName] = useState('Book');
+  const [active, setActive] = useState('');
+  const radioOptions = [
+    { label: 'Career and business', value: 'Career and business' },
+    { label: 'Lesson for kids', value: 'Lesson for kids' },
+    { label: 'Living abroad', value: 'Living abroad' },
+    { label: 'Exams and courswork', value: 'Exams and courswork' },
+    { label: 'Culture, travel and hobby', value: 'Culture, travel and hobby' },
+  ];
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -52,23 +66,21 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
     [setEmail, setFullName, setPhone]
   );
   const onClick = data => {
-    setFullName('');
-    setPhone('');
-    setEmail('');
     console.log(data);
     setBtnName('Submitting');
     setTimeout(() => {
+      setFullName('');
+      setPhone('');
+      setEmail('');
       setBtnName('Book');
     }, 1000);
   };
 
-  const radioOptions = [
-    { label: 'Career and business', value: 'Career and business' },
-    { label: 'Lesson for kids', value: 'Lesson for kids' },
-    { label: 'Living abroad', value: 'Living abroad' },
-    { label: 'Exams and courswork', value: 'Exams and courswork' },
-    { label: 'Culture, travel and hobby', value: 'Culture, travel and hobby' },
-  ];
+  //saving state on changes in SORT options
+  const handleRadioChange = event => {
+    setActive(event.target.value);
+    console.log('active', active);
+  };
 
   useEffect(() => {
     console.log(isSubmitSuccessful);
@@ -102,7 +114,7 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
         </NameWrapper>
 
         <form onSubmit={handleSubmit(data => onClick(data))}>
-          <RadioTitle>
+          {/* <RadioTitle>
             What is your main reason for learning English?
           </RadioTitle>
           {radioOptions?.map(({ label: optionLabel, value }, index) => {
@@ -122,6 +134,106 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
                 </label>
                 <RadioDescr>{optionLabel}</RadioDescr>
               </RadioWrapper>
+            );
+          })} */}
+
+          {/* <FormControl
+            sx={{ m: 3, minWidth: '155px', minHeight: '155px' }}
+            error={'error'}
+            variant="standard"
+          >
+            <FormLabel
+              sx={{
+                color: '#141414',
+              }}
+              id="demo-error-radios"
+              style={{
+                color: '#141414',
+              }}
+            >
+              Sort by
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-error-radios"
+              name="sorting"
+              value={active || ''}
+              onChange={handleRadioChange}
+            >
+              <FormControlLabel
+                sx={{
+                  color: '#141414',
+                }}
+                value="Brand Name"
+                label="Brand"
+                control={
+                  <Radio
+                    sx={{
+                      color: '#0d34d1',
+                      '&.Mui-checked': {
+                        color: '#73f5f3',
+                      },
+                    }}
+                  />
+                }
+              />
+            </RadioGroup>
+            {/* <FormHelperText sx={{ m: 3, color: '#141414' }}>
+              {'helperText'}
+            </FormHelperText> */}
+          {/* </FormControl>  */}
+
+          {radioOptions?.map(({ label: optionLabel, value }, index) => {
+            return (
+              <FormControl
+                key={index}
+                // sx={{ m: 3, minWidth: '155px', minHeight: '155px' }}
+                error={'error'}
+                variant="standard"
+              >
+                {/* <FormLabel
+                  sx={{
+                    color: '#141414',
+                  }}
+                  id="demo-error-radios"
+                  style={{
+                    color: '#141414',
+                  }}
+                >
+                  Sort by
+                </FormLabel> */}
+                <RadioGroup
+                  aria-labelledby="demo-error-radios"
+                  name="sorting"
+                  value={active || ''}
+                  onChange={handleRadioChange}
+                >
+                  <FormControlLabel
+                    sx={{
+                      color: '#141414',
+                    }}
+                    value={value}
+                    label={optionLabel}
+                    control={
+                      <Radio
+                        {...register('radioButton', {
+                          required: true,
+                          value: value,
+                        })}
+                        sx={{
+                          color: 'gray',
+
+                          '&.Mui-checked': {
+                            color: '#F4C550',
+                          },
+                        }}
+                      />
+                    }
+                  />
+                </RadioGroup>
+                {/* <FormHelperText sx={{ m: 3, color: '#141414' }}>
+              {'helperText'}
+            </FormHelperText> */}
+              </FormControl>
             );
           })}
 
