@@ -217,21 +217,21 @@ const Teachers = () => {
               selectedName={selectedLanguage}
               handleClick={handleLanguage}
               itemsMap={languages}
-              width={'170px'}
+              width={'210px'}
             />
             <Dropdown
               dropdownName={'Level of knowledge'}
               selectedName={selectedLevel}
               handleClick={handleLevel}
               itemsMap={levelOfLanguage}
-              width={'200px'}
+              width={'240px'}
             />
             <Dropdown
               dropdownName={'Price'}
               selectedName={selectedPrice}
               handleClick={handlePrice}
               itemsMap={price}
-              width={'80px'}
+              width={'100px'}
             />
           </DropdownContainer>
 
