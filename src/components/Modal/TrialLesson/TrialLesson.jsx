@@ -5,9 +5,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormLabel from '@mui/material/FormLabel';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Description,
   Heading,
@@ -21,12 +20,14 @@ import {
   Name,
   NameTitle,
   NameWrapper,
-  // RadioWrapper,
-  // RadioDescr,
-  // Radio,
-  // RadioTitle,
+  RadioWrapper,
+  RadioTitle,
 } from './TrialLesson.styled';
-export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
+
+export const TrialLesson = ({
+  details: { surname, name, avatar_url },
+  onClose,
+}) => {
   const {
     register,
     handleSubmit,
@@ -37,7 +38,7 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const [email, setEmail] = useLocalStorage('email' || '');
   const [phone, setPhone] = useLocalStorage('phone' || '');
   const [BtnName, setBtnName] = useState('Book');
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState(false);
   const radioOptions = [
     { label: 'Career and business', value: 'Career and business' },
     { label: 'Lesson for kids', value: 'Lesson for kids' },
@@ -54,39 +55,47 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
         return;
       }
       if (e.currentTarget.name === 'email') {
-        setEmail(e.currentTarget.value);
+        setEmail(e.currentTarget.value.trim());
       }
-      if (e.currentTarget.name === 'fullName') {
-        setFullName(e.currentTarget.value);
+      if (e.currentTarget.name === 'lastName') {
+        setFullName(e.currentTarget.value.trim());
       }
       if (e.currentTarget.name === 'phone') {
-        setPhone(e.currentTarget.value);
+        setPhone(e.currentTarget.value.trim());
       }
     },
     [setEmail, setFullName, setPhone]
   );
-  const onClick = data => {
-    console.log(data);
-    setBtnName('Submitting');
-    setTimeout(() => {
-      setFullName('');
-      setPhone('');
-      setEmail('');
-      setBtnName('Book');
-    }, 1000);
+
+  //common method success notifications
+  const toastSuccess = (message, _) => {
+    toast.success(message, {
+      className: 'toast-message',
+    });
   };
 
-  //saving state on changes in SORT options
-  const handleRadioChange = event => {
-    setActive(event.target.value);
-    console.log('active', active);
+  const onSubmitForm = data => {
+    console.log(data);
+    setActive(true);
+    setFullName('');
+    setPhone('');
+    setEmail('');
+    setBtnName('Submitting');
+
+    setTimeout(() => {
+      setActive(false);
+      setBtnName('Book');
+      onClose();
+      toastSuccess(
+        `You've successfully booked a lesson. We will contact you shortly!`
+      );
+    }, 1000);
   };
 
   useEffect(() => {
     console.log(isSubmitSuccessful);
 
     if (isSubmitSuccessful) {
-      console.log('deleting');
       setFullName('');
       setPhone('');
       setEmail('');
@@ -113,133 +122,54 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
           </NameTitle>
         </NameWrapper>
 
-        <form onSubmit={handleSubmit(data => onClick(data))}>
-          {/* <RadioTitle>
+        <form onSubmit={handleSubmit(data => onSubmitForm(data))}>
+          <RadioTitle>
             What is your main reason for learning English?
           </RadioTitle>
-          {radioOptions?.map(({ label: optionLabel, value }, index) => {
-            return (
-              <RadioWrapper key={index}>
-                <label htmlFor={optionLabel}>
-                  <Radio
-                    {...register('radioButton', {
-                      required: true,
-                      value: value,
-                    })}
-                    defaultChecked={index !== 0 ? true : false}
-                    type="radio"
-                    value={value}
-                    id={optionLabel}
-                  />
-                </label>
-                <RadioDescr>{optionLabel}</RadioDescr>
-              </RadioWrapper>
-            );
-          })} */}
-
-          {/* <FormControl
-            sx={{ m: 3, minWidth: '155px', minHeight: '155px' }}
-            error={'error'}
-            variant="standard"
-          >
-            <FormLabel
-              sx={{
-                color: '#141414',
-              }}
-              id="demo-error-radios"
-              style={{
-                color: '#141414',
-              }}
-            >
-              Sort by
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="demo-error-radios"
-              name="sorting"
-              value={active || ''}
-              onChange={handleRadioChange}
-            >
-              <FormControlLabel
-                sx={{
-                  color: '#141414',
-                }}
-                value="Brand Name"
-                label="Brand"
-                control={
-                  <Radio
-                    sx={{
-                      color: '#0d34d1',
-                      '&.Mui-checked': {
-                        color: '#73f5f3',
-                      },
-                    }}
-                  />
-                }
-              />
-            </RadioGroup>
-            {/* <FormHelperText sx={{ m: 3, color: '#141414' }}>
-              {'helperText'}
-            </FormHelperText> */}
-          {/* </FormControl>  */}
-
-          {radioOptions?.map(({ label: optionLabel, value }, index) => {
-            return (
-              <FormControl
-                key={index}
-                // sx={{ m: 3, minWidth: '155px', minHeight: '155px' }}
-                error={'error'}
-                variant="standard"
+          <RadioWrapper>
+            <FormControl variant="standard">
+              <RadioGroup
+                aria-labelledby="demo-error-radios"
+                name="radio"
+                defaultValue={radioOptions[0].value}
               >
-                {/* <FormLabel
-                  sx={{
-                    color: '#141414',
-                  }}
-                  id="demo-error-radios"
-                  style={{
-                    color: '#141414',
-                  }}
-                >
-                  Sort by
-                </FormLabel> */}
-                <RadioGroup
-                  aria-labelledby="demo-error-radios"
-                  name="sorting"
-                  value={active || ''}
-                  onChange={handleRadioChange}
-                >
-                  <FormControlLabel
-                    sx={{
-                      color: '#141414',
-                    }}
-                    value={value}
-                    label={optionLabel}
-                    control={
-                      <Radio
-                        {...register('radioButton', {
-                          required: true,
-                          value: value,
-                        })}
+                {radioOptions?.map(({ label: optionLabel, value }, index) => {
+                  return (
+                    <div key={index}>
+                      <FormControlLabel
                         sx={{
-                          color: 'gray',
-
-                          '&.Mui-checked': {
-                            color: '#F4C550',
-                          },
+                          color: '#141414',
                         }}
-                      />
-                    }
-                  />
-                </RadioGroup>
-                {/* <FormHelperText sx={{ m: 3, color: '#141414' }}>
-              {'helperText'}
-            </FormHelperText> */}
-              </FormControl>
-            );
-          })}
+                        value={value}
+                        label={optionLabel}
+                        defaultChecked={index === 1 ? true : false}
+                        control={
+                          <Radio
+                            {...register('reasonForLearning', {
+                              required: true,
+                              value: value,
+                            })}
+                            sx={{
+                              color: 'lightgray',
 
-          {errors.email && <ErrorMessage>Email is required.</ErrorMessage>}
-          {errors.fullName && (
-            <ErrorMessage>Full Name is required.</ErrorMessage>
+                              '&.Mui-checked': {
+                                color: '#F4C550',
+                              },
+                              fontSize: '16px',
+                              lineHeight: 'calc(22/16)',
+                            }}
+                          />
+                        }
+                      />
+                    </div>
+                  );
+                })}
+              </RadioGroup>
+            </FormControl>
+          </RadioWrapper>
+          {/* {errors.radio && <ErrorMessage>Email is required.</ErrorMessage>} */}
+          {errors.lastName && (
+            <ErrorMessage>Last Name is required.</ErrorMessage>
           )}
           {errors.phone && (
             <ErrorMessage>Phone number is required.</ErrorMessage>
@@ -247,18 +177,18 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
 
           <Wrapper>
             <Field
-              {...register('fullName', {
+              {...register('lastName', {
                 required: true,
                 value: fullName,
-                maxLength: 5,
+                // maxLength: 5,
               })}
               onChange={onQueryChange}
-              name="fullName"
+              name="lastName"
               value={fullName}
               autoComplete="off"
               type={'text'}
             />
-            <Label htmlFor={1}>{'Full Name'}</Label>
+            <Label htmlFor={1}>{'Last Name'}</Label>
           </Wrapper>
           <Wrapper>
             <Field
@@ -282,7 +212,7 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
             />
             <Label htmlFor={1}>{'Phone'}</Label>
           </Wrapper>
-          <MainButton type="submit" value={BtnName} />
+          <MainButton disabled={active} type="submit" value={BtnName} />
         </form>
       </Description>
     </>

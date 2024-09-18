@@ -6,7 +6,7 @@ export const ModalDetailsStyled = styled.img`
 
 export const Description = styled.div`
   display: block;
-  max-width: 500px;
+  max-width: 600px;
   background-color: #f7f7f7;
   padding-right: 20px;
   padding-left: 20px;
@@ -168,20 +168,18 @@ export const RadioWrapper = styled.div`
   justify-content: start;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
 `;
 export const RadioDescr = styled.legend`
 font-size: 16px;
 line-height: calc(22/16)
 text-align: center;
 `;
-export const Radio = styled.input`
-  display: block;
-  cursor: pointer;
-`;
+
 export const RadioTitle = styled.p`
   font-weight: 500;
   font-size: 24px;
   line-height: calc(32 / 24);
   text-align: left;
+  margin-bottom: 10px;
+  margin-top: 10px;
 `;
