@@ -23,7 +23,7 @@ import {
   RadioWrapper,
   RadioTitle,
 } from './TrialLesson.styled';
-
+ 
 export const TrialLesson = ({
   details: { surname, name, avatar_url },
   onClose,
