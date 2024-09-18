@@ -46,13 +46,13 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledIsActive = styled.div`
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   border-radius: 100%;
   background: #38cd3e;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   position: absolute;
-  top: 25px;
+  top: 20px;
   right: 25px;
 `;
 
