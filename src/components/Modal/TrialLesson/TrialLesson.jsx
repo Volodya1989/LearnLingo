@@ -1,6 +1,12 @@
 import { useForm } from 'react-hook-form';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useLocalStorage from 'hooks/useLocalStorage';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormLabel from '@mui/material/FormLabel';
 
 import {
   Description,
@@ -15,6 +21,10 @@ import {
   Name,
   NameTitle,
   NameWrapper,
+  // RadioWrapper,
+  // RadioDescr,
+  // Radio,
+  // RadioTitle,
 } from './TrialLesson.styled';
 export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const {
@@ -26,6 +36,15 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
   const [fullName, setFullName] = useLocalStorage('fullName' || '');
   const [email, setEmail] = useLocalStorage('email' || '');
   const [phone, setPhone] = useLocalStorage('phone' || '');
+  const [BtnName, setBtnName] = useState('Book');
+  const [active, setActive] = useState('');
+  const radioOptions = [
+    { label: 'Career and business', value: 'Career and business' },
+    { label: 'Lesson for kids', value: 'Lesson for kids' },
+    { label: 'Living abroad', value: 'Living abroad' },
+    { label: 'Exams and courswork', value: 'Exams and courswork' },
+    { label: 'Culture, travel and hobby', value: 'Culture, travel and hobby' },
+  ];
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -43,15 +62,24 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
       if (e.currentTarget.name === 'phone') {
         setPhone(e.currentTarget.value);
       }
-      // setQuerySearch(e.currentTarget.value);
     },
     [setEmail, setFullName, setPhone]
   );
   const onClick = data => {
-    setFullName('');
-    setPhone('');
-    setEmail('');
     console.log(data);
+    setBtnName('Submitting');
+    setTimeout(() => {
+      setFullName('');
+      setPhone('');
+      setEmail('');
+      setBtnName('Book');
+    }, 1000);
+  };
+
+  //saving state on changes in SORT options
+  const handleRadioChange = event => {
+    setActive(event.target.value);
+    console.log('active', active);
   };
 
   useEffect(() => {
@@ -64,22 +92,8 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
       setEmail('');
     }
   }, [setEmail, setFullName, setPhone, isSubmitSuccessful]);
-  // const { showBridge, description, brand, model } = details;
   return (
     <>
-      {/* <TrialLessonStyled
-        src={
-          showBridge
-            ? require('../../../images/bridge.jpg')
-            : require('../../../images/placeholderCar.jpg')
-        }
-        onError={e =>
-          (e.target.src = require('../../../images/placeholderCar.jpg'))
-        }
-        alt="large image"
-        width="600"
-      /> */}
-
       <Description>
         <Heading>{`Book Trial Lesson `}</Heading>
         <DescrText>
@@ -98,7 +112,131 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
             </Name>
           </NameTitle>
         </NameWrapper>
+
         <form onSubmit={handleSubmit(data => onClick(data))}>
+          {/* <RadioTitle>
+            What is your main reason for learning English?
+          </RadioTitle>
+          {radioOptions?.map(({ label: optionLabel, value }, index) => {
+            return (
+              <RadioWrapper key={index}>
+                <label htmlFor={optionLabel}>
+                  <Radio
+                    {...register('radioButton', {
+                      required: true,
+                      value: value,
+                    })}
+                    defaultChecked={index !== 0 ? true : false}
+                    type="radio"
+                    value={value}
+                    id={optionLabel}
+                  />
+                </label>
+                <RadioDescr>{optionLabel}</RadioDescr>
+              </RadioWrapper>
+            );
+          })} */}
+
+          {/* <FormControl
+            sx={{ m: 3, minWidth: '155px', minHeight: '155px' }}
+            error={'error'}
+            variant="standard"
+          >
+            <FormLabel
+              sx={{
+                color: '#141414',
+              }}
+              id="demo-error-radios"
+              style={{
+                color: '#141414',
+              }}
+            >
+              Sort by
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-error-radios"
+              name="sorting"
+              value={active || ''}
+              onChange={handleRadioChange}
+            >
+              <FormControlLabel
+                sx={{
+                  color: '#141414',
+                }}
+                value="Brand Name"
+                label="Brand"
+                control={
+                  <Radio
+                    sx={{
+                      color: '#0d34d1',
+                      '&.Mui-checked': {
+                        color: '#73f5f3',
+                      },
+                    }}
+                  />
+                }
+              />
+            </RadioGroup>
+            {/* <FormHelperText sx={{ m: 3, color: '#141414' }}>
+              {'helperText'}
+            </FormHelperText> */}
+          {/* </FormControl>  */}
+
+          {radioOptions?.map(({ label: optionLabel, value }, index) => {
+            return (
+              <FormControl
+                key={index}
+                // sx={{ m: 3, minWidth: '155px', minHeight: '155px' }}
+                error={'error'}
+                variant="standard"
+              >
+                {/* <FormLabel
+                  sx={{
+                    color: '#141414',
+                  }}
+                  id="demo-error-radios"
+                  style={{
+                    color: '#141414',
+                  }}
+                >
+                  Sort by
+                </FormLabel> */}
+                <RadioGroup
+                  aria-labelledby="demo-error-radios"
+                  name="sorting"
+                  value={active || ''}
+                  onChange={handleRadioChange}
+                >
+                  <FormControlLabel
+                    sx={{
+                      color: '#141414',
+                    }}
+                    value={value}
+                    label={optionLabel}
+                    control={
+                      <Radio
+                        {...register('radioButton', {
+                          required: true,
+                          value: value,
+                        })}
+                        sx={{
+                          color: 'gray',
+
+                          '&.Mui-checked': {
+                            color: '#F4C550',
+                          },
+                        }}
+                      />
+                    }
+                  />
+                </RadioGroup>
+                {/* <FormHelperText sx={{ m: 3, color: '#141414' }}>
+              {'helperText'}
+            </FormHelperText> */}
+              </FormControl>
+            );
+          })}
+
           {errors.email && <ErrorMessage>Email is required.</ErrorMessage>}
           {errors.fullName && (
             <ErrorMessage>Full Name is required.</ErrorMessage>
@@ -144,7 +282,7 @@ export const TrialLesson = ({ details: { surname, name, avatar_url } }) => {
             />
             <Label htmlFor={1}>{'Phone'}</Label>
           </Wrapper>
-          <MainButton type="submit" value={'Book'} />
+          <MainButton type="submit" value={BtnName} />
         </form>
       </Description>
     </>

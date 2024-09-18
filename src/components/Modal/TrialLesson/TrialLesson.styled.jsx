@@ -163,3 +163,25 @@ export const NameWrapper = styled.div`
   display: flex;
   gap: 20px;
 `;
+export const RadioWrapper = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+`;
+export const RadioDescr = styled.legend`
+font-size: 16px;
+line-height: calc(22/16)
+text-align: center;
+`;
+export const Radio = styled.input`
+  display: block;
+  cursor: pointer;
+`;
+export const RadioTitle = styled.p`
+  font-weight: 500;
+  font-size: 24px;
+  line-height: calc(32 / 24);
+  text-align: left;
+`;
