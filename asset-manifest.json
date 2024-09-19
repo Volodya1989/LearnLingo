@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/learn-lingo/static/css/main.237befbd.css",
-    "main.js": "/learn-lingo/static/js/main.1236aaea.js",
+    "main.js": "/learn-lingo/static/js/main.60361e19.js",
     "static/js/0.9d3a788b.chunk.js": "/learn-lingo/static/js/0.9d3a788b.chunk.js",
-    "static/js/309.502dac23.chunk.js": "/learn-lingo/static/js/309.502dac23.chunk.js",
+    "static/js/309.ef969e38.chunk.js": "/learn-lingo/static/js/309.ef969e38.chunk.js",
     "static/js/877.4b79905e.chunk.js": "/learn-lingo/static/js/877.4b79905e.chunk.js",
-    "static/js/994.6e1eb57a.chunk.js": "/learn-lingo/static/js/994.6e1eb57a.chunk.js",
-    "static/js/399.f8da0a48.chunk.js": "/learn-lingo/static/js/399.f8da0a48.chunk.js",
-    "static/css/391.ed4a857f.chunk.css": "/learn-lingo/static/css/391.ed4a857f.chunk.css",
-    "static/js/391.7f4d732d.chunk.js": "/learn-lingo/static/js/391.7f4d732d.chunk.js",
-    "static/js/239.e15ad162.chunk.js": "/learn-lingo/static/js/239.e15ad162.chunk.js",
+    "static/js/994.455a73f4.chunk.js": "/learn-lingo/static/js/994.455a73f4.chunk.js",
+    "static/js/958.f49a6ce4.chunk.js": "/learn-lingo/static/js/958.f49a6ce4.chunk.js",
+    "static/css/789.655aede7.chunk.css": "/learn-lingo/static/css/789.655aede7.chunk.css",
+    "static/js/789.13a177f8.chunk.js": "/learn-lingo/static/js/789.13a177f8.chunk.js",
+    "static/js/187.21e9175b.chunk.js": "/learn-lingo/static/js/187.21e9175b.chunk.js",
+    "static/js/733.a2135b02.chunk.js": "/learn-lingo/static/js/733.a2135b02.chunk.js",
     "static/media/block.svg": "/learn-lingo/static/media/block.9e584226175102e80edf63e9f0756b8e.svg",
     "static/media/book-open.svg": "/learn-lingo/static/media/book-open.818b41995f0a0349a370ae28b73e4fa6.svg",
     "index.html": "/learn-lingo/index.html",
@@ -19,18 +20,19 @@
     "static/media/log-in-01.svg": "/learn-lingo/static/media/log-in-01.d3edbd99db7c1c3d823755570ca3eb2f.svg",
     "static/media/ukraine.svg": "/learn-lingo/static/media/ukraine.d34743a6d4214a7edfd037c74ed2da93.svg",
     "main.237befbd.css.map": "/learn-lingo/static/css/main.237befbd.css.map",
-    "main.1236aaea.js.map": "/learn-lingo/static/js/main.1236aaea.js.map",
+    "main.60361e19.js.map": "/learn-lingo/static/js/main.60361e19.js.map",
     "0.9d3a788b.chunk.js.map": "/learn-lingo/static/js/0.9d3a788b.chunk.js.map",
-    "309.502dac23.chunk.js.map": "/learn-lingo/static/js/309.502dac23.chunk.js.map",
+    "309.ef969e38.chunk.js.map": "/learn-lingo/static/js/309.ef969e38.chunk.js.map",
     "877.4b79905e.chunk.js.map": "/learn-lingo/static/js/877.4b79905e.chunk.js.map",
-    "994.6e1eb57a.chunk.js.map": "/learn-lingo/static/js/994.6e1eb57a.chunk.js.map",
-    "399.f8da0a48.chunk.js.map": "/learn-lingo/static/js/399.f8da0a48.chunk.js.map",
-    "391.ed4a857f.chunk.css.map": "/learn-lingo/static/css/391.ed4a857f.chunk.css.map",
-    "391.7f4d732d.chunk.js.map": "/learn-lingo/static/js/391.7f4d732d.chunk.js.map",
-    "239.e15ad162.chunk.js.map": "/learn-lingo/static/js/239.e15ad162.chunk.js.map"
+    "994.455a73f4.chunk.js.map": "/learn-lingo/static/js/994.455a73f4.chunk.js.map",
+    "958.f49a6ce4.chunk.js.map": "/learn-lingo/static/js/958.f49a6ce4.chunk.js.map",
+    "789.655aede7.chunk.css.map": "/learn-lingo/static/css/789.655aede7.chunk.css.map",
+    "789.13a177f8.chunk.js.map": "/learn-lingo/static/js/789.13a177f8.chunk.js.map",
+    "187.21e9175b.chunk.js.map": "/learn-lingo/static/js/187.21e9175b.chunk.js.map",
+    "733.a2135b02.chunk.js.map": "/learn-lingo/static/js/733.a2135b02.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.237befbd.css",
-    "static/js/main.1236aaea.js"
+    "static/js/main.60361e19.js"
   ]
 }
