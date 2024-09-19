@@ -12,10 +12,12 @@ import {
   ErrorMessage,
   MainButton,
   DescrText,
+  ProtectedEye,
 } from './Login.styled';
 import { ToastContainer } from 'react-toastify';
 import { StyledToastContainer } from 'components/Teachers/Teachers.styled';
 import Loader from 'components/Loader';
+import { IoEyeOffOutline } from 'react-icons/io5';
 
 export const Login = () => {
   const {
@@ -108,7 +110,7 @@ export const Login = () => {
             {errors.password && (
               <ErrorMessage>Password is required.</ErrorMessage>
             )}
-            {errors.phone && <ErrorMessage>Email is required.</ErrorMessage>}
+            {errors.email && <ErrorMessage>Email is required.</ErrorMessage>}
             <Wrapper>
               <Field
                 {...register('email', { required: true, value: email })}
@@ -125,14 +127,19 @@ export const Login = () => {
                 {...register('password', {
                   required: true,
                   value: password,
-                  // maxLength: 5,
                 })}
+                sx={{
+                  position: 'relative',
+                }}
                 onChange={onQueryChange}
                 name="password"
                 value={password}
                 autoComplete="off"
                 type={'password'}
               />
+              <ProtectedEye>
+                <IoEyeOffOutline />
+              </ProtectedEye>
               <Label htmlFor={1}>{'Password'}</Label>
             </Wrapper>
 
