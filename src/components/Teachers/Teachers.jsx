@@ -145,14 +145,10 @@ const Teachers = () => {
   };
 
   const onLoadMore = () => {
-    console.log(filteredTeachers.length);
-    console.log(filteredTeachers.length <= pageCounter);
-
     if (filteredTeachers.length <= pageCounter) {
       setIsLoadMore(false);
     }
     setPageCounter(prevCounter => prevCounter + 3);
-    console.log('onLoadeMore', pageCounter);
   };
   const handleLoading = useCallback(
     e => {
