@@ -64,7 +64,7 @@ export const StyledFirstSection = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 95px;
+  gap: 75px;
   font-size: 16px;
   font-weight: 500;
   line-height: calc(24 / 16);
