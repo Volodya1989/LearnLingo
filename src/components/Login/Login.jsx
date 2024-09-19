@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useFetch from 'use-http';
 import {
   Description,
   Heading,
@@ -14,6 +15,7 @@ import {
 } from './Login.styled';
 import { ToastContainer } from 'react-toastify';
 import { StyledToastContainer } from 'components/Teachers/Teachers.styled';
+import Loader from 'components/Loader';
 
 export const Login = () => {
   const {
@@ -22,10 +24,12 @@ export const Login = () => {
     formState: { errors },
     formState: { isSubmitSuccessful },
   } = useForm();
+  const { loading } = useFetch();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [BtnName, setBtnName] = useState('Log In');
   const [active, setActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -70,53 +74,72 @@ export const Login = () => {
       setEmail('');
     }
   }, [setEmail, setPassword, isSubmitSuccessful]);
+
+  const handleLoading = useCallback(
+    e => {
+      if (!loading) {
+        setTimeout(() => {
+          setIsLoading(true);
+        }, 1000);
+      }
+    },
+    [loading]
+  );
+
+  useEffect(() => {
+    handleLoading();
+  }, [handleLoading]);
   return (
     <>
-      <Description>
-        <StyledToastContainer autoClose={2000} position="top-right">
-          <ToastContainer />;
-        </StyledToastContainer>
-        <Heading>{`Log In`}</Heading>
-        <DescrText>
-          Welcome back! Please enter your credentials to access your account and
-          continue your search for an teacher.
-        </DescrText>
+      {!isLoading ? (
+        <Loader />
+      ) : (
+        <Description>
+          <StyledToastContainer autoClose={2000} position="top-right">
+            <ToastContainer />;
+          </StyledToastContainer>
+          <Heading>{`Log In`}</Heading>
+          <DescrText>
+            Welcome back! Please enter your credentials to access your account
+            and continue your search for an teacher.
+          </DescrText>
 
-        <form onSubmit={handleSubmit(data => onSubmitForm(data))}>
-          {errors.password && (
-            <ErrorMessage>Password is required.</ErrorMessage>
-          )}
-          {errors.phone && <ErrorMessage>Email is required.</ErrorMessage>}
-          <Wrapper>
-            <Field
-              {...register('email', { required: true, value: email })}
-              onChange={onQueryChange}
-              name="email"
-              value={email}
-              autoComplete="off"
-              type={'text'}
-            />
-            <Label htmlFor={1}>{'Email'}</Label>
-          </Wrapper>
-          <Wrapper>
-            <Field
-              {...register('password', {
-                required: true,
-                value: password,
-                // maxLength: 5,
-              })}
-              onChange={onQueryChange}
-              name="password"
-              value={password}
-              autoComplete="off"
-              type={'password'}
-            />
-            <Label htmlFor={1}>{'Password'}</Label>
-          </Wrapper>
+          <form onSubmit={handleSubmit(data => onSubmitForm(data))}>
+            {errors.password && (
+              <ErrorMessage>Password is required.</ErrorMessage>
+            )}
+            {errors.phone && <ErrorMessage>Email is required.</ErrorMessage>}
+            <Wrapper>
+              <Field
+                {...register('email', { required: true, value: email })}
+                onChange={onQueryChange}
+                name="email"
+                value={email}
+                autoComplete="off"
+                type={'text'}
+              />
+              <Label htmlFor={1}>{'Email'}</Label>
+            </Wrapper>
+            <Wrapper>
+              <Field
+                {...register('password', {
+                  required: true,
+                  value: password,
+                  // maxLength: 5,
+                })}
+                onChange={onQueryChange}
+                name="password"
+                value={password}
+                autoComplete="off"
+                type={'password'}
+              />
+              <Label htmlFor={1}>{'Password'}</Label>
+            </Wrapper>
 
-          <MainButton disabled={active} type="submit" value={BtnName} />
-        </form>
-      </Description>
+            <MainButton disabled={active} type="submit" value={BtnName} />
+          </form>
+        </Description>
+      )}
     </>
   );
 };
