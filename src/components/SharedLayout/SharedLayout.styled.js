@@ -63,8 +63,8 @@ export const StyledHeader = styled.nav`
   height: 50px;
   padding-left: 5%;
   padding-right: 5%;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   color: #fff;
   background: #fff;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),

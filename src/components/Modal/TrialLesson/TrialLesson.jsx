@@ -23,7 +23,7 @@ import {
   RadioWrapper,
   RadioTitle,
 } from './TrialLesson.styled';
- 
+
 export const TrialLesson = ({
   details: { surname, name, avatar_url },
   onClose,
@@ -50,7 +50,6 @@ export const TrialLesson = ({
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
     e => {
-      console.log(e.currentTarget.name);
       if (e.currentTarget.value === ' ') {
         return;
       }
@@ -75,7 +74,6 @@ export const TrialLesson = ({
   };
 
   const onSubmitForm = data => {
-    console.log(data);
     setActive(true);
     setFullName('');
     setPhone('');
@@ -93,8 +91,6 @@ export const TrialLesson = ({
   };
 
   useEffect(() => {
-    console.log(isSubmitSuccessful);
-
     if (isSubmitSuccessful) {
       setFullName('');
       setPhone('');

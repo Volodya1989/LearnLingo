@@ -41,7 +41,6 @@ const Card = ({
   onClick,
   onFavoriteChange,
 }) => {
-  console.log('card', surname);
   const [isFavorite, setIsFavorite] = useState(favorites);
   const [isReadMore, setIsReadMore] = useState(true);
 
