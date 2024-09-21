@@ -157,7 +157,7 @@ export const Registration = () => {
                 name="password"
                 value={password}
                 autoComplete="off"
-                type={isVisible ? 'password' : 'text'}
+                type={isVisible ? 'text' : 'password'}
               />
               <ProtectedEye onClick={togglePassword}>
                 <IoEyeOffOutline />
