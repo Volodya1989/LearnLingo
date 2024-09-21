@@ -33,7 +33,7 @@ export const Registration = () => {
   const [BtnName, setBtnName] = useState('Sign Up');
   const [active, setActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [isVisible, setIsVisible] = useState(false);
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
     e => {
@@ -74,7 +74,9 @@ export const Registration = () => {
       toastSuccess(`You are signing in...`);
     }, 1000);
   };
-
+  const togglePassword = () => {
+    setIsVisible(!isVisible);
+  };
   useEffect(() => {
     if (isSubmitSuccessful) {
       setPassword('');
@@ -155,9 +157,9 @@ export const Registration = () => {
                 name="password"
                 value={password}
                 autoComplete="off"
-                type={'password'}
+                type={isVisible ? 'password' : 'text'}
               />
-              <ProtectedEye>
+              <ProtectedEye onClick={togglePassword}>
                 <IoEyeOffOutline />
               </ProtectedEye>
               <Label htmlFor={1}>{'Password'}</Label>
