@@ -32,6 +32,7 @@ export const Login = () => {
   const [BtnName, setBtnName] = useState('Log In');
   const [active, setActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -48,6 +49,10 @@ export const Login = () => {
     },
     [setEmail, setPassword]
   );
+
+  const togglePassword = () => {
+    setIsVisible(!isVisible);
+  };
 
   //common method success notifications
   const toastSuccess = (message, _) => {
@@ -135,9 +140,9 @@ export const Login = () => {
                 name="password"
                 value={password}
                 autoComplete="off"
-                type={'password'}
+                type={isVisible ? 'password' : 'text'}
               />
-              <ProtectedEye>
+              <ProtectedEye onClick={togglePassword}>
                 <IoEyeOffOutline />
               </ProtectedEye>
               <Label htmlFor={1}>{'Password'}</Label>
