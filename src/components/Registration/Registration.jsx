@@ -17,7 +17,7 @@ import {
 import { ToastContainer } from 'react-toastify';
 import { StyledToastContainer } from 'components/Teachers/Teachers.styled';
 import Loader from 'components/Loader';
-import { IoEyeOffOutline } from 'react-icons/io5';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 
 export const Registration = () => {
   const {
@@ -160,7 +160,7 @@ export const Registration = () => {
                 type={isVisible ? 'text' : 'password'}
               />
               <ProtectedEye onClick={togglePassword}>
-                <IoEyeOffOutline />
+                {isVisible ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </ProtectedEye>
               <Label htmlFor={1}>{'Password'}</Label>
             </Wrapper>
