@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+body{
+  overflow-y: ${({ isShowModal }) => (isShowModal ? 'hidden' : 'scroll')};
+}
+`;
 
 export const StyledContainer = styled.div`
   max-width: 1250px;

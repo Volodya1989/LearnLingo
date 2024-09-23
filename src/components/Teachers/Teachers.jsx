@@ -12,6 +12,7 @@ import {
   StyledContainer,
   DropdownContainer,
   StyledToastContainer,
+  GlobalStyle,
 } from './Teachers.styled';
 import { ToastContainer } from 'react-toastify';
 
@@ -230,6 +231,7 @@ const Teachers = () => {
               width={'100px'}
             />
           </DropdownContainer>
+          <GlobalStyle isShowModal={isShowModal} />
 
           <CardsList
             onFavoriteChange={onFavoriteChange}
