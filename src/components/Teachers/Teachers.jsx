@@ -20,7 +20,7 @@ const Teachers = () => {
   const [languages, setLanguages] = useLocalStorage('languages', null);
   const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
-  const [pageCounter, setPageCounter] = useState(() => 3);
+  const [pageCounter, setPageCounter] = useState(() => 4);
   const [isLoadMore, setIsLoadMore] = useState(true);
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalProps, setModalProps] = useState(null);
@@ -144,12 +144,12 @@ const Teachers = () => {
     setSelectedPrice(item);
   };
 
-  const onLoadMore = () => {
+  const onLoadMore = useCallback(() => {
     if (filteredTeachers.length <= pageCounter) {
       setIsLoadMore(false);
     }
-    setPageCounter(prevCounter => prevCounter + 3);
-  };
+    setPageCounter(prevCounter => prevCounter + 4);
+  }, [setPageCounter, filteredTeachers.length, pageCounter]);
   const handleLoading = useCallback(
     e => {
       if (loading) {
