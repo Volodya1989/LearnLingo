@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+body{
+  overflow-y: ${({ isShowModal }) => (isShowModal ? 'hidden' : 'scroll')};
+}
+`;
 
 export const StyledContainer = styled.div`
   max-width: 1250px;
@@ -8,11 +15,19 @@ export const StyledContainer = styled.div`
   padding-right: 20px;
 `;
 export const DropdownContainer = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 20px;
-  margin-left: 45px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    margin-left: 45px;
+  }
+  @media screen and (min-width: 1150px) {
+    width: 1150px;
+  }
 `;
 
 export const StyledToastContainer = styled(ToastContainer).attrs({

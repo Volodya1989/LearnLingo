@@ -12,13 +12,14 @@ import {
   StyledContainer,
   DropdownContainer,
   StyledToastContainer,
+  GlobalStyle,
 } from './Teachers.styled';
 import { ToastContainer } from 'react-toastify';
 
 const Teachers = () => {
+  const { loading } = useFetch();
   const [teachers, setTeachers] = useLocalStorage('teachers', null);
   const [languages, setLanguages] = useLocalStorage('languages', null);
-  const { loading } = useFetch();
   const [isLoading, setIsLoading] = useState(false);
   const [pageCounter, setPageCounter] = useState(() => 4);
   const [isLoadMore, setIsLoadMore] = useState(true);
@@ -97,7 +98,7 @@ const Teachers = () => {
       (_, index) => index < pageCounter
     );
     setFilteredTeachers(finalListFilteredTeachers);
-    if (finalListFilteredTeachers.length + 1 <= pageCounter) {
+    if (finalListFilteredTeachers?.length + 1 <= pageCounter) {
       setIsLoadMore(false);
     } else {
       setIsLoadMore(true);
@@ -145,11 +146,11 @@ const Teachers = () => {
   };
 
   const onLoadMore = useCallback(() => {
-    if (filteredTeachers.length <= pageCounter) {
+    if (filteredTeachers?.length <= pageCounter) {
       setIsLoadMore(false);
     }
     setPageCounter(prevCounter => prevCounter + 4);
-  }, [setPageCounter, filteredTeachers.length, pageCounter]);
+  }, [setPageCounter, filteredTeachers?.length, pageCounter]);
   const handleLoading = useCallback(
     e => {
       if (loading) {
@@ -230,6 +231,7 @@ const Teachers = () => {
               width={'100px'}
             />
           </DropdownContainer>
+          <GlobalStyle isShowModal={isShowModal} />
 
           <CardsList
             onFavoriteChange={onFavoriteChange}

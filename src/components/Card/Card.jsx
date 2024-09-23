@@ -22,6 +22,7 @@ import {
   Comments,
   CommentsRating,
   Heart,
+  TextContainer,
 } from './Card.styled';
 const Card = ({
   avatar_url,
@@ -59,7 +60,7 @@ const Card = ({
         <StyledIsActive></StyledIsActive>
         <StyledImg src={avatar_url} alt={name} />
       </ImgWrapper>
-      <div>
+      <TextContainer>
         <StyledFirstSection>
           <StyledSubTitle>
             Languages <br />
@@ -172,7 +173,7 @@ const Card = ({
             Book trial lesson
           </MainButton>
         )}
-      </div>
+      </TextContainer>
     </CardWrapper>
   );
 };
