@@ -8,11 +8,19 @@ export const StyledContainer = styled.div`
   padding-right: 20px;
 `;
 export const DropdownContainer = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 20px;
-  margin-left: 45px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    margin-left: 45px;
+  }
+  @media screen and (min-width: 1150px) {
+    width: 1150px;
+  }
 `;
 
 export const StyledToastContainer = styled(ToastContainer).attrs({

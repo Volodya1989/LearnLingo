@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 
 export const CardWrapper = styled.li`
-  //   position: relative;
-  //   box-shadow: var(--shade);
   font-family: Roboto;
   border-radius: 20px;
-  width: 1100px;
-  display: flex;
-  justify-content: space-around;
-  gap: 50px;
+  width: 350px;
+  display: block;
   margin-left: auto;
   margin-right: auto;
   padding-left: 30px;
@@ -16,25 +12,19 @@ export const CardWrapper = styled.li`
   padding-bottom: 20px;
   padding-top: 20px;
   margin-bottom: 60px;
-  //   margin-bottom: 35px;
   transition: transform 0.4s;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
-  // &:hover {
-  //   transition: transform 0.4s;
-  //   transform: scale(1.05);
-  // }
-  //   @media screen and (min-width: 768px) {
-  //     width: 200px;
-  //     height: 362px;
-  //     margin-left: 0;
-  //     margin-right: 0;
-  //   }
-  //   @media screen and (min-width: 1150px) {
-  //     width: 187px;
-  //     height: 335px;
-  //   }
+  @media screen and (min-width: 768px) {
+    width: 950px;
+    display: flex;
+    justify-content: space-around;
+    gap: 50px;
+  }
+  @media screen and (min-width: 1150px) {
+    width: 1150px;
+  }
 `;
 
 export const StyledImg = styled.img`
@@ -53,7 +43,10 @@ export const StyledIsActive = styled.div`
   border: 2px solid #fff;
   position: absolute;
   top: 20px;
-  right: 25px;
+  right: 190px;
+  @media screen and (min-width: 768px) {
+    right: 25px;
+  }
 `;
 
 export const ImgWrapper = styled.div`
@@ -61,15 +54,24 @@ export const ImgWrapper = styled.div`
 `;
 
 export const StyledFirstSection = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 75px;
+  display: block;
   font-size: 16px;
   font-weight: 500;
   line-height: calc(24 / 16);
   text-align: left;
   margin-bottom: 32px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 75px;
+  }
+  @media screen and (min-width: 1150px) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 75px;
+  }
 `;
 export const StyledBook = styled.div`
   display: flex;
@@ -82,16 +84,23 @@ export const StyledLessons = styled.span`
 `;
 
 export const StyledFirstSection2 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  display: block;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 export const StyledPipe = styled.div`
-  border: solid #121417 0.5px;
-  opacity: 0.3;
-  height: 16px;
+  display: none;
+  @media screen and (min-width: 768px) {
+    border: solid #121417 0.5px;
+    opacity: 0.3;
+    height: 16px;
+  }
 `;
 
 export const StyledPrice = styled.span`
@@ -125,37 +134,47 @@ export const StyledReadMore = styled.div`
 `;
 
 export const StyledLevel = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  display: block;
   font-size: 14px;
   font-weight: 500;
   line-height: calc(16 / 14);
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 `;
 
 export const StyledLevelEl = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  padding: 4px 12px 4px 12px;
-  height: 32px;
-  border-radius: 35px;
-  opacity: 0px;
-  margin-top: 25px;
-  border: solid lightgray 1px;
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 4px 12px 4px 12px;
+    height: 32px;
+    border-radius: 35px;
+    opacity: 0px;
+    margin-top: 25px;
+    border: solid lightgray 1px;
+  }
 `;
 
 export const MainButton = styled.button`
   width: Hug (232px) px;
   height: Hug (60px) px;
   padding: 16px 48px 16px 48px;
+  display: flex;
+  justify-content: center;
   gap: 0px;
   margin-top: 25px;
   border-radius: 12px;
   opacity: 0px;
   font-weight: 700;
   background: #f4c550;
+  margin-left: auto;
+  margin-right: auto;
   border: none;
   font-size: 18px;
   line-height: calc(28 / 18);
@@ -164,6 +183,11 @@ export const MainButton = styled.button`
     transition: opacity 0.4s;
     opacity: 0.8;
     transition-timing-function: ease;
+  }
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+    margin-left: 0;
+    margin-right: 0;
   }
 `;
 export const Comments = styled.div`
@@ -180,10 +204,23 @@ export const CommentsRating = styled.div`
 `;
 
 export const Heart = styled.div`
+  position: absolute;
+  top: -110px;
+  left: 250px;
   cursor: pointer;
   &:hover {
     transition: opacity 0.4s;
     opacity: 0.6;
     transition-timing-function: ease;
+  }
+
+  @media screen and (min-width: 768px) {
+    position: static;
+  }
+`;
+export const TextContainer = styled.div`
+  position: relative;
+  @media screen and (min-width: 768px) {
+    position: static;
   }
 `;

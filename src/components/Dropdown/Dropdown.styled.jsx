@@ -30,10 +30,13 @@ export const DropdownDescr = styled.div`
 
 export const DropdownContainer = styled.div`
   position: relative;
-  display: inline-block;
+  display: block;
   width: 221 px;
   margin-top: 20px;
-  margin-right: 15px;
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+    margin-right: 15px;
+  }
 `;
 export const DropdownArrow = styled.div`
   display: flex;
