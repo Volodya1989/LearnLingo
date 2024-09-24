@@ -10,6 +10,8 @@ export const StyledLink = styled(NavLink)`
   font-size: 16px;
   line-height: calc(20 / 16);
   // width: 100%;
+  max-width: 1250px;
+  // overflow: hidden;
 
   &:hover {
     color: gray;
@@ -32,12 +34,25 @@ export const Logo = styled.span`
   display: flex;
   align-items: center;
   padding-left: 5px;
-  padding-right: 430px;
+  padding-right: 50px;
+
+  @media screen and (min-width: 768px) {
+    padding-right: 150px;
+  }
+  @media screen and (min-width: 1150px) {
+    padding-right: 430px;
+  }
 `;
 
 export const StyledLogin = styled.span`
   font-weight: 700;
   padding-left: 5px;
+`;
+export const HideMobile = styled.span`
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
 `;
 
 export const StyledRegistration = styled.span`
@@ -79,13 +94,19 @@ export const StyledList = styled.ul`
 `;
 
 export const Block = styled.div`
-  display: flax;
+  display: flex;
   justify-content: space-around;
 `;
 export const BlockRight = styled.div`
-  justify-content: right;
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: right;
+  }
 `;
 
 export const StyledItem = styled.li`
   text-decoration: none;
 `;
+
+
