@@ -34,9 +34,9 @@ export const TrialLesson = ({
     formState: { errors },
     formState: { isSubmitSuccessful },
   } = useForm();
-  const [fullName, setFullName] = useLocalStorage('fullName' || '');
-  const [email, setEmail] = useLocalStorage('email' || '');
-  const [phone, setPhone] = useLocalStorage('phone' || '');
+  const [fullName, setFullName] = useLocalStorage('fullName', '');
+  const [email, setEmail] = useLocalStorage('email', '');
+  const [phone, setPhone] = useLocalStorage('phone', '');
   const [BtnName, setBtnName] = useState('Book');
   const [active, setActive] = useState(false);
   const radioOptions = [
