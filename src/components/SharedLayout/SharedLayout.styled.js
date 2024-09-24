@@ -9,22 +9,11 @@ export const StyledLink = styled(NavLink)`
   align-itmes: center;
   font-size: 16px;
   line-height: calc(20 / 16);
-  // width: 100%;
   max-width: 1250px;
-  // overflow: hidden;
 
   &:hover {
     color: gray;
   }
-
-  // @media screen and (min-width: 768px) {
-  //   line-height: 1.07;
-  // }
-
-  // &.active {
-  //   color: red;
-  //   text-decoration: underline;
-  // }
 `;
 export const Logo = styled.span`
   size: 50px;
@@ -96,12 +85,15 @@ export const StyledList = styled.ul`
 export const Block = styled.div`
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  gap: 4 em;
 `;
 export const BlockRight = styled.div`
   display: none;
   @media screen and (min-width: 768px) {
     display: flex;
     justify-content: right;
+    align-items: center;
   }
 `;
 
@@ -109,4 +101,24 @@ export const StyledItem = styled.li`
   text-decoration: none;
 `;
 
+export const MobileNav = styled.ul`
+  display: ${({ hamburgerOpen }) => (hamburgerOpen ? 'inline' : 'none')};
+  list-style: none;
+  text-decoration: none;
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  margin-top: 50px;
+  padding-top: 50px;
+  position: absolute;
+  top: 20px;
+  left: -2px;
+  color: black;
+`;
 
+export const StyledMobileItem = styled(StyledItem)`
+  &:hover {
+    color: #f4c550;
+  }
+  margin-bottom: 10px;
+`;
