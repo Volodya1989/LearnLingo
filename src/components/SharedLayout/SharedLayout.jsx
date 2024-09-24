@@ -11,6 +11,7 @@ import {
   Logo,
   StyledLogin,
   StyledRegistration,
+  HideMobile,
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
@@ -28,16 +29,20 @@ const SharedLayout = () => {
               />
               <Logo>LearnLingo</Logo>
             </StyledLink>
-            <StyledItem>
-              <StyledLink to="/" end>
-                Home
-              </StyledLink>
-            </StyledItem>
-            <StyledItem>
-              <StyledLink to="/teachers" end>
-                Teachers
-              </StyledLink>
-            </StyledItem>
+            <HideMobile>
+              <StyledItem>
+                <StyledLink to="/" end>
+                  Home
+                </StyledLink>
+              </StyledItem>
+            </HideMobile>
+            <HideMobile>
+              <StyledItem>
+                <StyledLink to="/teachers" end>
+                  Teachers
+                </StyledLink>
+              </StyledItem>
+            </HideMobile>
           </StyledList>
         </Block>
         <BlockRight>

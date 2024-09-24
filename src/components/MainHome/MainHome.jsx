@@ -10,6 +10,7 @@ import {
   StyledLi,
   StyledSpan,
   StyledContainer,
+  StyledImg,
 } from './MainHome.styled';
 const MainHome = () => {
   return (
@@ -33,7 +34,7 @@ const MainHome = () => {
           </Link>
         </StyledDescription>
         <div>
-          <img
+          <StyledImg
             src={require('../../SVG/block.svg').default}
             alt="Lady with computer"
           />
