@@ -1,5 +1,6 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import Hamburger from 'components/Hamburger';
 // import Loader from 'components/Loader';
 import {
   StyledLink,
@@ -12,13 +13,40 @@ import {
   StyledLogin,
   StyledRegistration,
   HideMobile,
+  MobileNav,
+  StyledMobileItem,
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const toggleHamburger = () => {
+    console.log('click');
+    setHamburgerOpen(!hamburgerOpen);
+    console.log(hamburgerOpen);
+  };
   return (
     <div>
       <StyledHeader>
         <Block>
+          <div onClick={toggleHamburger}>
+            <MobileNav hamburgerOpen={hamburgerOpen}>
+              <StyledMobileItem>
+                <StyledLink to="/">Home</StyledLink>
+              </StyledMobileItem>
+              <StyledMobileItem>
+                <StyledLink to="/teachers">Teachers</StyledLink>
+              </StyledMobileItem>
+              <StyledMobileItem>
+                <StyledLink to="/login">Login</StyledLink>
+              </StyledMobileItem>
+              <StyledMobileItem>
+                <StyledLink to="/registration">Registration</StyledLink>
+              </StyledMobileItem>
+            </MobileNav>
+            <div onClick={toggleHamburger}>
+              <Hamburger isOpen={hamburgerOpen} />
+            </div>
+          </div>
           <StyledList>
             <StyledLink to="/" end>
               <img
