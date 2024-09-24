@@ -121,6 +121,6 @@ export const StyledImg = styled.img`
   width: 100%;
 
   @media screen and (min-width: 768px) {
-    width: 720px;
+    width: 600px;
   }
 `;
