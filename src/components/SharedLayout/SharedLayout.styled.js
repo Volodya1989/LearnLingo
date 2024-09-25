@@ -23,17 +23,17 @@ export const Logo = styled.span`
   display: flex;
   align-items: center;
   padding-left: 5px;
-  padding-right: 75px;
 
   @media screen and (min-width: 830px) {
     padding-right: 100px;
   }
   @media screen and (min-width: 1150px) {
-    padding-right: 430px;
+    padding-right: 370px;
   }
 `;
 
 export const StyledLogin = styled.span`
+  width: 55px;
   font-weight: 700;
   padding-left: 5px;
 `;
@@ -80,6 +80,10 @@ export const StyledList = styled.ul`
   gap: 50px;
   list-style: none;
   text-decoration: none;
+  padding-left: 10px;
+  @media screen and (min-width: 768px) {
+    padding-left: 30px;
+  }
 `;
 
 export const Block = styled.div`

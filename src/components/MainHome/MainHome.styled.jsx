@@ -58,8 +58,6 @@ export const StyledText = styled.p`
     font-size: 12px;
     line-height: calc(18 / 12);
   }
-  @media screen and (min-width: 1150px) {
-  }
 `;
 
 export const StyledButton = styled.div`
@@ -121,6 +119,9 @@ export const StyledImg = styled.img`
   width: 100%;
 
   @media screen and (min-width: 768px) {
+    width: 720px;
+  }
+  @media screen and (min-width: 1150px) {
     width: 600px;
   }
 `;
