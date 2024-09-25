@@ -16,8 +16,8 @@ export const CardWrapper = styled.li`
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
-  @media screen and (min-width: 768px) {
-    width: 950px;
+  @media screen and (min-width: 830px) {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     gap: 50px;

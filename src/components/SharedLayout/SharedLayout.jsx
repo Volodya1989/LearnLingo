@@ -28,25 +28,6 @@ const SharedLayout = () => {
     <div>
       <StyledHeader>
         <Block>
-          <div onClick={toggleHamburger}>
-            <MobileNav hamburgerOpen={hamburgerOpen}>
-              <StyledMobileItem>
-                <StyledLink to="/">Home</StyledLink>
-              </StyledMobileItem>
-              <StyledMobileItem>
-                <StyledLink to="/teachers">Teachers</StyledLink>
-              </StyledMobileItem>
-              <StyledMobileItem>
-                <StyledLink to="/login">Login</StyledLink>
-              </StyledMobileItem>
-              <StyledMobileItem>
-                <StyledLink to="/registration">Registration</StyledLink>
-              </StyledMobileItem>
-            </MobileNav>
-            <div onClick={toggleHamburger}>
-              <Hamburger isOpen={hamburgerOpen} />
-            </div>
-          </div>
           <StyledList>
             <StyledLink to="/" end>
               <img
@@ -72,6 +53,25 @@ const SharedLayout = () => {
               </StyledItem>
             </HideMobile>
           </StyledList>
+          <div onClick={toggleHamburger}>
+            <MobileNav hamburgerOpen={hamburgerOpen}>
+              <StyledMobileItem>
+                <StyledLink to="/">Home</StyledLink>
+              </StyledMobileItem>
+              <StyledMobileItem>
+                <StyledLink to="/teachers">Teachers</StyledLink>
+              </StyledMobileItem>
+              <StyledMobileItem>
+                <StyledLink to="/login">Login</StyledLink>
+              </StyledMobileItem>
+              <StyledMobileItem>
+                <StyledLink to="/registration">Registration</StyledLink>
+              </StyledMobileItem>
+            </MobileNav>
+            <div onClick={toggleHamburger}>
+              <Hamburger isOpen={hamburgerOpen} />
+            </div>
+          </div>
         </Block>
         <BlockRight>
           <StyledList>

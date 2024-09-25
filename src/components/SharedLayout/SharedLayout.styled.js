@@ -23,10 +23,10 @@ export const Logo = styled.span`
   display: flex;
   align-items: center;
   padding-left: 5px;
-  padding-right: 50px;
+  padding-right: 75px;
 
-  @media screen and (min-width: 768px) {
-    padding-right: 150px;
+  @media screen and (min-width: 830px) {
+    padding-right: 100px;
   }
   @media screen and (min-width: 1150px) {
     padding-right: 430px;
