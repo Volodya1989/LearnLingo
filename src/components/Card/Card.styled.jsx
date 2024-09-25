@@ -44,7 +44,7 @@ export const StyledIsActive = styled.div`
   position: absolute;
   top: 20px;
   right: 190px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     right: 25px;
   }
 `;
@@ -60,7 +60,7 @@ export const StyledFirstSection = styled.div`
   line-height: calc(24 / 16);
   text-align: left;
   margin-bottom: 32px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -86,7 +86,7 @@ export const StyledLessons = styled.span`
 export const StyledFirstSection2 = styled.div`
   display: block;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,7 +96,7 @@ export const StyledFirstSection2 = styled.div`
 
 export const StyledPipe = styled.div`
   display: none;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     border: solid #121417 0.5px;
     opacity: 0.3;
     height: 16px;
@@ -138,7 +138,7 @@ export const StyledLevel = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: calc(16 / 14);
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -147,7 +147,7 @@ export const StyledLevel = styled.div`
 
 export const StyledLevelEl = styled.span`
   display: none;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -184,7 +184,7 @@ export const MainButton = styled.button`
     opacity: 0.8;
     transition-timing-function: ease;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     justify-content: start;
     margin-left: 0;
     margin-right: 0;
@@ -214,13 +214,13 @@ export const Heart = styled.div`
     transition-timing-function: ease;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     position: static;
   }
 `;
 export const TextContainer = styled.div`
   position: relative;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 830px) {
     position: static;
   }
 `;
