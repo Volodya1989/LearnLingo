@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: space-around;
   flex-flow: column nowrap;
   z-index: 10;
+  margin-left: 130px;
   //   color: black;
 
   @media screen and (min-width: 768px) {
