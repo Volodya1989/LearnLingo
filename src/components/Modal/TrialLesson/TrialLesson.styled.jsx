@@ -81,15 +81,9 @@ export const Field = styled.input`
   border-bottom: 1px solid #f4c550;
 
   outline: none;
-  width: 200px;
+  width: 100%;
   color: black;
   overflow: hidden;
-  @media screen and (min-width: 768px) {
-    width: 100%;
-  }
-  // @media screen and (min-width: 1100px) {
-  //   width: 450px;
-  // }
 
   ${({ disabled }) =>
     (disabled || '') &&
