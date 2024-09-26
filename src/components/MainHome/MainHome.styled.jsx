@@ -84,11 +84,16 @@ export const StyledList = styled.ul`
     width: auto;
     justify-content: center;
     align-items: center;
-    gap: 20px;
     list-style: none;
     text-decoration: none;
     border: 1.5px dashed #f4c550;
     border-radius: 18px;
+    @media screen and (min-width: 768px) {
+      padding-right: 30px;
+    }
+    @media screen and (min-width: 1150px) {
+      gap: 20px;
+    }
   }
 `;
 export const StyledLi = styled.li`

@@ -114,6 +114,7 @@ export const MobileNav = styled.ul`
   width: 100vw;
   margin-top: 50px;
   padding-top: 50px;
+  padding-left: 60%;
   position: absolute;
   top: 20px;
   left: -2px;
