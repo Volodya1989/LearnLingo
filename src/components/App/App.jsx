@@ -1,7 +1,7 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAuth } from '../../hooks';
+// import { useAuth } from '../../hooks';
 import { refreshUser } from 'redux/auth/operations';
 
 import SharedLayout from '../SharedLayout';
@@ -15,7 +15,7 @@ const Registration = lazy(() => import('../Registration'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  // const { isRefreshing } = useAuth();
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
