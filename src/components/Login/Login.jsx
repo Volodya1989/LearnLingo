@@ -18,8 +18,12 @@ import { ToastContainer } from 'react-toastify';
 import { StyledToastContainer } from 'components/Teachers/Teachers.styled';
 import Loader from 'components/Loader';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 
 export const Login = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -63,6 +67,12 @@ export const Login = () => {
 
   const onSubmitForm = data => {
     console.log(data);
+    dispatch(
+      logIn({
+        email: data.email,
+        password: data.password,
+      })
+    );
     setActive(true);
     setPassword('');
     setEmail('');
@@ -143,7 +153,7 @@ export const Login = () => {
                 type={isVisible ? 'text' : 'password'}
               />
               <ProtectedEye onClick={togglePassword}>
-                {isVisible ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                {!isVisible ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </ProtectedEye>
               <Label htmlFor={1}>{'Password'}</Label>
             </Wrapper>

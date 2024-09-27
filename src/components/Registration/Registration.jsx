@@ -18,6 +18,8 @@ import { ToastContainer } from 'react-toastify';
 import { StyledToastContainer } from 'components/Teachers/Teachers.styled';
 import Loader from 'components/Loader';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
+import { register as reg } from 'redux/auth/operations';
 
 export const Registration = () => {
   const {
@@ -34,6 +36,8 @@ export const Registration = () => {
   const [active, setActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const dispatch = useDispatch();
+
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
     e => {
@@ -61,18 +65,30 @@ export const Registration = () => {
   };
 
   const onSubmitForm = data => {
+    dispatch(
+      reg({
+        username: data.name,
+        email: data.email,
+        password: data.password,
+      })
+    );
     console.log(data);
+    const username = data.name;
+    setTimeout(() => {
+      setActive(false);
+      setBtnName('Signed up');
+      toastSuccess(
+        `${username}, please check your email to verify your registration.`
+      );
+    }, 1000);
+    setTimeout(() => {
+      window.location.href = 'https://volodya1989.github.io/login#/login';
+    }, 6000);
     setActive(true);
     setPassword('');
     setEmail('');
     setName('');
-    setBtnName('Signing in...');
-
-    setTimeout(() => {
-      setActive(false);
-      setBtnName('In development ...');
-      toastSuccess(`You are signing in...`);
-    }, 1000);
+    setBtnName('Signing up...');
   };
   const togglePassword = () => {
     setIsVisible(!isVisible);
@@ -105,7 +121,7 @@ export const Registration = () => {
         <Loader />
       ) : (
         <Description>
-          <StyledToastContainer autoClose={2000} position="top-right">
+          <StyledToastContainer autoClose={6000} position="top-right">
             <ToastContainer />;
           </StyledToastContainer>
           <Heading>{`Registration`}</Heading>
@@ -131,7 +147,7 @@ export const Registration = () => {
                 autoComplete="off"
                 type={'text'}
               />
-              <Label htmlFor={1}>{'Name'}</Label>
+              <Label htmlFor={1}>{'Username'}</Label>
             </Wrapper>
             <Wrapper>
               <Field
@@ -160,7 +176,7 @@ export const Registration = () => {
                 type={isVisible ? 'text' : 'password'}
               />
               <ProtectedEye onClick={togglePassword}>
-                {isVisible ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                {!isVisible ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </ProtectedEye>
               <Label htmlFor={1}>{'Password'}</Label>
             </Wrapper>

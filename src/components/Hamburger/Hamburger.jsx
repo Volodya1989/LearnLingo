@@ -4,12 +4,12 @@ import {
   BurgerItem2,
   BurgerItem3,
 } from './Hamburger.styled';
-const Hamburger = ({ isOpen }) => {
+const Hamburger = ({ isopen }) => {
   return (
     <Container>
-      <BurgerItem1 isOpen={isOpen} />
-      <BurgerItem2 isOpen={isOpen} />
-      <BurgerItem3 isOpen={isOpen} />
+      <BurgerItem1 isopen={isopen.toString()} />
+      <BurgerItem2 isopen={isopen.toString()} />
+      <BurgerItem3 isopen={isopen.toString()} />
     </Container>
   );
 };

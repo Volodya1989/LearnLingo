@@ -23,13 +23,16 @@ export const BurgerItem = styled.div`
   transition: all 0.3s linear;
 `;
 export const BurgerItem1 = styled(BurgerItem)`
-  transform: ${({ isOpen }) => (isOpen ? 'rotate(45deg)' : 'rotate(0)')};
+  transform: ${({ isopen }) =>
+    isopen === 'true' ? 'rotate(45deg)' : 'rotate(0)'};
 `;
 
 export const BurgerItem2 = styled(BurgerItem)`
-  transform: ${({ isOpen }) => (isOpen ? 'translateX(100%)' : 'translateX(0)')};
-  opacity: ${({ isOpen }) => (isOpen ? 0 : 1)};
+  transform: ${({ isopen }) =>
+    isopen === 'true' ? 'translateX(100%)' : 'translateX(0)'};
+  opacity: ${({ isopen }) => (isopen === 'true' ? 0 : 1)};
 `;
 export const BurgerItem3 = styled(BurgerItem)`
-  transform: ${({ isOpen }) => (isOpen ? 'rotate(-45deg)}' : 'rotate(0)')};
+  transform: ${({ isopen }) =>
+    isopen === 'true' ? 'rotate(-45deg)}' : 'rotate(0)'};
 `;
