@@ -82,7 +82,8 @@ export const Registration = () => {
       );
     }, 1000);
     setTimeout(() => {
-      window.location.href = 'https://volodya1989.github.io/login#/login';
+      window.location.href =
+        'https://volodya1989.github.io/learn-lingo/#/login';
     }, 6000);
     setActive(true);
     setPassword('');
