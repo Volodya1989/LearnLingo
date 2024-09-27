@@ -1,6 +1,10 @@
 import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Hamburger from 'components/Hamburger';
+import { useAuth } from 'hooks';
+import { useDispatch } from 'react-redux';
+import { logOut } from 'redux/auth/operations';
+
 // import Loader from 'components/Loader';
 import {
   StyledLink,
@@ -18,11 +22,15 @@ import {
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
+  const dispatch = useDispatch();
+
+  const { isLoggedIn, user, isVerified } = useAuth();
+  console.log('isLoggedIn', isLoggedIn);
+  console.log('isverified', isVerified);
+
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const toggleHamburger = () => {
-    console.log('click');
     setHamburgerOpen(!hamburgerOpen);
-    console.log(hamburgerOpen);
   };
   return (
     <div>
@@ -54,7 +62,7 @@ const SharedLayout = () => {
             </HideMobile>
           </StyledList>
           <div onClick={toggleHamburger}>
-            <MobileNav hamburgerOpen={hamburgerOpen}>
+            <MobileNav hamburgeropen={hamburgerOpen.toString()}>
               <StyledMobileItem>
                 <StyledLink to="/">Home</StyledLink>
               </StyledMobileItem>
@@ -69,28 +77,52 @@ const SharedLayout = () => {
               </StyledMobileItem>
             </MobileNav>
             <div onClick={toggleHamburger}>
-              <Hamburger isOpen={hamburgerOpen} />
+              <Hamburger isopen={hamburgerOpen} />
             </div>
           </div>
         </Block>
-        <BlockRight>
-          <StyledList>
-            <StyledItem>
-              <StyledLink to="/login">
-                <img
-                  src={require('../../SVG/log-in-01.svg').default}
-                  alt="Log in"
-                />
-                <StyledLogin>Log in</StyledLogin>
-              </StyledLink>
-            </StyledItem>
-            <StyledItem>
-              <StyledLink to="/registration">
-                <StyledRegistration> Registration</StyledRegistration>
-              </StyledLink>
-            </StyledItem>
-          </StyledList>
-        </BlockRight>
+        {isLoggedIn && isVerified ? (
+          <BlockRight>
+            <StyledList>
+              <StyledItem onClick={() => dispatch(logOut())}>
+                <StyledLink>
+                  <img
+                    src={require('../../SVG/log-in-01.svg').default}
+                    alt="Log out"
+                  />
+                  <StyledLogin>Log Out </StyledLogin>
+                </StyledLink>
+              </StyledItem>
+              <StyledItem>
+                <StyledLink>
+                  <StyledRegistration>
+                    {' '}
+                    Welcome, {user.username}
+                  </StyledRegistration>
+                </StyledLink>
+              </StyledItem>
+            </StyledList>
+          </BlockRight>
+        ) : (
+          <BlockRight>
+            <StyledList>
+              <StyledItem>
+                <StyledLink to="/login">
+                  <img
+                    src={require('../../SVG/log-in-01.svg').default}
+                    alt="Log in"
+                  />
+                  <StyledLogin>Log in</StyledLogin>
+                </StyledLink>
+              </StyledItem>
+              <StyledItem>
+                <StyledLink to="/registration">
+                  <StyledRegistration> Registration</StyledRegistration>
+                </StyledLink>
+              </StyledItem>
+            </StyledList>
+          </BlockRight>
+        )}
       </StyledHeader>
       <Suspense fallback={<div>loading...</div>}>
         <Outlet />

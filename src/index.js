@@ -1,10 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App  from 'components/App';
 import './index.css';
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+import App from './components/App';
+import { HashRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { store, persistor } from './redux/store';
+import reportWebVitals from './reportWebVitals';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
+
+reportWebVitals();

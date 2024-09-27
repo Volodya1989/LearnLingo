@@ -106,7 +106,8 @@ export const StyledItem = styled.li`
 `;
 
 export const MobileNav = styled.ul`
-  display: ${({ hamburgerOpen }) => (hamburgerOpen ? 'inline' : 'none')};
+  display: ${({ hamburgeropen }) =>
+    hamburgeropen === 'true' ? 'inline' : 'none'};
   list-style: none;
   text-decoration: none;
   background-color: white;
