@@ -13,6 +13,7 @@ import {
   MainButton,
   DescrText,
   ProtectedEye,
+  ContainerLoader,
 } from './Login.styled';
 import { ToastContainer } from 'react-toastify';
 import { StyledToastContainer } from 'components/Teachers/Teachers.styled';
@@ -140,6 +141,10 @@ export const Login = () => {
         <Loader />
       ) : (
         <Description>
+          <ContainerLoader>
+            {isLoading && isSubmitSuccessful && <Loader />}
+          </ContainerLoader>
+
           <StyledToastContainer autoClose={4000} position="top-right">
             <ToastContainer />;
           </StyledToastContainer>
