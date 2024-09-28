@@ -19,18 +19,28 @@ import {
   HideMobile,
   MobileNav,
   StyledMobileItem,
+  LoggedInName,
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
   const dispatch = useDispatch();
 
   const { isLoggedIn, user, isVerified } = useAuth();
-  console.log('isLoggedIn', isLoggedIn);
-  console.log('isverified', isVerified);
-
+  console.log('user', user);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
+  };
+  const onLogOut = () => {
+    dispatch(logOut()).then(data => {
+      try {
+        console.log(data);
+        if (!data?.error?.message) {
+          window.location.href =
+            'https://volodya1989.github.io/learn-lingo/#/login';
+        }
+      } catch (error) {}
+    });
   };
   return (
     <div>
@@ -63,6 +73,7 @@ const SharedLayout = () => {
           </StyledList>
           <div onClick={toggleHamburger}>
             <MobileNav hamburgeropen={hamburgerOpen.toString()}>
+              {isLoggedIn ? <LoggedInName>{user.username}</LoggedInName> : ''}
               <StyledMobileItem>
                 <StyledLink to="/">Home</StyledLink>
               </StyledMobileItem>
@@ -70,7 +81,13 @@ const SharedLayout = () => {
                 <StyledLink to="/teachers">Teachers</StyledLink>
               </StyledMobileItem>
               <StyledMobileItem>
-                <StyledLink to="/login">Login</StyledLink>
+                {isLoggedIn ? (
+                  <StyledLink to="/login" onClick={() => onLogOut()}>
+                    Log Out
+                  </StyledLink>
+                ) : (
+                  <StyledLink to="/login">Log In</StyledLink>
+                )}
               </StyledMobileItem>
               <StyledMobileItem>
                 <StyledLink to="/registration">Registration</StyledLink>
@@ -84,7 +101,7 @@ const SharedLayout = () => {
         {isLoggedIn && isVerified ? (
           <BlockRight>
             <StyledList>
-              <StyledItem onClick={() => dispatch(logOut())}>
+              <StyledItem onClick={() => onLogOut()}>
                 <StyledLink>
                   <img
                     src={require('../../SVG/log-in-01.svg').default}
@@ -97,7 +114,7 @@ const SharedLayout = () => {
                 <StyledLink>
                   <StyledRegistration>
                     {' '}
-                    Welcome, {user.username}
+                    {user.username[0].toUpperCase() + user.username.slice(1)}
                   </StyledRegistration>
                 </StyledLink>
               </StyledItem>
@@ -112,7 +129,7 @@ const SharedLayout = () => {
                     src={require('../../SVG/log-in-01.svg').default}
                     alt="Log in"
                   />
-                  <StyledLogin>Log in</StyledLogin>
+                  <StyledLogin>Log In</StyledLogin>
                 </StyledLink>
               </StyledItem>
               <StyledItem>

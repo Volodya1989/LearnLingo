@@ -26,7 +26,7 @@ export const Registration = () => {
     register,
     handleSubmit,
     formState: { errors },
-    formState: { isSubmitSuccessful },
+    // formState: { isSubmitSuccessful },
   } = useForm();
   const { loading } = useFetch();
   const [password, setPassword] = useState('');
@@ -63,44 +63,65 @@ export const Registration = () => {
       className: 'toast-message',
     });
   };
+  const toastError = (message, _) => {
+    toast.error(message, {
+      className: 'toast-message',
+    });
+  };
 
   const onSubmitForm = data => {
     dispatch(
       reg({
         username: data.name,
-        email: data.email,
+        email: data.email.toLowerCase(),
         password: data.password,
       })
-    );
+    ).then(data => {
+      try {
+        console.log('response', data);
+        if (data?.error?.message) {
+          setTimeout(() => {
+            setActive(false);
+          }, 2000);
+          setActive(true);
+          toastError(
+            `Provide valid email or password should have at least 6 characters`
+          );
+          console.log('Error message', data?.error?.message);
+        }
+        if (!data?.error?.message) {
+          setPassword('');
+          setEmail('');
+          setName('');
+          setBtnName('Signing up...');
+          setActive(true);
+          toastSuccess(
+            `${username}, please check your email to verify your registration.`
+          );
+          setTimeout(() => {
+            setBtnName('Sign up');
+            setActive(false);
+            window.location.href =
+              'https://volodya1989.github.io/learn-lingo/learn-lingo/#/login';
+          }, 5000);
+        }
+      } catch (error) {
+        console.log('error', error.message);
+      }
+    });
     console.log(data);
     const username = data.name;
-    setTimeout(() => {
-      setActive(false);
-      setBtnName('Signed up');
-      toastSuccess(
-        `${username}, please check your email to verify your registration.`
-      );
-    }, 1000);
-    setTimeout(() => {
-      window.location.href =
-        'https://volodya1989.github.io/learn-lingo/#/login';
-    }, 6000);
-    setActive(true);
-    setPassword('');
-    setEmail('');
-    setName('');
-    setBtnName('Signing up...');
   };
   const togglePassword = () => {
     setIsVisible(!isVisible);
   };
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      setPassword('');
-      setEmail('');
-      setName('');
-    }
-  }, [setEmail, setPassword, setName, isSubmitSuccessful]);
+  // useEffect(() => {
+  //   if (isSubmitSuccessful) {
+  //     setPassword('');
+  //     setEmail('');
+  //     setName('');
+  //   }
+  // }, [setEmail, setPassword, setName, isSubmitSuccessful]);
 
   const handleLoading = useCallback(
     e => {
