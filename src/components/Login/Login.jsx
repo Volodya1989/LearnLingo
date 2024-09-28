@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useFetch from 'use-http';
+import { useAuth } from 'hooks';
 import {
   Description,
   Heading,
@@ -23,6 +24,7 @@ import { logIn } from 'redux/auth/operations';
 
 export const Login = () => {
   const dispatch = useDispatch();
+  const { isLoggedIn, isVerified } = useAuth();
 
   const {
     register,
@@ -64,25 +66,54 @@ export const Login = () => {
       className: 'toast-message',
     });
   };
+  const toastError = (message, _) => {
+    toast.error(message, {
+      className: 'toast-message',
+    });
+  };
 
   const onSubmitForm = data => {
-    console.log(data);
+    console.log(data.email.toLowerCase());
+
     dispatch(
       logIn({
-        email: data.email,
+        email: data.email.toLowerCase(),
         password: data.password,
       })
-    );
+    ).then(data => {
+      try {
+        console.log('response', data);
+        if (data?.error?.message && isVerified) {
+          toastError(`Email or password is incorrect`);
+        }
+        if (!data?.error?.message) {
+          toastSuccess(`You are logging...`);
+          window.location.href =
+            'https://volodya1989.github.io/learn-lingo/#/teachers';
+        }
+        if (!isVerified) {
+          toastError(
+            `If you registered, please check your email to complete your registration.`
+          );
+        }
+      } catch (error) {
+        console.log('error', error.message);
+      }
+    });
     setActive(true);
     setPassword('');
     setEmail('');
     setBtnName('Logging...');
-
     setTimeout(() => {
       setActive(false);
-      setBtnName('In development ...');
-      toastSuccess(`You are logging...`);
+      setBtnName('Log In');
     }, 1000);
+    setTimeout(() => {
+      console.log('isLoggedIn', isLoggedIn);
+
+      if (isLoggedIn && isVerified) {
+      }
+    }, 1500);
   };
 
   useEffect(() => {
@@ -112,7 +143,7 @@ export const Login = () => {
         <Loader />
       ) : (
         <Description>
-          <StyledToastContainer autoClose={2000} position="top-right">
+          <StyledToastContainer autoClose={4000} position="top-right">
             <ToastContainer />;
           </StyledToastContainer>
           <Heading>{`Log In`}</Heading>

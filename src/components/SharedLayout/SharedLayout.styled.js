@@ -33,7 +33,7 @@ export const Logo = styled.span`
 `;
 
 export const StyledLogin = styled.span`
-  width: 55px;
+  width: 70px;
   font-weight: 700;
   padding-left: 5px;
 `;
@@ -127,4 +127,10 @@ export const StyledMobileItem = styled(StyledItem)`
     color: #f4c550;
   }
   margin-bottom: 10px;
+`;
+export const LoggedInName = styled(StyledRegistration)`
+  font-size: 20px;
+  width: 150px;
+  height: 38px;
+  margin-bottom: 15px;
 `;
