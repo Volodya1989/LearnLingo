@@ -78,6 +78,8 @@ export const Login = () => {
       toastError('Please provide details');
       return;
     } else {
+      setPassword('');
+      setEmail('');
       setIsLoading(true);
       setActive(true);
     }
@@ -90,8 +92,6 @@ export const Login = () => {
       try {
         setIsLoading(false);
         if (data?.error?.message) {
-          setPassword('');
-          setEmail('');
           toastError(
             `Email or password is incorrect OR check your email to complete your registration.`
           );
