@@ -7,7 +7,7 @@ export const StyledLink = styled(NavLink)`
   font-weight: 400;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 20px;
   line-height: calc(20 / 16);
   max-width: 1250px;
 
@@ -119,7 +119,7 @@ export const MobileNav = styled.ul`
   width: 100vw;
   margin-top: 50px;
   padding-top: 50px;
-  padding-left: 60%;
+  padding-left: 50%;
   position: absolute;
   top: 20px;
   left: -2px;
@@ -133,7 +133,7 @@ export const StyledMobileItem = styled(StyledItem)`
   &:hover {
     color: #f4c550;
   }
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 `;
 export const LoggedInName = styled(StyledRegistration)`
   background: #f0aa8d;
