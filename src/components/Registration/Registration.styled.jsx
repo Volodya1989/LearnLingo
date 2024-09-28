@@ -5,6 +5,7 @@ export const ModalDetailsStyled = styled.img`
 `;
 
 export const Description = styled.div`
+  position: relative;
   display: block;
   margin: auto;
   margin-top: 100px;
@@ -147,4 +148,10 @@ export const ProtectedEye = styled.div`
   top: 0;
   right: 20px;
   cursor: pointer;
+`;
+export const ContainerLoader = styled.div`
+  position: absolute;
+  z-index: 10;
+  top: 1em;
+  left: 8em;
 `;

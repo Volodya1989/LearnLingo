@@ -13,6 +13,7 @@ import {
   MainButton,
   DescrText,
   ProtectedEye,
+  ContainerLoader,
 } from './Registration.styled';
 import { ToastContainer } from 'react-toastify';
 import { StyledToastContainer } from 'components/Teachers/Teachers.styled';
@@ -77,6 +78,9 @@ export const Registration = () => {
       toastError('Please provide details');
       return;
     } else {
+      setPassword('');
+      setEmail('');
+      setName('');
       setIsLoading(true);
       setActive(true);
     }
@@ -100,9 +104,6 @@ export const Registration = () => {
           );
         }
         if (!data?.error?.message) {
-          setPassword('');
-          setEmail('');
-          setName('');
           setBtnName('Signing up...');
           setActive(true);
           toastSuccess(
@@ -146,6 +147,9 @@ export const Registration = () => {
         <Loader />
       ) : (
         <Description>
+          <ContainerLoader>
+            {isLoading && isSubmitSuccessful && <Loader />}
+          </ContainerLoader>
           <StyledToastContainer autoClose={6000} position="top-right">
             <ToastContainer />;
           </StyledToastContainer>
