@@ -93,7 +93,7 @@ const SharedLayout = () => {
               {isLoggedIn ? <LoggedInName>{user.username}</LoggedInName> : ''}
               <StyledMobileItem>
                 <IconContext.Provider
-                  value={{ color: '#f4c550', size: '15px' }}
+                  value={{ color: '#f4c550', size: '20px' }}
                 >
                   <FaHome />
                 </IconContext.Provider>
@@ -119,7 +119,7 @@ const SharedLayout = () => {
                   </StyledMobileItem>
                   <StyledMobileItem>
                     <IconContext.Provider
-                      value={{ color: '#f4c550', size: '20px' }}
+                      value={{ color: '#f4c550', size: '18px' }}
                     >
                       <SlLogout />
                     </IconContext.Provider>
