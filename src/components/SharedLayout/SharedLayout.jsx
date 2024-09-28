@@ -31,6 +31,7 @@ import {
 
 const SharedLayout = () => {
   const dispatch = useDispatch();
+  // const { BASE_URL } = process.env;
 
   const { isLoggedIn, user, isVerified } = useAuth();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
@@ -41,8 +42,8 @@ const SharedLayout = () => {
     dispatch(logOut()).then(data => {
       try {
         if (!data?.error?.message) {
-          window.location.href =
-            'https://volodya1989.github.io/learn-lingo/#/login';
+          window.location.href = `https://volodya1989.github.io/learn-lingo/#/login`;
+          // window.location.href = `http://localhost:3000/learn-lingo/#/login`;
         }
       } catch (error) {}
     });
@@ -100,7 +101,7 @@ const SharedLayout = () => {
               </StyledMobileItem>
               <StyledMobileItem>
                 <IconContext.Provider
-                  value={{ color: '#f4c550', size: '15px' }}
+                  value={{ color: '#f4c550', size: '20px' }}
                 >
                   <LiaChalkboardTeacherSolid />
                 </IconContext.Provider>
@@ -110,7 +111,7 @@ const SharedLayout = () => {
                 <>
                   <StyledMobileItem>
                     <IconContext.Provider
-                      value={{ color: '#f4c550', size: '15px' }}
+                      value={{ color: '#f4c550', size: '20px' }}
                     >
                       <MdFavorite />
                     </IconContext.Provider>
@@ -118,7 +119,7 @@ const SharedLayout = () => {
                   </StyledMobileItem>
                   <StyledMobileItem>
                     <IconContext.Provider
-                      value={{ color: '#f4c550', size: '15px' }}
+                      value={{ color: '#f4c550', size: '20px' }}
                     >
                       <SlLogout />
                     </IconContext.Provider>
@@ -131,7 +132,7 @@ const SharedLayout = () => {
                 <>
                   <StyledMobileItem>
                     <IconContext.Provider
-                      value={{ color: '#f4c550', size: '15px' }}
+                      value={{ color: '#f4c550', size: '20px' }}
                     >
                       <SlLogin />
                     </IconContext.Provider>
@@ -139,7 +140,7 @@ const SharedLayout = () => {
                   </StyledMobileItem>
                   <StyledMobileItem>
                     <IconContext.Provider
-                      value={{ color: '#f4c550', size: '15px' }}
+                      value={{ color: '#f4c550', size: '20px' }}
                     >
                       <MdAppRegistration />
                     </IconContext.Provider>

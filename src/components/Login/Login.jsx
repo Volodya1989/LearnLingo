@@ -36,6 +36,7 @@ export const Login = () => {
   const [active, setActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -70,6 +71,15 @@ export const Login = () => {
   };
 
   const onSubmitForm = data => {
+    setIsSubmitSuccessful(true);
+
+    if (data.password === '' && data.email === '') {
+      toastError('Please provide details');
+      return;
+    } else {
+      setIsLoading(true);
+      setActive(true);
+    }
     dispatch(
       logIn({
         email: data.email.toLowerCase(),
@@ -77,6 +87,7 @@ export const Login = () => {
       })
     ).then(data => {
       try {
+        setIsLoading(false);
         if (data?.error?.message) {
           setPassword('');
           setEmail('');
@@ -97,6 +108,8 @@ export const Login = () => {
           setTimeout(() => {
             window.location.href =
               'https://volodya1989.github.io/learn-lingo/#/teachers';
+            // window.location.href = `http://localhost:3000/learn-lingo/#/teachers`;
+
             setActive(false);
             setBtnName('Log In');
           }, 2000);
@@ -109,13 +122,13 @@ export const Login = () => {
 
   const handleLoading = useCallback(
     e => {
-      if (!loading) {
+      if (!loading && !isSubmitSuccessful) {
         setTimeout(() => {
           setIsLoading(true);
         }, 1000);
       }
     },
-    [loading]
+    [loading, isSubmitSuccessful]
   );
 
   useEffect(() => {
@@ -123,7 +136,7 @@ export const Login = () => {
   }, [handleLoading]);
   return (
     <>
-      {!isLoading ? (
+      {!isLoading && !isSubmitSuccessful ? (
         <Loader />
       ) : (
         <Description>
@@ -173,7 +186,13 @@ export const Login = () => {
               <Label htmlFor={1}>{'Password'}</Label>
             </Wrapper>
 
-            <MainButton disabled={active} type="submit" value={BtnName} />
+            <MainButton
+              disabled={password && email ? active : true}
+              type="submit"
+              value={
+                isLoading && isSubmitSuccessful ? 'Submitting...' : BtnName
+              }
+            />
           </form>
         </Description>
       )}
