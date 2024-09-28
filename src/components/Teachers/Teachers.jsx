@@ -237,6 +237,8 @@ const Teachers = () => {
             onFavoriteChange={onFavoriteChange}
             onClick={onClickModal}
             teachers={filteredTeachers}
+            title="List of Teachers"
+            notFound="Teachers Not Found"
           />
           {isLoadMore && <Button onLoad={onLoadMore} />}
         </>

@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useFetch from 'use-http';
-import { useAuth } from 'hooks';
 import {
   Description,
   Heading,
@@ -24,13 +23,11 @@ import { logIn } from 'redux/auth/operations';
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn, isVerified } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    formState: { isSubmitSuccessful },
   } = useForm();
   const { loading } = useFetch();
   const [password, setPassword] = useState('');
@@ -73,8 +70,6 @@ export const Login = () => {
   };
 
   const onSubmitForm = data => {
-    console.log(data.email.toLowerCase());
-
     dispatch(
       logIn({
         email: data.email.toLowerCase(),
@@ -82,46 +77,35 @@ export const Login = () => {
       })
     ).then(data => {
       try {
-        console.log('response', data);
-        if (data?.error?.message && isVerified) {
-          toastError(`Email or password is incorrect`);
+        if (data?.error?.message) {
+          setPassword('');
+          setEmail('');
+          toastError(
+            `Email or password is incorrect OR check your email to complete your registration.`
+          );
+          setActive(true);
+          setTimeout(() => {
+            setActive(false);
+          }, 4000);
         }
         if (!data?.error?.message) {
           toastSuccess(`You are logging...`);
-          window.location.href =
-            'https://volodya1989.github.io/learn-lingo/#/teachers';
-        }
-        if (!isVerified) {
-          toastError(
-            `If you registered, please check your email to complete your registration.`
-          );
+          setActive(true);
+          setPassword('');
+          setEmail('');
+          setBtnName('Logging...');
+          setTimeout(() => {
+            window.location.href =
+              'https://volodya1989.github.io/learn-lingo/#/teachers';
+            setActive(false);
+            setBtnName('Log In');
+          }, 2000);
         }
       } catch (error) {
         console.log('error', error.message);
       }
     });
-    setActive(true);
-    setPassword('');
-    setEmail('');
-    setBtnName('Logging...');
-    setTimeout(() => {
-      setActive(false);
-      setBtnName('Log In');
-    }, 1000);
-    setTimeout(() => {
-      console.log('isLoggedIn', isLoggedIn);
-
-      if (isLoggedIn && isVerified) {
-      }
-    }, 1500);
   };
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      setPassword('');
-      setEmail('');
-    }
-  }, [setEmail, setPassword, isSubmitSuccessful]);
 
   const handleLoading = useCallback(
     e => {

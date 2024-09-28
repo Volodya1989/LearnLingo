@@ -6,7 +6,7 @@ export const StyledLink = styled(NavLink)`
   text-decoration: none;
   font-weight: 400;
   display: flex;
-  align-itmes: center;
+  align-items: center;
   font-size: 16px;
   line-height: calc(20 / 16);
   max-width: 1250px;
@@ -25,10 +25,10 @@ export const Logo = styled.span`
   padding-left: 5px;
 
   @media screen and (min-width: 830px) {
-    padding-right: 100px;
+    // padding-right: 100px;
   }
   @media screen and (min-width: 1150px) {
-    padding-right: 370px;
+    padding-right: 150px;
   }
 `;
 
@@ -83,6 +83,10 @@ export const StyledList = styled.ul`
   padding-left: 10px;
   @media screen and (min-width: 768px) {
     padding-left: 30px;
+    gap: 25px;
+  }
+  @media screen and (min-width: 1150px) {
+    gap: 50px;
   }
 `;
 
@@ -123,14 +127,22 @@ export const MobileNav = styled.ul`
 `;
 
 export const StyledMobileItem = styled(StyledItem)`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   &:hover {
     color: #f4c550;
   }
   margin-bottom: 10px;
 `;
 export const LoggedInName = styled(StyledRegistration)`
+  background: #f0aa8d;
   font-size: 20px;
   width: 150px;
   height: 38px;
   margin-bottom: 15px;
+`;
+
+export const StyledUsername = styled(StyledRegistration)`
+  background: #f0aa8d;
 `;
