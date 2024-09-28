@@ -4,6 +4,12 @@ import Hamburger from 'components/Hamburger';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
+import { SlLogout, SlLogin } from 'react-icons/sl';
+import { IconContext } from 'react-icons';
+import { MdAppRegistration } from 'react-icons/md';
+import { LiaChalkboardTeacherSolid } from 'react-icons/lia';
+import { FaHome } from 'react-icons/fa';
+import { MdFavorite } from 'react-icons/md';
 
 // import Loader from 'components/Loader';
 import {
@@ -20,13 +26,13 @@ import {
   MobileNav,
   StyledMobileItem,
   LoggedInName,
+  StyledUsername,
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
   const dispatch = useDispatch();
 
   const { isLoggedIn, user, isVerified } = useAuth();
-  console.log('user', user);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -34,7 +40,6 @@ const SharedLayout = () => {
   const onLogOut = () => {
     dispatch(logOut()).then(data => {
       try {
-        console.log(data);
         if (!data?.error?.message) {
           window.location.href =
             'https://volodya1989.github.io/learn-lingo/#/login';
@@ -70,28 +75,78 @@ const SharedLayout = () => {
                 </StyledLink>
               </StyledItem>
             </HideMobile>
+            {isLoggedIn ? (
+              <HideMobile>
+                <StyledItem>
+                  <StyledLink to="/favorites" end>
+                    Favorites
+                  </StyledLink>
+                </StyledItem>
+              </HideMobile>
+            ) : (
+              ''
+            )}
           </StyledList>
           <div onClick={toggleHamburger}>
             <MobileNav hamburgeropen={hamburgerOpen.toString()}>
               {isLoggedIn ? <LoggedInName>{user.username}</LoggedInName> : ''}
               <StyledMobileItem>
+                <IconContext.Provider
+                  value={{ color: '#f4c550', size: '15px' }}
+                >
+                  <FaHome />
+                </IconContext.Provider>
                 <StyledLink to="/">Home</StyledLink>
               </StyledMobileItem>
               <StyledMobileItem>
+                <IconContext.Provider
+                  value={{ color: '#f4c550', size: '15px' }}
+                >
+                  <LiaChalkboardTeacherSolid />
+                </IconContext.Provider>
                 <StyledLink to="/teachers">Teachers</StyledLink>
               </StyledMobileItem>
-              <StyledMobileItem>
-                {isLoggedIn ? (
-                  <StyledLink to="/login" onClick={() => onLogOut()}>
-                    Log Out
-                  </StyledLink>
-                ) : (
-                  <StyledLink to="/login">Log In</StyledLink>
-                )}
-              </StyledMobileItem>
-              <StyledMobileItem>
-                <StyledLink to="/registration">Registration</StyledLink>
-              </StyledMobileItem>
+              {isLoggedIn ? (
+                <>
+                  <StyledMobileItem>
+                    <IconContext.Provider
+                      value={{ color: '#f4c550', size: '15px' }}
+                    >
+                      <MdFavorite />
+                    </IconContext.Provider>
+                    <StyledLink to="/favorites">Favorites</StyledLink>
+                  </StyledMobileItem>
+                  <StyledMobileItem>
+                    <IconContext.Provider
+                      value={{ color: '#f4c550', size: '15px' }}
+                    >
+                      <SlLogout />
+                    </IconContext.Provider>
+                    <StyledLink to="/login" onClick={() => onLogOut()}>
+                      Log Out
+                    </StyledLink>
+                  </StyledMobileItem>
+                </>
+              ) : (
+                <>
+                  <StyledMobileItem>
+                    <IconContext.Provider
+                      value={{ color: '#f4c550', size: '15px' }}
+                    >
+                      <SlLogin />
+                    </IconContext.Provider>
+                    <StyledLink to="/login">Log In</StyledLink>
+                  </StyledMobileItem>
+                  <StyledMobileItem>
+                    <IconContext.Provider
+                      value={{ color: '#f4c550', size: '15px' }}
+                    >
+                      <MdAppRegistration />
+                    </IconContext.Provider>
+                    <StyledLink to="/registration">Registration</StyledLink>
+                  </StyledMobileItem>
+                </>
+              )}
             </MobileNav>
             <div onClick={toggleHamburger}>
               <Hamburger isopen={hamburgerOpen} />
@@ -103,19 +158,20 @@ const SharedLayout = () => {
             <StyledList>
               <StyledItem onClick={() => onLogOut()}>
                 <StyledLink>
-                  <img
-                    src={require('../../SVG/log-in-01.svg').default}
-                    alt="Log out"
-                  />
+                  <IconContext.Provider
+                    value={{ color: '#f4c550', size: '25px' }}
+                  >
+                    <SlLogout />
+                  </IconContext.Provider>
                   <StyledLogin>Log Out </StyledLogin>
                 </StyledLink>
               </StyledItem>
               <StyledItem>
                 <StyledLink>
-                  <StyledRegistration>
+                  <StyledUsername>
                     {' '}
                     {user.username[0].toUpperCase() + user.username.slice(1)}
-                  </StyledRegistration>
+                  </StyledUsername>
                 </StyledLink>
               </StyledItem>
             </StyledList>
@@ -125,10 +181,11 @@ const SharedLayout = () => {
             <StyledList>
               <StyledItem>
                 <StyledLink to="/login">
-                  <img
-                    src={require('../../SVG/log-in-01.svg').default}
-                    alt="Log in"
-                  />
+                  <IconContext.Provider
+                    value={{ color: '#f4c550', size: '25px' }}
+                  >
+                    <SlLogin />
+                  </IconContext.Provider>
                   <StyledLogin>Log In</StyledLogin>
                 </StyledLink>
               </StyledItem>

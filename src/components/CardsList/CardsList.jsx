@@ -1,10 +1,10 @@
 import Card from 'components/Card';
 import { List, Title, NoTeachers } from 'components/CardsList/CardsList.styled';
 import { v4 as uuidv4 } from 'uuid';
-const CardsList = ({ teachers, onTeachers, onClick, onFavoriteChange }) => {
+const CardsList = ({ teachers, onTeachers, onClick, onFavoriteChange, title, notFound }) => {
   return (
     <div>
-      <Title>List of Teachers</Title>
+      <Title>{title}</Title>
       <List
         style={{
           display: `${!teachers.length ? `flex` : ''}`,
@@ -53,7 +53,7 @@ const CardsList = ({ teachers, onTeachers, onClick, onFavoriteChange }) => {
             }
           )
         ) : (
-          <NoTeachers>Teachers Not Found</NoTeachers>
+            <NoTeachers>{notFound}</NoTeachers>
         )}
       </List>
     </div>

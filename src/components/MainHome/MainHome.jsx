@@ -12,11 +12,7 @@ import {
   StyledContainer,
   StyledImg,
 } from './MainHome.styled';
-import { useAuth } from 'hooks';
 const MainHome = () => {
-  const { isLoggedIn } = useAuth();
-  console.log('------isLoggedIn----', isLoggedIn);
-
   return (
     <StyledContainer>
       <StyledMain>
