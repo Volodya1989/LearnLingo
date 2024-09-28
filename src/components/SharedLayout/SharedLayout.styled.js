@@ -146,3 +146,4 @@ export const LoggedInName = styled(StyledRegistration)`
 export const StyledUsername = styled(StyledRegistration)`
   background: #f0aa8d;
 `;
+
