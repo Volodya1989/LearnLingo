@@ -21,6 +21,7 @@ import Loader from 'components/Loader';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,10 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
-  const [isServerStartingUp, setIsServerStartingUp] = useState(true);
+  const [isServerStartingUp, setIsServerStartingUp] = useLocalStorage(
+    'isServerUp',
+    true
+  );
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -91,8 +95,7 @@ export const Login = () => {
           toastInfo(
             `Please wait as it takes few more seconds for server to wake up.`
           );
-          console.log('Server is starting up.');
-        }, 8500);
+        }, 10500);
       }
 
       setPassword('');
