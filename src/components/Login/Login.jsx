@@ -38,6 +38,7 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+  const [isServerStartingUp, setIsServerStartingUp] = useState(true);
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -71,6 +72,12 @@ export const Login = () => {
     });
   };
 
+  const toastInfo = (message, _) => {
+    toast.info(message, {
+      className: 'toast-message',
+    });
+  };
+
   const onSubmitForm = data => {
     setIsSubmitSuccessful(true);
 
@@ -78,11 +85,22 @@ export const Login = () => {
       toastError('Please provide details');
       return;
     } else {
+      if (isServerStartingUp) {
+        setIsServerStartingUp(false);
+        setTimeout(() => {
+          toastInfo(
+            `Please wait as it takes few more seconds for server to wake up.`
+          );
+          console.log('Server is starting up.');
+        }, 8500);
+      }
+
       setPassword('');
       setEmail('');
       setIsLoading(true);
       setActive(true);
     }
+
     dispatch(
       logIn({
         email: data.email.toLowerCase(),
@@ -92,9 +110,26 @@ export const Login = () => {
       try {
         setIsLoading(false);
         if (data?.error?.message) {
-          toastError(
-            `Email or password is incorrect OR check your email to complete your registration.`
-          );
+          const { payload: errorMessage } = data;
+          console.log('ERROR', errorMessage);
+
+          const emailInUseError = 'Email in use';
+          const passwordError = 'PASSWORD should have a minimum length of 6';
+          const passwrodWrongError = 'Email or password invalid';
+          const emailError = `"email" with value "${data.meta.arg.email}" fails to match the required pattern: /^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$/`;
+
+          if (errorMessage === emailInUseError) {
+            toastError('Please provide different email.');
+          } else if (errorMessage === passwordError) {
+            toastError(`${passwordError} characters.`);
+          } else if (errorMessage === emailError) {
+            toastError('Please provide valid Email.');
+          } else if (errorMessage === passwrodWrongError) {
+            toastError(`${passwrodWrongError}.`);
+          } else {
+            toastError(`Please try again as server error occured.`);
+          }
+
           setActive(true);
           setTimeout(() => {
             setActive(false);
