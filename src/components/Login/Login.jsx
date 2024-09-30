@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useFetch from 'use-http';
@@ -43,6 +43,7 @@ export const Login = () => {
     'isServerUp',
     true
   );
+  const timeoutRef = useRef(null);
 
   //setting query state on change and passing it as props to search component
   const onQueryChange = useCallback(
@@ -91,11 +92,12 @@ export const Login = () => {
     } else {
       if (isServerStartingUp) {
         setIsServerStartingUp(false);
-        setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           toastInfo(
             `Please wait as it takes few more seconds for server to wake up.`
           );
         }, 10500);
+        console.log('TimeoutID', timeoutRef.current);
       }
 
       setPassword('');
@@ -111,6 +113,7 @@ export const Login = () => {
       })
     ).then(data => {
       try {
+        clearTimeout(timeoutRef.current);
         setIsLoading(false);
         if (data?.error?.message) {
           const { payload: errorMessage } = data;
