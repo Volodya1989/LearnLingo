@@ -21,6 +21,7 @@ import Loader from 'components/Loader';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { register as reg } from 'redux/auth/operations';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 export const Registration = () => {
   const {
@@ -37,7 +38,10 @@ export const Registration = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
-  const [isServerStartingUp, setIsServerStartingUp] = useState(true);
+  const [isServerStartingUp, setIsServerStartingUp] = useLocalStorage(
+    'isServerUp',
+    true
+  );
 
   const dispatch = useDispatch();
 
@@ -90,7 +94,7 @@ export const Registration = () => {
             `Please wait as it takes few more seconds for server to wake up.`
           );
           console.log('Server is starting up.');
-        }, 8500);
+        }, 10500);
       }
 
       setPassword('');
