@@ -27,7 +27,6 @@ export const Registration = () => {
     register,
     handleSubmit,
     formState: { errors },
-    // formState: { isSubmitSuccessful },
   } = useForm();
   const { loading } = useFetch();
   const [password, setPassword] = useState('');
@@ -38,6 +37,7 @@ export const Registration = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+  const [isServerStartingUp, setIsServerStartingUp] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -71,6 +71,11 @@ export const Registration = () => {
       className: 'toast-message',
     });
   };
+  const toastInfo = (message, _) => {
+    toast.info(message, {
+      className: 'toast-message',
+    });
+  };
 
   const onSubmitForm = data => {
     setIsSubmitSuccessful(true);
@@ -78,6 +83,16 @@ export const Registration = () => {
       toastError('Please provide details');
       return;
     } else {
+      if (isServerStartingUp) {
+        setIsServerStartingUp(false);
+        setTimeout(() => {
+          toastInfo(
+            `Please wait as it takes few more seconds for server to wake up.`
+          );
+          console.log('Server is starting up.');
+        }, 8500);
+      }
+
       setPassword('');
       setEmail('');
       setName('');
@@ -95,13 +110,27 @@ export const Registration = () => {
       try {
         setIsLoading(false);
         if (data?.error?.message) {
+          const { payload: errorMessage } = data;
           setTimeout(() => {
             setActive(false);
           }, 2000);
           setActive(true);
-          toastError(
-            `Provide valid email or password should have at least 6 characters`
-          );
+          const emailInUseError = 'Email in use';
+          const passwordError = 'PASSWORD should have a minimum length of 6';
+          const emailError = `"email" with value "${data.meta.arg.email}" fails to match the required pattern: /^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$/`;
+          const usernameError =
+            'E11000 duplicate key error collection: Lingo.users index: username_1 dup key';
+          if (errorMessage === emailInUseError) {
+            toastError('Please provide different email.');
+          } else if (errorMessage === passwordError) {
+            toastError(`${passwordError} characters.`);
+          } else if (errorMessage === emailError) {
+            toastError('Please provide valid Email.');
+          } else if (errorMessage.includes(usernameError)) {
+            toastError('Please provide unique Username.');
+          } else {
+            toastError(`Please try again as server error occured.`);
+          }
         }
         if (!data?.error?.message) {
           setBtnName('Signing up...');
@@ -118,7 +147,7 @@ export const Registration = () => {
           }, 5000);
         }
       } catch (error) {
-        console.log('error', error.message);
+        console.log('error', error);
       }
     });
     const username = data.name;
