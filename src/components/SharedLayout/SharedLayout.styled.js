@@ -33,7 +33,7 @@ export const Logo = styled.span`
 `;
 
 export const StyledLogin = styled.span`
-  width: 70px;
+  width: 79px;
   font-weight: 700;
   padding-left: 5px;
 `;
@@ -146,4 +146,3 @@ export const LoggedInName = styled(StyledRegistration)`
 export const StyledUsername = styled(StyledRegistration)`
   background: #f0aa8d;
 `;
-

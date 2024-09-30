@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useFetch from 'use-http';
@@ -42,6 +42,7 @@ export const Registration = () => {
     'isServerUp',
     true
   );
+  const timeoutRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -89,7 +90,7 @@ export const Registration = () => {
     } else {
       if (isServerStartingUp) {
         setIsServerStartingUp(false);
-        setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           toastInfo(
             `Please wait as it takes few more seconds for server to wake up.`
           );
@@ -112,6 +113,7 @@ export const Registration = () => {
       })
     ).then(data => {
       try {
+        clearTimeout(timeoutRef.current);
         setIsLoading(false);
         if (data?.error?.message) {
           const { payload: errorMessage } = data;
