@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from 'hooks';
 
 import {
   CardWrapper,
@@ -41,9 +42,11 @@ const Card = ({
   id,
   onClick,
   onFavoriteChange,
+  onClickBlockedModal,
 }) => {
   const [isFavorite, setIsFavorite] = useState(favorites);
   const [isReadMore, setIsReadMore] = useState(true);
+  const { isLoggedIn } = useAuth();
 
   const onHandleFavorite = e => {
     setIsFavorite(!isFavorite);
@@ -88,7 +91,13 @@ const Card = ({
               Price / 1 hour: <StyledPrice>{price_per_hour}$</StyledPrice>
             </div>
           </StyledFirstSection2>
-          <Heart onClick={() => onHandleFavorite()}>
+          <Heart
+            onClick={
+              isLoggedIn
+                ? () => onHandleFavorite()
+                : () => onClickBlockedModal()
+            }
+          >
             <img
               src={
                 isFavorite

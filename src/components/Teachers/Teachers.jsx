@@ -8,6 +8,7 @@ import useFetch from 'use-http';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
 import TrialLesson from 'components/Modal/TrialLesson';
+import Blocked from 'components/Modal/Blocked';
 import {
   StyledContainer,
   DropdownContainer,
@@ -15,34 +16,41 @@ import {
   GlobalStyle,
 } from './Teachers.styled';
 import { ToastContainer } from 'react-toastify';
+import { useAuth } from 'hooks';
 
 const Teachers = () => {
+  const { isLoggedIn } = useAuth();
+
   const { loading } = useFetch();
-  const [teachers, setTeachers] = useLocalStorage('teachers', null);
+  const [teachers, setTeachers] = useLocalStorage(
+    isLoggedIn ? 'teachers' : 'notLoggedInTeachers',
+    null
+  );
   const [languages, setLanguages] = useLocalStorage('languages', null);
   const [isLoading, setIsLoading] = useState(false);
   const [pageCounter, setPageCounter] = useState(() => 4);
   const [isLoadMore, setIsLoadMore] = useState(true);
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalProps, setModalProps] = useState(null);
-
+  const [isTrialLesson, setIsTrialLesson] = useState(false);
+  const [isBlockedModal, setIsBlockedModal] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
-    'selectedLanguage',
+    isLoggedIn ? 'selectedLanguage' : 'notLoggedSelectedLanguage',
     'All'
   );
   const [selectedLevel, setSelectedLevel] = useLocalStorage(
-    'selectedLevel',
+    isLoggedIn ? 'selectedLevel' : 'notloggedSelectedLevel',
     'All'
   );
   const [selectedPrice, setSelectedPrice] = useLocalStorage('selected', 'All');
   const [levelOfLanguage, setLevelOfLanguage] = useLocalStorage(
-    'levelOfLanguage',
+    isLoggedIn ? 'levelOfLanguage' : 'notloggedLevelOfLanguage',
     null
   );
   const [price, setPrice] = useLocalStorage('price', null);
 
   const [filteredTeachers, setFilteredTeachers] = useLocalStorage(
-    'filteredTeachers',
+    isLoggedIn ? 'filteredTeachers' : 'notLoggedFilteredTeachers',
     null
   );
   const onFavoriteChange = useCallback(
@@ -113,20 +121,37 @@ const Teachers = () => {
   ]);
 
   // using this toggle to update state of the Modal window based on previous state
-  const toggleModal = useCallback(
+  const toggleTrialModal = useCallback(
     e => {
       setIsShowModal(prevIsShowModal => !prevIsShowModal);
+      setIsTrialLesson(prevIsTrialLesson => !prevIsTrialLesson);
     },
-    [setIsShowModal]
+    [setIsShowModal, setIsTrialLesson]
+  );
+
+  const toggleBlockedModal = useCallback(
+    e => {
+      setIsShowModal(prevIsShowModal => !prevIsShowModal);
+      setIsBlockedModal(prevIsBlockedModal => !prevIsBlockedModal);
+    },
+    [setIsBlockedModal]
   );
 
   //setting info that is displayed in Modal and passed as props
   const onClickModal = useCallback(
     (e, showModalInfo) => {
       setModalProps(showModalInfo);
-      toggleModal();
+      toggleTrialModal();
     },
-    [setModalProps, toggleModal]
+    [setModalProps, toggleTrialModal]
+  );
+
+  const onClickBlockedModal = useCallback(
+    (e, showModalInfo) => {
+      setModalProps(showModalInfo);
+      toggleBlockedModal();
+    },
+    [setModalProps, toggleBlockedModal]
   );
 
   useEffect(() => {
@@ -236,6 +261,7 @@ const Teachers = () => {
           <CardsList
             onFavoriteChange={onFavoriteChange}
             onClick={onClickModal}
+            onClickBlockedModal={onClickBlockedModal}
             teachers={filteredTeachers}
             title="List of Teachers"
             notFound="Teachers Not Found"
@@ -243,9 +269,18 @@ const Teachers = () => {
           {isLoadMore && <Button onLoad={onLoadMore} />}
         </>
       )}
-      {isShowModal && (
-        <Modal onClose={toggleModal}>
-          <TrialLesson onClose={toggleModal} details={modalProps} />
+      {isShowModal && isTrialLesson && (
+        <Modal onClose={toggleTrialModal}>
+          <TrialLesson
+            onClickBlockedModal={onClickBlockedModal}
+            onClose={toggleTrialModal}
+            details={modalProps}
+          />
+        </Modal>
+      )}
+      {isShowModal && isBlockedModal && (
+        <Modal onClose={toggleBlockedModal}>
+          <Blocked onClose={toggleBlockedModal} />
         </Modal>
       )}
     </StyledContainer>
