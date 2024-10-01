@@ -82,10 +82,11 @@ export const StyledList = styled.ul`
   text-decoration: none;
   padding-left: 10px;
   @media screen and (min-width: 768px) {
-    padding-left: 30px;
+    padding-left: 0px;
     gap: 25px;
   }
   @media screen and (min-width: 1150px) {
+    padding-left: 30px;
     gap: 50px;
   }
 `;

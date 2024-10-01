@@ -23,10 +23,10 @@ export const DropdownContainer = styled.div`
     justify-content: start;
     align-items: center;
     gap: 20px;
-    margin-left: 45px;
+    padding-left: 45px;
   }
   @media screen and (min-width: 1150px) {
-    width: 1150px;
+    width: 100%;
   }
 `;
 
