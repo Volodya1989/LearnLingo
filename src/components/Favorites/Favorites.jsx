@@ -15,17 +15,22 @@ import {
   GlobalStyle,
 } from './Favorites.styled';
 import { ToastContainer } from 'react-toastify';
+import { useAuth } from 'hooks';
 
 const Favorites = () => {
+  const { isLoggedIn } = useAuth();
+
   const { loading } = useFetch();
-  const [teachers, setTeachers] = useLocalStorage('teachers', null);
+  const [teachers, setTeachers] = useLocalStorage(
+    isLoggedIn ? 'teachers' : 'notLoggedInTeachers',
+    null
+  );
   const [languages, setLanguages] = useLocalStorage('languages', null);
   const [isLoading, setIsLoading] = useState(false);
   const [pageCounter, setPageCounter] = useState(() => 4);
   const [isLoadMore, setIsLoadMore] = useState(true);
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalProps, setModalProps] = useState(null);
-
   const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
     'selectedLanguage',
     'All'
@@ -45,6 +50,7 @@ const Favorites = () => {
     'filteredTeachers',
     null
   );
+
   const onFavoriteChange = useCallback(
     (e, id, isFavorite) => {
       const teachersModified = teachers?.map(obj => {
