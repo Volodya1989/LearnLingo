@@ -33,7 +33,7 @@ export const Logo = styled.span`
 `;
 
 export const StyledLogin = styled.span`
-  width: 79px;
+  width: 85px;
   font-weight: 700;
   padding-left: 5px;
 `;
