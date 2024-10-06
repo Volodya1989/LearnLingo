@@ -40,6 +40,8 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/login', credentials);
+      localStorage.removeItem('notLoggedFilteredTeachers');
+      localStorage.removeItem('notLoggedInTeachers');
       // After successful login, add the token to the HTTP header
       setAuthHeader(res.data.token);
       return res.data;
@@ -56,8 +58,6 @@ export const logIn = createAsyncThunk(
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     localStorage.removeItem('isServerUp');
-    localStorage.removeItem('notLoggedFilteredTeachers');
-    localStorage.removeItem('notLoggedInTeachers');
 
     await axios.post('/users/logout');
     // After a successful logout, remove the token from the HTTP header
